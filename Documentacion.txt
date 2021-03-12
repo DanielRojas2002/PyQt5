@@ -1,0 +1,75 @@
+DOCUMENTACION:
+
+"Siempre se importa PyQt5.QtWidgets import QDialog,QApplicacion"
+
+Codigo para inicializar la Aplicacion:
+
+class Nombre(QDialog):
+	def __init__(self):
+	super().__init__()
+	self.ui=Ui_Form ()  --El nombre de la clase del otro archivo
+	self.ui.setupUi(self) 
+--------------------------------------------------------------------------------------
+Para Inicializar la Aplicacion va al final del codigo:
+if __name__ == '__main__':
+    app=QApplication(sys.argv)
+    dialogo=CalculadoraAplicacion() ---Aqui va el nombre de la Clase que le diste
+    dialogo.show()
+    sys.exit(app.exec_())
+--------------------------------------------------------------------------------------
+para el Widget PUSH BUTTON
+Se utiliza:
+	self.ui.boton0.clicked.connect(funcion cuando de click)
+	def funcion(self):
+--------------------------------------------------------------------------------------
+Para el Widget Label
+Se utiliza:
+	x=self.ui.texto.text() ---- para obtener el texto que tenga el Label
+	a=self.ui.texto.setText("aqui") --- para escribir un valor en el Label
+--------------------------------------------------------------------------------------
+Para el Widget ComboBox
+Se utiliza:
+	seleccion=self.ui.datos.itemText(self.ui.datos.currentIndex())
+			------- Consigo el nombre del combo --- Consigo el numero de indice y asi se obtiene el dato y se almacena en seleccion
+------------------------------------------------------------------------------------------------------------------------------------------------
+Para usar una Imagen
+Se utiliza:
+	el label (solo ten cuidado cuando lo insertes checa que la ruta no se cambie)
+------------------------------------------------------------------------------------------------------------------------------------------------
+Para el Widget Line Edit,Text Edit,Plain Text Edit
+Se Utiliza:
+	x=self.ui.texto.text() ---- para obtener el texto que tenga el 'ENTRY'	
+	ya luego se vali los numeros o el texto , siempre te lo devuelve como 'str'
+------------------------------------------------------------------------------------------------------------------------------------------------
+Para el Widget Radio Button
+Se Utiliza:
+	self.ui.radio.toggled.connect(funcion) -- Se marca para cada vez que se selecione
+	def funcion(self):
+		if self.ui.radio.isChecked()==True: ----- si esta seleccionado
+		----aqui lo que quieras hacer imprimir lo que es en un label y asi 
+------------------------------------------------------------------------------------------------------------------------------------------------
+Para el Widget CheckBox
+Se Utiliza :
+	self.ui.Peperoni.stateChanged.connect(self.info)---- Si esta seleccionada ve a hacer la funcion
+	def funcion(self):	
+		if self.ui.Peperoni.isChecked()==True:---- Si esta selecionada
+	---haces lo que quieras hacer
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Para el Widget SpinBox
+Se Utliza:
+	self.ui.sb1.editingFinished.connect(self.playera) ---- Cuando se deje de modificar ve a hacer la funcion
+	def playera(self):
+		precio=50
+        	cantidad=self.ui.sb1.value()  ----- aqui obtengo el valor del spinbox 
+        	operacion=precio*cantidad --- hago la operacion
+        	self.ui.resultado1.setText(str(operacion)) ---- regreso el resultado como str adentro de un label
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Para el Widget QSlider
+Se Utliza:
+	self.ui.scrollA.valueChanged.connect(self.mostrar) --- cuando  se mueva ve a hacer la funcion
+	def mostrar(self,valor):
+		self.ui.resultadoAzu.setText("Nivel del Azucar: {}".format(valor)) ---- aqui concateno el valor del scroll
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+
+	

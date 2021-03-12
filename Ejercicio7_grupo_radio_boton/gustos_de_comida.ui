@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>309</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="titulo1">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>271</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="text">
+    <string>¿Cual es tu postre favorito?</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>230</y>
+     <width>161</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="comida">
+    <item>
+     <widget class="QRadioButton" name="mexicana">
+      <property name="text">
+       <string>Comida Mexicana</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>multimedia/mexicana.ico</normaloff>multimedia/mexicana.ico</iconset>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="china">
+      <property name="text">
+       <string>Comidad China</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>multimedia/china.ico</normaloff>multimedia/china.ico</iconset>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="arabe">
+      <property name="text">
+       <string>Comida Arabe</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>multimedia/arabe.ico</normaloff>multimedia/arabe.ico</iconset>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="italiana">
+      <property name="text">
+       <string>Comida Italiana</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>multimedia/italiana.ico</normaloff>multimedia/italiana.ico</iconset>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="imgen1">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>40</y>
+     <width>131</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>multimedia/foto1.ico</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="resultado1">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>170</y>
+     <width>301</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="imagen2">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>230</y>
+     <width>121</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>multimedia/foto2.ico</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="resultado2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>370</y>
+     <width>301</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="titulo2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>200</y>
+     <width>271</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="text">
+    <string>¿Cual es tu comida favorito?</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>151</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="postre">
+    <item>
+     <widget class="QRadioButton" name="pastel">
+      <property name="text">
+       <string>Pastel</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>multimedia/pastel.png</normaloff>multimedia/pastel.png</iconset>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="helado">
+      <property name="text">
+       <string>Helado</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>multimedia/helado.ico</normaloff>multimedia/helado.ico</iconset>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="pay">
+      <property name="text">
+       <string>Pay</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>multimedia/pay.ico</normaloff>multimedia/pay.ico</iconset>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="galletas">
+      <property name="text">
+       <string>Galletas</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>multimedia/galleta.ico</normaloff>multimedia/galleta.ico</iconset>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

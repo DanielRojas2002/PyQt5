@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>195</width>
+    <height>131</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QComboBox" name="datos">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>161</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Python</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>multimedia/python.png</normaloff>multimedia/python.png</iconset>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>C++</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>multimedia/c++.png</normaloff>multimedia/c++.png</iconset>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>CSS</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>multimedia/css.png</normaloff>multimedia/css.png</iconset>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>HTML</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>multimedia/html.png</normaloff>multimedia/html.png</iconset>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Java</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>multimedia/java.png</normaloff>multimedia/java.png</iconset>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Javascript</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>multimedia/javascript.png</normaloff>multimedia/javascript.png</iconset>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>R</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>multimedia/r.png</normaloff>multimedia/r.png</iconset>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="enviar">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>60</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Enviar</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>100</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

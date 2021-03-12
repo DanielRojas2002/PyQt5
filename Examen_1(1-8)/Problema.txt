@@ -1,0 +1,17 @@
+En este examen tenemos que aplicar los siguientes widgets:
+
+Label
+Imagen(label)
+PushButton
+Entry
+ComboBox
+CheckBox
+RadioBotton
+
+Usar la Creatividad 
+Requisitos:
+-Usar minimo 5 widgets de cada tipo de Widget (5 botones , 5 pushbutton ,etc...)
+
+Tratar de hacerlo minimo 1hr maximo 1hr y media
+
+
