@@ -70,6 +70,12 @@ Se Utliza:
 	def mostrar(self,valor):
 		self.ui.resultadoAzu.setText("Nivel del Azucar: {}".format(valor)) ---- aqui concateno el valor del scroll
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-	
+Para el Widget QLISTWIDGET
+Se Utiliza:
+	self.ui.listWidget.itemClicked.connect(self.diagnostico) -- sirve para sabe cuando se selecciona que se ejecute una funcion
+	def diagnostico(self):
+		dato=self.ui.listWidget.currentItem().text() ---sirve para almacenar el valor de la lista cuando se seleccione
+
+
 
 	
