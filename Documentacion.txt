@@ -76,6 +76,14 @@ Se Utiliza:
 	def diagnostico(self):
 		dato=self.ui.listWidget.currentItem().text() ---sirve para almacenar el valor de la lista cuando se seleccione
 
+	*******************************************
+	Para poner informacion de un QLISTWIDGET copiar la informacion a otro QLISTWIDGET
+	Se Utiliza:
+
+	lenguajes=self.ui.prograW.selectedItems() ---- Obtengo en una variable los items
+	for lenguaje in list(lenguajes):  -- en un for creo una lista de la variable lenguaje donde tengo los datos
+		self.ui.lenguajesA.addItem(lenguaje.text())  --- Le agrego en modo texto los items al otro QLISTWIDGET 
+-------------------------------------------------------------------------------------------------------------------------------
 
 
 	
