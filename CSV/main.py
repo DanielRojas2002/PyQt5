@@ -20,7 +20,7 @@ class VentanaP1(QMainWindow):
         self.ui.setupUi(self)
         self.ui.BUSCAR.clicked.connect(self.Buscar)
         self.ui.realizar.clicked.connect(self.REALIZAR)
-        self.ui.GRAFICAR.clicked.connect(self.GraficarPastel)
+        self.ui.GRAFICAR.clicked.connect(self.Graficar)
 
 
     def Buscar(self):
@@ -101,7 +101,7 @@ class VentanaP1(QMainWindow):
             titulo=""
             etiqueta1=""
             etiqueta2=""
-            self.ui.tituloGrafica.setText("INGRESE LOS DATOS PARA PODER GRAFICAR:")
+            self.ui.tituloGrafica.setText("DATOS PARA PODER GRAFICAR:\nPASTEL:")
             self.ui.titulo_Grafico.setPlaceholderText("Ingrese el Titulo del Grafico:")
             self.ui.etiqueta_nombre.setPlaceholderText("Ingrese la Etiqueta del Nombre:")
             self.ui.etiqueta_valor.setPlaceholderText("Ingrese la Etiqueta del Valor:")
@@ -110,11 +110,23 @@ class VentanaP1(QMainWindow):
             etiqueta1=self.ui.etiqueta_nombre.text()
             etiqueta2=self.ui.etiqueta_valor.text()
 
+        elif self.ui.graficaBarras.isChecked()==True:
+            titulo=""
+            etiqueta1=""
+            etiqueta2=""
+            self.ui.tituloGrafica.setText("DATOS PARA PODER GRAFICAR:\nBARRAS:")
+            self.ui.titulo_Grafico.setPlaceholderText("Ingrese el Titulo del Grafico:")
+            self.ui.etiqueta_nombre.setPlaceholderText("Ingrese la Etiqueta del Nombre:")
+            self.ui.etiqueta_valor.setPlaceholderText("Ingrese la Etiqueta del Valor:")
+            
+            titulo=self.ui.titulo_Grafico.text()
+            etiqueta1=self.ui.etiqueta_nombre.text()
+            etiqueta2=self.ui.etiqueta_valor.text()
             
 
 
 
-    def GraficarPastel(self):
+    def Graficar(self):
         global notas
         global excel
         global titulo
@@ -122,44 +134,53 @@ class VentanaP1(QMainWindow):
         global etiqueta2
         
         if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0:
-            nombre=notas[etiqueta1]
-            try:
+            if self.ui.graficaPastel.isChecked()==True:
+                try:
+                    notas=pd.read_csv(excel)
+                    nombre=notas[etiqueta1]
+                    valor=notas[etiqueta2]
 
-                nombre=notas[etiqueta1]
-                valor=notas[etiqueta2]
+                    porcentaje=notas[etiqueta2].sum()
+                    porcentajeb=round(porcentaje)
+                    
+                    leyenda = []
+                    for navegador, mercado in zip(nombre,valor):
+                        mercado2=round((mercado/porcentajeb*100),2)
+                        leyenda.append(navegador + '  (' + str(mercado2) + '%)')
 
-                porcentaje=notas[etiqueta2].sum()
-                porcentajeb=round(porcentaje)
-                
-                leyenda = []
-                for navegador, mercado in zip(nombre,valor):
-                    mercado2=round((mercado/porcentajeb*100),2)
-                    leyenda.append(navegador + '  (' + str(mercado2) + '%)')
+                    
+                    plt.pie(valor,labels=None,autopct="%0.1f %%")
+                    plt.title(titulo)
+                    plt.rc('legend', fontsize=6)
+                    plt.legend(leyenda,loc='best',bbox_to_anchor=(1.05, 1.0))
+                    plt.show()
+                except:
+                    self.ui.errorarchivo.setText("Ingreso mal Una Etiqueta")
 
-                
-                plt.pie(valor,labels=None,autopct="%0.1f %%")
-                plt.title(titulo)
-                plt.rc('legend', fontsize=6)
-                plt.legend(leyenda,loc='best',bbox_to_anchor=(1.05, 1.0))
-            # plt.tight_layout()
-                plt.show()
-            except:
-                self.ui.errorarchivo.setText("Ingreso mal Una Etiqueta")
+            elif self.ui.graficaBarras.isChecked()==True:
+                try:
+                    notas=pd.read_csv(excel)
+                    nombre=notas[etiqueta1]
+                    valor=notas[etiqueta2]
 
+                    fig=plt.subplots()
+                    plt.xlabel(etiqueta1,fontsize=20)
+                    plt.ylabel(etiqueta2,fontsize=20)
+                    plt.xticks(rotation=45)
+                    plt.title(titulo,fontsize=20)
+                    plt.bar(nombre,valor)
+                    plt.grid(True)
+                    plt.show()
+                except:
+                    self.ui.errorarchivo.setText("Ingreso mal Una Etiqueta")
                 
 
         else:
             self.ui.errorarchivo.setText("Tiene que ingresar todos los Datos")
-        
-        
-            
-            
-
-            
 
         
 
-
+        
 if __name__=="__main__":
     app=QApplication(sys.argv)
     main=VentanaP1()

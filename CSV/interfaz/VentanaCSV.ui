@@ -6,18 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1227</width>
-    <height>624</height>
+    <width>1388</width>
+    <height>730</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>VECTOR CASA DE BOLSA SA DE CV</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../multimedia/vector.ico</normaloff>../multimedia/vector.ico</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
-      <x>333</x>
+      <x>340</x>
       <y>10</y>
       <width>20</width>
       <height>371</height>
@@ -42,7 +51,7 @@
       <x>0</x>
       <y>10</y>
       <width>20</width>
-      <height>591</height>
+      <height>671</height>
      </rect>
     </property>
     <property name="orientation">
@@ -54,7 +63,7 @@
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>1201</width>
+      <width>1341</width>
       <height>20</height>
      </rect>
     </property>
@@ -67,7 +76,7 @@
      <rect>
       <x>10</x>
       <y>370</y>
-      <width>1201</width>
+      <width>1341</width>
       <height>20</height>
      </rect>
     </property>
@@ -78,10 +87,10 @@
    <widget class="Line" name="line_6">
     <property name="geometry">
      <rect>
-      <x>1200</x>
+      <x>1340</x>
       <y>10</y>
       <width>20</width>
-      <height>591</height>
+      <height>671</height>
      </rect>
     </property>
     <property name="font">
@@ -100,7 +109,7 @@
    <widget class="Line" name="line_5">
     <property name="geometry">
      <rect>
-      <x>630</x>
+      <x>710</x>
       <y>10</y>
       <width>20</width>
       <height>371</height>
@@ -123,8 +132,8 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>590</y>
-      <width>1201</width>
+      <y>670</y>
+      <width>1341</width>
       <height>20</height>
      </rect>
     </property>
@@ -135,9 +144,9 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>31</y>
-      <width>261</width>
+      <x>380</x>
+      <y>20</y>
+      <width>311</width>
       <height>131</height>
      </rect>
     </property>
@@ -146,6 +155,7 @@
       <widget class="QLabel" name="titulo2">
        <property name="font">
         <font>
+         <family>Arial Black</family>
          <pointsize>14</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -189,9 +199,9 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>35</y>
-      <width>281</width>
-      <height>331</height>
+      <y>20</y>
+      <width>301</width>
+      <height>341</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -204,7 +214,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>../multimedia/vector.ico</pixmap>
+        <pixmap>../../../../../../Desktop/P Git/PYQT5/PyQt5/CSV/multimedia/vector.ico</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -215,7 +225,7 @@
       <widget class="QLabel" name="titulo">
        <property name="font">
         <font>
-         <family>MS Sans Serif</family>
+         <family>Arial Black</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -236,6 +246,22 @@
        </property>
        <widget class="QLineEdit" name="nombreruta"/>
        <widget class="QPushButton" name="BUSCAR">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Buscar Archivo CSV&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton:hover{
+	
+	background-color: rgb(165, 175, 173);
+}</string>
+        </property>
         <property name="text">
          <string>BUSCAR</string>
         </property>
@@ -246,6 +272,7 @@
       <widget class="QRadioButton" name="verCSV">
        <property name="font">
         <font>
+         <family>Arial Black</family>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -259,6 +286,7 @@
       <widget class="QRadioButton" name="graficaPastel">
        <property name="font">
         <font>
+         <family>Arial Black</family>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -272,6 +300,7 @@
       <widget class="QRadioButton" name="graficaBarras">
        <property name="font">
         <font>
+         <family>Arial Black</family>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -285,6 +314,7 @@
       <widget class="QRadioButton" name="graficaTenInd">
        <property name="font">
         <font>
+         <family>Arial Black</family>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -298,6 +328,7 @@
       <widget class="QRadioButton" name="graficarTenGru">
        <property name="font">
         <font>
+         <family>Arial Black</family>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -309,8 +340,24 @@
      </item>
      <item>
       <widget class="QPushButton" name="realizar">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Actualizar Opcion&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton:hover{
+	
+	background-color: rgb(165, 175, 173);
+}</string>
+       </property>
        <property name="text">
-        <string>REALIZAR</string>
+        <string>ACTUALIZACION</string>
        </property>
       </widget>
      </item>
@@ -321,17 +368,17 @@
      <rect>
       <x>20</x>
       <y>390</y>
-      <width>1181</width>
-      <height>192</height>
+      <width>1321</width>
+      <height>281</height>
      </rect>
     </property>
    </widget>
    <widget class="Line" name="line_8">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>170</y>
-      <width>301</width>
+      <x>350</x>
+      <y>160</y>
+      <width>371</width>
       <height>20</height>
      </rect>
     </property>
@@ -339,13 +386,13 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>200</y>
-      <width>281</width>
-      <height>161</height>
+      <x>380</x>
+      <y>180</y>
+      <width>311</width>
+      <height>181</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -353,6 +400,7 @@
       <widget class="QLabel" name="tituloGrafica">
        <property name="font">
         <font>
+         <family>Arial Black</family>
          <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -373,6 +421,7 @@
       <widget class="QLineEdit" name="titulo_Grafico">
        <property name="font">
         <font>
+         <family>Arial</family>
          <pointsize>8</pointsize>
         </font>
        </property>
@@ -392,6 +441,22 @@
      </item>
      <item>
       <widget class="QPushButton" name="GRAFICAR">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>Graficar CSV</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton:hover{
+	
+	background-color: rgb(165, 175, 173);
+}</string>
+       </property>
        <property name="text">
         <string>GRAFICAR</string>
        </property>
@@ -405,7 +470,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1227</width>
+     <width>1388</width>
      <height>21</height>
     </rect>
    </property>
