@@ -377,7 +377,7 @@
     <property name="geometry">
      <rect>
       <x>350</x>
-      <y>160</y>
+      <y>150</y>
       <width>371</width>
       <height>20</height>
      </rect>
@@ -390,9 +390,9 @@
     <property name="geometry">
      <rect>
       <x>380</x>
-      <y>180</y>
+      <y>170</y>
       <width>311</width>
-      <height>181</height>
+      <height>191</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -437,7 +437,10 @@
       <widget class="QLineEdit" name="etiqueta_valor"/>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_3"/>
+      <widget class="QLineEdit" name="etiqueta_usuario"/>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="etiqueta_tiempo"/>
      </item>
      <item>
       <widget class="QPushButton" name="GRAFICAR">
