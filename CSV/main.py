@@ -70,6 +70,13 @@ class VentanaP1(QMainWindow):
                 self.ui.etiqueta_usuario.setPlaceholderText("")
                 self.ui.etiqueta_tiempo.setPlaceholderText("")
 
+
+                self.ui.titulo_Grafico.clear()
+                self.ui.etiqueta_nombre.clear()
+                self.ui.etiqueta_valor.clear()
+                self.ui.etiqueta_usuario.clear()
+                self.ui.etiqueta_tiempo.clear()
+
                 self.ui.encabezados.clear()
                 self.ui.tableWidget.clear()
                 listaEncabezados=[]
@@ -120,6 +127,9 @@ class VentanaP1(QMainWindow):
             self.ui.etiqueta_valor.setEnabled(True)
             self.ui.GRAFICAR.setEnabled(True)
 
+            self.ui.etiqueta_usuario.clear()
+            self.ui.etiqueta_tiempo.clear()
+
 
             
             self.ui.etiqueta_usuario.setDisabled(True)
@@ -150,6 +160,9 @@ class VentanaP1(QMainWindow):
             self.ui.etiqueta_nombre.setEnabled(True)
             self.ui.etiqueta_valor.setEnabled(True)
             self.ui.GRAFICAR.setEnabled(True)
+
+            self.ui.etiqueta_usuario.clear()
+            self.ui.etiqueta_tiempo.clear()
 
             self.ui.etiqueta_usuario.setDisabled(True)
             self.ui.etiqueta_tiempo.setDisabled(True)
