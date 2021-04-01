@@ -170,7 +170,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QListWidget" name="encabezados"/>
+      <widget class="QListWidget" name="encabezados">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Aqui saldran los Encabezados del CSV&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="errorarchivo">
@@ -181,6 +185,9 @@
          <weight>75</weight>
          <bold>true</bold>
         </font>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Aqui saldran los Posibles Errores&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::Box</enum>
@@ -208,7 +215,7 @@
      <item>
       <widget class="QLabel" name="imagen">
        <property name="frameShape">
-        <enum>QFrame::Box</enum>
+        <enum>QFrame::NoFrame</enum>
        </property>
        <property name="text">
         <string/>
@@ -254,7 +261,7 @@
          </font>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Buscar Archivo CSV&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Buscar Archivo CSV&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton:hover{
@@ -277,6 +284,9 @@
          <bold>true</bold>
         </font>
        </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Esta opcion:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Abre el CSV y te muestra los Encabezados para despues poder Graficar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
         <string>Checar Encabezados y Checar el CSV</string>
        </property>
@@ -290,6 +300,9 @@
          <weight>75</weight>
          <bold>true</bold>
         </font>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Grafica en formato Pastel:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Sirve para representar la proporcion de observaciones que estan en cada categoria.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string>Graficar Pastel</string>
@@ -305,6 +318,9 @@
          <bold>true</bold>
         </font>
        </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Grafica en formato Barras:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Sirve para representar o ilustrar una cantidad de datos para un mejor entendimiento de los mismos&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
         <string>Graficar Barras</string>
        </property>
@@ -319,6 +335,9 @@
          <bold>true</bold>
         </font>
        </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Grafico en formato Lineal(Tendencia):&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Sirve para representar una serie de datos que han sido recolectados atravez del tiempo:&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;(De un solo Usuario)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
         <string>Graficar Tendencia (Individual)</string>
        </property>
@@ -332,6 +351,9 @@
          <weight>75</weight>
          <bold>true</bold>
         </font>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Grafico en formato Lineal(Tendencia):&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Sirve para representar una serie de datos que han sido recolectados atravez del tiempo:&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;(GENERAL)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string>Graficar Tendencia (Grupal)</string>
@@ -348,7 +370,7 @@
         </font>
        </property>
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Actualizar Opcion&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Actualizar Opcion&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton:hover{
@@ -425,22 +447,41 @@
          <pointsize>8</pointsize>
         </font>
        </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ingrese el Nombre del Grafico&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;(El que usted desee)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="placeholderText">
         <string/>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="etiqueta_nombre"/>
+      <widget class="QLineEdit" name="etiqueta_nombre">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ingrese el nombre de la Etiqueta &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="etiqueta_valor"/>
+      <widget class="QLineEdit" name="etiqueta_valor">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ingrese el nombre de la Etiqueta del valor&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="etiqueta_usuario"/>
+      <widget class="QLineEdit" name="etiqueta_usuario">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ingrese el nombre del Usuario a buscar&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;(Ingreselo exactamente como esta abajo)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="etiqueta_tiempo"/>
+      <widget class="QLineEdit" name="etiqueta_tiempo">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ingrese el nombre de la Etiqueta donde esta el Tiempo&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;(Las Fechas)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="GRAFICAR">
@@ -452,7 +493,7 @@
         </font>
        </property>
        <property name="toolTip">
-        <string>Graficar CSV</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Graficar CSV&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton:hover{
