@@ -1,6 +1,7 @@
 import sys
 import pandas as pd 
 import matplotlib.pyplot as plt 
+
 from matplotlib import dates as mpl_dates
 from PyQt5.QtWidgets import QDialog,QApplication,QMainWindow,QMessageBox,QErrorMessage,QFileDialog,QTableWidgetItem
 from codigo.ventanacsv import Ui_VentanaPrincipal
@@ -15,6 +16,7 @@ etiqueta3=""
 etiqueta4=""
 listaEncabezados=[]
 listadatos=[]
+listacolumnas=[]
 class VentanaP1(QMainWindow):
     def __init__(self):
         super(VentanaP1,self).__init__()
@@ -23,6 +25,8 @@ class VentanaP1(QMainWindow):
         self.ui.BUSCAR.clicked.connect(self.Buscar)
         self.ui.realizar.clicked.connect(self.REALIZAR)
         self.ui.GRAFICAR.clicked.connect(self.Graficar)
+        
+
 
         self.ui.titulo_Grafico.setDisabled(True)
         self.ui.etiqueta_nombre.setDisabled(True)
@@ -41,6 +45,8 @@ class VentanaP1(QMainWindow):
             listaEncabezados=[]
             self.ui.encabezados.clear()
             self.ui.tableWidget.clear()
+            self.ui.tableDescripcion.clear()
+            self.ui.cantidad_registros.setText("")
             ruta=QFileDialog.getOpenFileName(self,'Open file')
             for dato in ruta[::-1]:
                 excel=dato
@@ -53,6 +59,7 @@ class VentanaP1(QMainWindow):
         global excel
         global listaEncabezados
         global listadatos
+        global listacolumnas
         contador=0
         if self.ui.verCSV.isChecked()==True:
             self.ui.titulo_Grafico.setDisabled(True)
@@ -111,15 +118,119 @@ class VentanaP1(QMainWindow):
                         columna=columna+1
                     fila=fila+1
                 self.ui.tableWidget.setHorizontalHeaderLabels(listaEncabezados)
-                    
-               
-
+                self.ui.tableWidget.setSortingEnabled(True)
+            
+                for x in range(0,contador+1):
+                    self.ui.tableWidget.setColumnWidth(x,200)
+                
+                
             except:
                 listaEncabezados=[]
                 listadatos=[]
                 self.ui.encabezados.clear()
                 self.ui.tableWidget.clear()
                 self.ui.errorarchivo.setText("El Archivo no se puede leer")
+
+
+        elif self.ui.Estadistica.isChecked()==True:
+            try:
+
+                self.ui.titulo_Grafico.setDisabled(True)
+                self.ui.etiqueta_nombre.setDisabled(True)
+                self.ui.etiqueta_valor.setDisabled(True)
+                self.ui.etiqueta_usuario.setDisabled(True)
+                self.ui.etiqueta_tiempo.setDisabled(True)
+
+                self.ui.GRAFICAR.setDisabled(True)
+                #try:
+                self.ui.tituloGrafica.setText("")
+                self.ui.titulo_Grafico.setPlaceholderText("")
+                self.ui.etiqueta_nombre.setPlaceholderText("")
+                self.ui.etiqueta_valor.setPlaceholderText("")
+                self.ui.etiqueta_usuario.setPlaceholderText("")
+                self.ui.etiqueta_tiempo.setPlaceholderText("")
+
+
+                self.ui.titulo_Grafico.clear()
+                self.ui.etiqueta_nombre.clear()
+                self.ui.etiqueta_valor.clear()
+                self.ui.etiqueta_usuario.clear()
+                self.ui.etiqueta_tiempo.clear()
+                
+                listacolumnas=[]
+                notas=pd.read_csv(excel,encoding='utf-8')
+                descripcion=notas.describe()
+                
+
+                for columna in descripcion:
+                    listacolumnas.append(columna)
+                    
+
+            
+                lista=[]
+                listanueva=[]
+                listadatos=[]
+                contador=0
+
+                for elemento in listacolumnas:
+                    contador=contador+1
+                    listanueva=[]
+                    
+                    desviacion=str(round(notas[elemento].std(),2))
+                    maximo=str(round(notas[elemento].max(),2))
+                    minimo=str(round(notas[elemento].min(),2))
+                    promedio=str(round(notas[elemento].mean(),2))
+                    
+                    listanueva.append(desviacion)
+                    listanueva.append(maximo)
+                    listanueva.append(minimo)
+                    listanueva.append(promedio)
+
+                    lista.append(listanueva)
+
+                
+                
+                registro=len(notas.index)    
+
+                filas=contador
+                self.ui.cantidad_registros.setText("")
+                self.ui.cantidad_registros.setText("Cantidad de Registros: "+str(registro))
+                listaDescripcion=["Desviacion","Maximo","Minimo","Promedio"]
+                
+                self.ui.tableDescripcion.setRowCount(filas)
+                self.ui.tableDescripcion.setColumnCount(4)
+
+            
+
+                for registros in lista:
+                    dato=(tuple(registros))
+                    listadatos.append(dato)
+
+                
+
+                fila=0
+                for registro in listadatos:
+                    columna=0
+                    for elemento in registro:
+                        celda=QTableWidgetItem(str(elemento))
+                        self.ui.tableDescripcion.setItem(fila,columna,celda)
+                        columna=columna+1
+                    fila=fila+1
+                self.ui.tableDescripcion.setHorizontalHeaderLabels(listaDescripcion)
+                self.ui.tableDescripcion.setVerticalHeaderLabels(listacolumnas)
+                self.ui.tableDescripcion.setSortingEnabled(True)
+
+                for x in range(0,contador+1):
+                    self.ui.tableDescripcion.setColumnWidth(x,100)
+
+
+            except:
+                self.ui.tableDescripcion.clear()
+                self.ui.errorarchivo.setText("ERROR")
+
+
+
+
 
         elif self.ui.graficaPastel.isChecked()==True:
             self.ui.titulo_Grafico.setEnabled(True)
@@ -224,8 +335,9 @@ class VentanaP1(QMainWindow):
         if self.ui.graficaPastel.isChecked()==True:
             if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0:
                 try:
+
                     self.ui.errorarchivo.setText("")
-                    notas=pd.read_csv(excel)
+                    notas=pd.read_csv(excel,encoding='utf-8')
                     nombre=notas[etiqueta1]
                     valor=notas[etiqueta2]
 
@@ -254,7 +366,7 @@ class VentanaP1(QMainWindow):
             if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0:
                 try:
                     self.ui.errorarchivo.setText("")
-                    notas=pd.read_csv(excel)
+                    notas=pd.read_csv(excel,encoding='utf-8')
                     nombre=notas[etiqueta1]
                     valor=notas[etiqueta2]
 
@@ -278,26 +390,30 @@ class VentanaP1(QMainWindow):
             if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0 and len(etiqueta3)>0 and len(etiqueta4)>0:
                 try:
                     self.ui.errorarchivo.setText("")
-                    notas=pd.read_csv(excel)
-                    notas[etiqueta3]=pd.to_datetime(notas[etiqueta3])
+                    notas=pd.read_csv(excel,encoding='utf-8')
+                    notas[etiqueta4]=pd.to_datetime(notas[etiqueta4])
+                    
 
-                    dato=notas[etiqueta1]==etiqueta4
+                    dato=notas[etiqueta1]==etiqueta3
                     DATOS=notas[dato]
 
                     valor=DATOS[etiqueta2]
-                    tiempo=DATOS[etiqueta3]
+                    tiempo=DATOS[etiqueta4]
+
+                    
 
                     
                     plt.style.use('seaborn')
                     plt.plot_date(tiempo,valor,linestyle="solid")
                     plt.gcf().autofmt_xdate()
-                    #formato=mpl_dates.DateFormatter('%b, %d, %Y')
-                    #plt.gca().xaxis.set_major_formatter(formato)
+                    formato=mpl_dates.DateFormatter('%d,%b,%Y')
+                    plt.gca().xaxis.set_major_formatter(formato)
                     plt.title(titulo+": "+etiqueta1+": "+etiqueta4)
                     plt.xlabel(etiqueta3)
                     plt.ylabel(etiqueta2)
                     plt.tight_layout()
                     plt.show()
+               
                     
 
                 except:
