@@ -901,6 +901,10 @@ class VentanaSelecciona(QMainWindow):
             except Error as e:
                 print(e)
 
+            except:
+                self.ui.titulo2.setText("No se Encontraron registros")
+
+
         elif seleccion=="Especifico":
             self.ui.tableWidget.clear()
             contador=0
