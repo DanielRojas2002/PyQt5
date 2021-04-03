@@ -4,7 +4,7 @@ import sys
 import os
 import time
 import webbrowser
-from PyQt5.QtWidgets import QDialog,QApplication,QMainWindow,QMessageBox,QErrorMessage
+from PyQt5.QtWidgets import QDialog,QApplication,QMainWindow,QMessageBox,QErrorMessage,QTableWidgetItem
 from codigos.creador import Ui_CREADORBD
 from codigos.ventanap1 import Ui_VentanaP
 from codigos.ventanap2 import Ui_VentanaP2
@@ -17,12 +17,14 @@ from codigos.ventanavcambiar import Ui_VentanaValidacioncambiar
 from codigos.ventanavseleccionar import Ui_VentanaValidacionseleccionar
 from codigos.ventanainformacion import Ui_Ventanainformacion
 from codigos.ventanainsertar import Ui_VentanaInsertarRegistros
+from codigos.ventanaseleccionar import Ui_VentanaSeleccionar
 
 nombre=""
 nombretabla=""
 dato=""
 ultima=""
 sqlinsertar=""
+seleccion=""
 listaquery=[]
 listadatos=[]
 listatablas=[]
@@ -31,6 +33,7 @@ listaValoresInsertar=[]
 listavalor=[]
 listacampos=[]
 diccInsertar={}
+listaDescripcion2=[]
 contador=0
 contador2=1
 contadorRegistros=1
@@ -618,6 +621,7 @@ class VentanaVborrar(QMainWindow):
                     for x in t:
                         contador4=contador+1
                         self.ui.tablascreadas.addItem(x)
+                        listavalores.append(x)
 
                 if contador4==0:
                     self.ui.tablascreadas.addItem("No existen Tablas tiene que crear tablas")
@@ -628,6 +632,24 @@ class VentanaVborrar(QMainWindow):
         self.ui.regresar.clicked.connect(self.atras)
         self.ui.tablascreadas.itemClicked.connect(self.agregar)
         self.ui.enviar.clicked.connect(self.ir)
+
+
+    def ir(self):
+        global listavalores
+        global nombretabla
+        validacion=0
+        for x in listavalores:
+            if self.ui.nombretabla.text()==x:
+                validacion=validacion+1
+                nombretabla=self.ui.nombretabla.text()
+        
+        if validacion>0:
+            self.hide()
+            otraventana=VentanaInsertar(self)
+            otraventana.show()
+        
+        else:
+            self.ui.error1.setText("No Existe esa Tabla")
 	
     def agregar(self):
         dato=self.ui.tablascreadas.currentItem().text()
@@ -659,6 +681,7 @@ class VentanaVcambiar(QMainWindow):
                     for x in t:
                         contador4=contador+1
                         self.ui.tablascreadas.addItem(x)
+                        listavalores.append(x)
 
                 if contador4==0:
                     self.ui.tablascreadas.addItem("No existen Tablas tiene que crear tablas")
@@ -673,6 +696,23 @@ class VentanaVcambiar(QMainWindow):
     def agregar(self):
         dato=self.ui.tablascreadas.currentItem().text()
         self.ui.nombretabla.setText(dato)
+
+    def ir(self):
+        global listavalores
+        global nombretabla
+        validacion=0
+        for x in listavalores:
+            if self.ui.nombretabla.text()==x:
+                validacion=validacion+1
+                nombretabla=self.ui.nombretabla.text()
+        
+        if validacion>0:
+            self.hide()
+            otraventana=VentanaInsertar(self)
+            otraventana.show()
+        
+        else:
+            self.ui.error1.setText("No Existe esa Tabla")
 
 
     def atras(self):
@@ -700,6 +740,7 @@ class VentanaVseleccionar(QMainWindow):
                     for x in t:
                         contador4=contador+1
                         self.ui.tablascreadas.addItem(x)
+                        listavalores.append(x)
 
                 if contador4==0:
                     self.ui.tablascreadas.addItem("No existen Tablas tiene que crear tablas")
@@ -715,10 +756,217 @@ class VentanaVseleccionar(QMainWindow):
         dato=self.ui.tablascreadas.currentItem().text()
         self.ui.nombretabla.setText(dato)
 
+
+    def ir(self):
+        global listavalores
+        global nombretabla
+        validacion=0
+        for x in listavalores:
+            if self.ui.nombretabla.text()==x:
+                validacion=validacion+1
+                nombretabla=self.ui.nombretabla.text()
+        
+        if validacion>0:
+            self.hide()
+            otraventana=VentanaSelecciona(self)
+            otraventana.show()
+        
+        else:
+            self.ui.error1.setText("No Existe esa Tabla")
+
    
     def atras(self):
         self.parent().show()
         self.close()
+
+class VentanaSelecciona(QMainWindow):
+    def __init__(self,parent=None):
+        super(VentanaSelecciona,self).__init__(parent)
+        self.ui=Ui_VentanaSeleccionar()
+        self.ui.setupUi(self)
+
+        self.ui.atras.clicked.connect(self.atras)
+        self.ui.realizar.clicked.connect(self.realizar)
+        self.ui.seleccionar.clicked.connect(self.seleccionar)
+
+        global listaDescripcion2
+        global nombre
+        global nombretabla
+
+        sql="PRAGMA table_info("
+        sql=sql+nombretabla+")"
+       
+
+        try:
+            listaDescripcion2=[]
+            base=(f"bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql)
+                tablas=c.fetchall()
+
+        
+                for a in tablas:
+                    for x in a[1:2]:
+                        listaDescripcion2.append(x)
+
+        except Error as e :
+            print(e)
+
+    def seleccionar(self):
+        global seleccion
+        global listaDescripcion2
+        self.ui.titulo2.setText("")
+        self.ui.dato.setText("")
+        selecciones=self.ui.opciones.itemText(self.ui.opciones.currentIndex())
+
+        if selecciones=="TODOS":
+            seleccion="TODOS"
+            self.ui.dato.setDisabled(True)
+            self.ui.opciones_2.setDisabled(True)
+            
+
+        elif selecciones=="Especifico":
+            seleccion="Especifico"
+            self.ui.dato.setEnabled(True)
+            self.ui.opciones_2.setEnabled(True)
+            self.ui.opciones_2.clear()
+        
+            for elemento in listaDescripcion2:
+                self.ui.opciones_2.addItem(elemento)
+
+        elif selecciones=="Empiece con...":
+            seleccion="Empiece con..."
+            self.ui.dato.setEnabled(True)
+            self.ui.opciones_2.setEnabled(True)
+            self.ui.opciones_2.clear()
+
+            for elemento in listaDescripcion2:
+                self.ui.opciones_2.addItem(elemento)
+
+        elif selecciones=="Termine con...":
+            seleccion="Termine con..."
+            self.ui.dato.setEnabled(True)
+            self.ui.opciones_2.setEnabled(True)
+            self.ui.opciones_2.clear()
+
+            for elemento in listaDescripcion2:
+                self.ui.opciones_2.addItem(elemento)
+
+
+    def realizar(self):
+        global nombre
+        global nombretabla
+        global seleccion
+        global listaDescripcion2
+        contador=0
+        lista=[]
+        
+
+        sql2="SELECT * FROM "
+        sql2=sql2+nombretabla+";" 
+
+        if seleccion=="TODOS":
+            try:
+                base=(f"bases/{nombre}.db")
+                with sqlite3.connect(base) as conn:
+                    c=conn.cursor()
+                    c.execute(sql2)
+                    tablas=c.fetchall()
+
+                    for t in tablas:
+                        contador=contador+1
+                        lista.append(t)
+
+                
+                columnas=len(lista[0])
+                
+
+                filas=contador
+                self.ui.tableWidget.setRowCount(filas)
+                self.ui.tableWidget.setColumnCount(columnas)
+
+                fila=0
+                for registro in lista:
+                    columna=0
+                    for elemento in registro:
+                        celda=QTableWidgetItem(str(elemento))
+                        self.ui.tableWidget.setItem(fila,columna,celda)
+                        columna=columna+1
+                    fila=fila+1
+
+                self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion2)
+                self.ui.tableWidget.setSortingEnabled(True)
+
+            except Error as e:
+                print(e)
+
+        elif seleccion=="Especifico":
+            self.ui.tableWidget.clear()
+            contador=0
+            lista2=[]
+            
+            
+            if len(self.ui.dato.text())>0:
+                dato=self.ui.dato.text()
+            
+            try:
+                selecciones=self.ui.opciones_2.itemText(self.ui.opciones_2.currentIndex())
+                valor={selecciones:dato}
+                sql="SELECT * FROM "
+                sql=sql+nombretabla+" WHERE "+selecciones+"= :"+selecciones
+                
+                
+                base=(f"bases/{nombre}.db")
+                with sqlite3.connect(base) as conn:
+                    c=conn.cursor()
+                    c.execute(sql,valor)
+                    registros=c.fetchall()
+
+            
+                    for elemento in registros:
+                        lista2.append(elemento)
+                        contador=contador+1
+                
+                    if contador==0:
+                        self.ui.titulo2.setText("No se Encontraron registros")
+
+                    if contador>=1:
+                        columnas=len(listaDescripcion2)
+                
+
+                        filas=contador
+                        self.ui.tableWidget.setRowCount(filas)
+                        self.ui.tableWidget.setColumnCount(columnas)
+
+                        fila=0
+                        for registro in lista2:
+                            columna=0
+                            for elemento in registro:
+                                celda=QTableWidgetItem(str(elemento))
+                                self.ui.tableWidget.setItem(fila,columna,celda)
+                                columna=columna+1
+                            fila=fila+1
+
+                        self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion2)
+                        self.ui.tableWidget.setSortingEnabled(True)
+
+
+            except Error as e:
+                print(e)
+
+
+
+
+
+
+
+
+
+    def atras(self):
+        self.parent().show()
+        self.close()
+
 
 
 class VentanaInsertar(QMainWindow):
@@ -813,8 +1061,7 @@ class VentanaInsertar(QMainWindow):
         
         sqlinsertar="INSERT INTO "+nombretabla+" VALUES("
        
-        print(contadorverificacion)
-        print(contadorvalidacion)
+        
         try:
             if contadorverificacion==contadorvalidacion:
                 
@@ -829,7 +1076,7 @@ class VentanaInsertar(QMainWindow):
 
                 sqlinsertar=sqlinsertar+")"
             
-                print(sqlinsertar)
+                
 
             
                 try:
@@ -892,7 +1139,7 @@ class VentanaInsertar(QMainWindow):
                 for campo in listavalor:
                     self.ui.Campos.addItem(campo)
                     contadorverificacion=contadorverificacion+1
-                print(sqlinsertar)
+                
                 
         except Error as e:
             print(e)

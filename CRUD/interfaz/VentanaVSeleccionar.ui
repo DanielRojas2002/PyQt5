@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>389</width>
-    <height>232</height>
+    <width>397</width>
+    <height>256</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
       <x>50</x>
       <y>20</y>
       <width>301</width>
-      <height>181</height>
+      <height>203</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -57,6 +57,26 @@ QPushButton{
        </property>
        <property name="text">
         <string>En que tabla desea seleccionar los registros</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="error1">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string/>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -104,7 +124,7 @@ QPushButton{
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>389</width>
+     <width>397</width>
      <height>21</height>
     </rect>
    </property>

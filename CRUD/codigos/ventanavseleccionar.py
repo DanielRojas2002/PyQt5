@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'VentanaVSeleccionar.ui'
+# Form implementation generated from reading ui file 'VentanaVseleccionar.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.2
 #
@@ -14,12 +14,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_VentanaValidacionseleccionar(object):
     def setupUi(self, VentanaValidacionseleccionar):
         VentanaValidacionseleccionar.setObjectName("VentanaValidacionseleccionar")
-        VentanaValidacionseleccionar.resize(389, 232)
+        VentanaValidacionseleccionar.resize(397, 256)
         VentanaValidacionseleccionar.setStyleSheet("background-color: rgb(200, 200, 29);")
         self.centralwidget = QtWidgets.QWidget(VentanaValidacionseleccionar)
         self.centralwidget.setObjectName("centralwidget")
         self.layoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget.setGeometry(QtCore.QRect(50, 20, 301, 181))
+        self.layoutWidget.setGeometry(QtCore.QRect(50, 20, 301, 203))
         self.layoutWidget.setObjectName("layoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -44,6 +44,17 @@ class Ui_VentanaValidacionseleccionar(object):
         self.titulo.setAlignment(QtCore.Qt.AlignCenter)
         self.titulo.setObjectName("titulo")
         self.verticalLayout.addWidget(self.titulo)
+        self.error1 = QtWidgets.QLabel(self.layoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.error1.setFont(font)
+        self.error1.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.error1.setText("")
+        self.error1.setAlignment(QtCore.Qt.AlignCenter)
+        self.error1.setObjectName("error1")
+        self.verticalLayout.addWidget(self.error1)
         self.tablascreadas = QtWidgets.QListWidget(self.layoutWidget)
         self.tablascreadas.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.tablascreadas.setObjectName("tablascreadas")
@@ -64,7 +75,7 @@ class Ui_VentanaValidacionseleccionar(object):
         self.verticalLayout.addWidget(self.enviar)
         VentanaValidacionseleccionar.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(VentanaValidacionseleccionar)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 389, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 397, 21))
         self.menubar.setObjectName("menubar")
         VentanaValidacionseleccionar.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(VentanaValidacionseleccionar)
