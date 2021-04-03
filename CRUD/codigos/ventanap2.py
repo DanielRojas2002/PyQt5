@@ -72,7 +72,7 @@ class Ui_VentanaP2(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(150, 130, 151, 91))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("mutimedia/base2.png"))
+        self.label.setPixmap(QtGui.QPixmap("CRUD/mutimedia/base2.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         VentanaP2.setCentralWidget(self.centralwidget)

@@ -82,7 +82,7 @@ class Ui_VentanaSeleccionar(object):
         self.imagen = QtWidgets.QLabel(self.layoutWidget)
         self.imagen.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.imagen.setText("")
-        self.imagen.setPixmap(QtGui.QPixmap("mutimedia/lupa.ico"))
+        self.imagen.setPixmap(QtGui.QPixmap("CRUD/mutimedia/lupa.ico"))
         self.imagen.setScaledContents(True)
         self.imagen.setObjectName("imagen")
         self.verticalLayout.addWidget(self.imagen)

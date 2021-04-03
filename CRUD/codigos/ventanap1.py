@@ -37,7 +37,7 @@ class Ui_VentanaP(object):
         self.imagen = QtWidgets.QLabel(self.layoutWidget)
         self.imagen.setFrameShape(QtWidgets.QFrame.Box)
         self.imagen.setText("")
-        self.imagen.setPixmap(QtGui.QPixmap("mutimedia/base.png"))
+        self.imagen.setPixmap(QtGui.QPixmap("CRUD/mutimedia/base.png"))
         self.imagen.setScaledContents(True)
         self.imagen.setWordWrap(False)
         self.imagen.setObjectName("imagen")

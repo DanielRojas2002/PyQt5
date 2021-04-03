@@ -57,7 +57,7 @@ class Ui_VentanaBTablas(object):
         self.verticalLayout.addWidget(self.titulo)
         self.imagen = QtWidgets.QLabel(self.widget)
         self.imagen.setText("")
-        self.imagen.setPixmap(QtGui.QPixmap("mutimedia/descarga.gif"))
+        self.imagen.setPixmap(QtGui.QPixmap("CRUD/mutimedia/descarga.gif"))
         self.imagen.setScaledContents(True)
         self.imagen.setObjectName("imagen")
         self.verticalLayout.addWidget(self.imagen)

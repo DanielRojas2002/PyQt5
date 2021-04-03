@@ -21,7 +21,7 @@ class Ui_VentanaInsertarRegistros(object):
         self.imagen = QtWidgets.QLabel(self.centralwidget)
         self.imagen.setGeometry(QtCore.QRect(300, 10, 141, 51))
         self.imagen.setText("")
-        self.imagen.setPixmap(QtGui.QPixmap("mutimedia/insertar.gif"))
+        self.imagen.setPixmap(QtGui.QPixmap("CRUD/mutimedia/insertar.gif"))
         self.imagen.setScaledContents(True)
         self.imagen.setObjectName("imagen")
         self.layoutWidget = QtWidgets.QWidget(self.centralwidget)

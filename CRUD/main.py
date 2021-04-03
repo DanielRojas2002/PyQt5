@@ -57,7 +57,7 @@ class VentanaP1(QMainWindow):
             nombre=self.ui.nombrebd.text()
             db_filename=nombre+".db" 
 
-            db_is_new = not os.path.exists("bases/"+db_filename)
+            db_is_new = not os.path.exists("CRUD/bases/"+db_filename)
 
             if db_is_new:
                 mensaje=QMessageBox()
@@ -104,14 +104,14 @@ class VentanaCreador(QMainWindow):
         nombre=self.ui.bdnombre.text()
         db_filename=nombre+".db" 
 
-        db_is_new = not os.path.exists("bases/"+db_filename)
+        db_is_new = not os.path.exists("CRUD/bases/"+db_filename)
 
         if db_is_new:
             if len(self.ui.bdnombre.text())>0:
                 bd=self.ui.bdnombre.text()
                 self.ui.resultado.setText(f"La base de datos:{bd} se ha creado")
                 try:
-                    with sqlite3.connect(f"bases/{bd}.db") as conn:
+                    with sqlite3.connect(f"CRUD/bases/{bd}.db") as conn:
                         pass
 
                 except Error as e:
@@ -237,7 +237,7 @@ class VentanaCreacionTablas(QMainWindow):
         sql="SELECT name FROM sqlite_master WHERE type='table';"
         contadortablas=0
 
-        base=(f"bases/{nombre}.db")
+        base=(f"CRUD/bases/{nombre}.db")
         with sqlite3.connect(base) as conn:
             c = conn.cursor()
             c.execute(sql)
@@ -361,7 +361,7 @@ class VentanaCreacionTablas(QMainWindow):
 
             
             try:
-                base=(f"bases/{nombre}.db")
+                base=(f"CRUD/bases/{nombre}.db")
                 with sqlite3.connect(base) as conn:
                     t=self.ui.nombretabla.text()
                     tabla=t
@@ -386,7 +386,7 @@ class VentanaCreacionTablas(QMainWindow):
         sql="SELECT name FROM sqlite_master WHERE type='table';"
         contadortablas=0
         self.ui.tablascreadas.clear()
-        base=(f"bases/{nombre}.db")
+        base=(f"CRUD/bases/{nombre}.db")
         with sqlite3.connect(base) as conn:
             c = conn.cursor()
             c.execute(sql)
@@ -441,7 +441,7 @@ class VentanaVT(QMainWindow):
         contador5=0
         contadortabla=1
 
-        base=(f"bases/{nombre}.db")
+        base=(f"CRUD/bases/{nombre}.db")
         with sqlite3.connect(base) as conn:
             c = conn.cursor()
             c.execute(sql)
@@ -480,7 +480,7 @@ class VentanaBorrarTablas(QMainWindow):
 
         sql="SELECT name FROM sqlite_master WHERE type='table';"
         try:
-            base=(f"bases/{nombre}.db")
+            base=(f"CRUD/bases/{nombre}.db")
             with sqlite3.connect(base) as conn:
                 c=conn.cursor()
                 c.execute(sql)
@@ -522,7 +522,7 @@ class VentanaBorrarTablas(QMainWindow):
         if contador4==0:
             self.ui.tablascreadas.addItem("No existen Tablas tiene que crear tablas")
         try:
-            base=(f"bases/{nombre}.db")
+            base=(f"CRUD/bases/{nombre}.db")
             tabla=self.ui.tablaaborrar.text()
             sql='DROP TABLE %s' % tabla
             with sqlite3.connect(base) as conn:
@@ -551,7 +551,7 @@ class VentanaVInsertar(QMainWindow):
         sql="SELECT name FROM sqlite_master WHERE type='table';"
 
         try:
-            base=(f"bases/{nombre}.db")
+            base=(f"CRUD/bases/{nombre}.db")
             with sqlite3.connect(base) as conn:
                 c=conn.cursor()
                 c.execute(sql)
@@ -611,7 +611,7 @@ class VentanaVborrar(QMainWindow):
         sql="SELECT name FROM sqlite_master WHERE type='table';"
 
         try:
-            base=(f"bases/{nombre}.db")
+            base=(f"CRUD/bases/{nombre}.db")
             with sqlite3.connect(base) as conn:
                 c=conn.cursor()
                 c.execute(sql)
@@ -671,7 +671,7 @@ class VentanaVcambiar(QMainWindow):
         sql="SELECT name FROM sqlite_master WHERE type='table';"
 
         try:
-            base=(f"bases/{nombre}.db")
+            base=(f"CRUD/bases/{nombre}.db")
             with sqlite3.connect(base) as conn:
                 c=conn.cursor()
                 c.execute(sql)
@@ -730,7 +730,7 @@ class VentanaVseleccionar(QMainWindow):
         sql="SELECT name FROM sqlite_master WHERE type='table';"
 
         try:
-            base=(f"bases/{nombre}.db")
+            base=(f"CRUD/bases/{nombre}.db")
             with sqlite3.connect(base) as conn:
                 c=conn.cursor()
                 c.execute(sql)
@@ -799,7 +799,7 @@ class VentanaSelecciona(QMainWindow):
 
         try:
             listaDescripcion2=[]
-            base=(f"bases/{nombre}.db")
+            base=(f"CRUD/bases/{nombre}.db")
             with sqlite3.connect(base) as conn:
                 c=conn.cursor()
                 c.execute(sql)
@@ -868,7 +868,7 @@ class VentanaSelecciona(QMainWindow):
 
         if seleccion=="TODOS":
             try:
-                base=(f"bases/{nombre}.db")
+                base=(f"CRUD/bases/{nombre}.db")
                 with sqlite3.connect(base) as conn:
                     c=conn.cursor()
                     c.execute(sql2)
@@ -917,7 +917,7 @@ class VentanaSelecciona(QMainWindow):
                 sql=sql+nombretabla+" WHERE "+selecciones+"= :"+selecciones
                 
                 
-                base=(f"bases/{nombre}.db")
+                base=(f"CRUD/bases/{nombre}.db")
                 with sqlite3.connect(base) as conn:
                     c=conn.cursor()
                     c.execute(sql,valor)
@@ -991,7 +991,7 @@ class VentanaInsertar(QMainWindow):
     
 	
         try:
-            base=(f"bases/{nombre}.db")
+            base=(f"CRUD/bases/{nombre}.db")
             with sqlite3.connect(base) as conn:
                 c=conn.cursor()
                 paso1="PRAGMA table_info("
@@ -1080,7 +1080,7 @@ class VentanaInsertar(QMainWindow):
 
             
                 try:
-                    base=(f"bases/{nombre}.db")
+                    base=(f"CRUD/bases/{nombre}.db")
                     with sqlite3.connect(base) as conn:
                         c=conn.cursor()
                         c.execute(sqlinsertar,diccInsertar)
@@ -1124,7 +1124,7 @@ class VentanaInsertar(QMainWindow):
         diccInsertar={}
         
         try:
-            base=(f"bases/{nombre}.db")
+            base=(f"CRUD/bases/{nombre}.db")
             with sqlite3.connect(base) as conn:
                 c=conn.cursor()
                 paso1="PRAGMA table_info("

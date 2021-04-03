@@ -43,7 +43,7 @@ class Ui_Ventanainformacion(object):
         self.foto.setGeometry(QtCore.QRect(10, 150, 131, 141))
         self.foto.setFrameShape(QtWidgets.QFrame.Box)
         self.foto.setText("")
-        self.foto.setPixmap(QtGui.QPixmap("mutimedia/daniel.gif"))
+        self.foto.setPixmap(QtGui.QPixmap("CRUD/mutimedia/daniel.gif"))
         self.foto.setScaledContents(True)
         self.foto.setObjectName("foto")
         self.regresar = QtWidgets.QPushButton(self.centralwidget)
