@@ -88,7 +88,7 @@ class VentanaP1(QMainWindow):
                 self.ui.tableWidget.clear()
                 listaEncabezados=[]
                 listadatos=[]
-                notas=pd.read_csv(excel)
+                notas=pd.read_csv(excel,encoding='utf-8')
                 
                 for encabezados in notas.columns:
                     listaEncabezados.append(encabezados)
@@ -233,6 +233,8 @@ class VentanaP1(QMainWindow):
 
 
         elif self.ui.graficaPastel.isChecked()==True:
+            self.ui.errorarchivo.setText("")
+            
             self.ui.titulo_Grafico.setEnabled(True)
             self.ui.etiqueta_nombre.setEnabled(True)
             self.ui.etiqueta_valor.setEnabled(True)
@@ -267,6 +269,8 @@ class VentanaP1(QMainWindow):
             etiqueta2=self.ui.etiqueta_valor.text()
 
         elif self.ui.graficaBarras.isChecked()==True:
+            self.ui.errorarchivo.setText("")
+
             self.ui.titulo_Grafico.setEnabled(True)
             self.ui.etiqueta_nombre.setEnabled(True)
             self.ui.etiqueta_valor.setEnabled(True)
@@ -295,6 +299,8 @@ class VentanaP1(QMainWindow):
             etiqueta2=self.ui.etiqueta_valor.text()
 
         elif self.ui.graficaTenInd.isChecked()==True:
+            
+            self.ui.errorarchivo.setText("")
 
             self.ui.titulo_Grafico.setEnabled(True)
             self.ui.etiqueta_nombre.setEnabled(True)
@@ -308,7 +314,7 @@ class VentanaP1(QMainWindow):
             etiqueta2=""
             etiqueta3=""
             etiqueta4=""
-            self.ui.tituloGrafica.setText("DATOS PARA PODER GRAFICAR:\nTendencia\n(Usuario):")
+            self.ui.tituloGrafica.setText("DATOS PARA PODER GRAFICAR:\nTendencia(Usuario):")
             self.ui.titulo_Grafico.setPlaceholderText("Ingrese el Titulo del Grafico:")
             self.ui.etiqueta_nombre.setPlaceholderText("Ingrese la Etiqueta del Nombre:")
             self.ui.etiqueta_valor.setPlaceholderText("Ingrese la Etiqueta del Valor:")
@@ -320,6 +326,41 @@ class VentanaP1(QMainWindow):
             etiqueta2=self.ui.etiqueta_valor.text()
             etiqueta3=self.ui.etiqueta_usuario.text()
             etiqueta4=self.ui.etiqueta_tiempo.text()
+
+        elif self.ui.graficarTenGru.isChecked()==True:
+
+            self.ui.errorarchivo.setText("")
+            
+
+            self.ui.titulo_Grafico.setEnabled(True)
+            self.ui.etiqueta_nombre.setEnabled(True)
+            self.ui.etiqueta_valor.setEnabled(True)
+
+            self.ui.etiqueta_usuario.setDisabled(True)
+            self.ui.etiqueta_usuario.setPlaceholderText("")
+
+            self.ui.etiqueta_tiempo.setEnabled(True)
+            self.ui.GRAFICAR.setEnabled(True)
+
+            titulo=""
+            etiqueta1=""
+            etiqueta2=""
+            etiqueta3=""
+            etiqueta4=""
+            self.ui.tituloGrafica.setText("DATOS PARA PODER GRAFICAR:\nTendencia(Grupal):")
+
+            self.ui.titulo_Grafico.setPlaceholderText("Ingrese el Titulo del Grafico:")
+            self.ui.etiqueta_nombre.setPlaceholderText("Ingrese la Etiqueta del Nombre:")
+            self.ui.etiqueta_valor.setPlaceholderText("Ingrese la Etiqueta del Valor:")
+        
+            self.ui.etiqueta_tiempo.setPlaceholderText("Ingrese la Etiqueta del Tiempo:")
+
+            titulo=self.ui.titulo_Grafico.text()
+            etiqueta1=self.ui.etiqueta_nombre.text()
+            etiqueta2=self.ui.etiqueta_valor.text()
+            etiqueta4=self.ui.etiqueta_tiempo.text()
+
+          
 
 
     def Graficar(self):
@@ -418,6 +459,17 @@ class VentanaP1(QMainWindow):
 
                 except:
                     self.ui.errorarchivo.setText("Ingreso mal Una Etiqueta")
+
+            else:
+                self.ui.errorarchivo.setText("Ingrese los datos necesarios")
+
+
+        if self.ui.graficarTenGru.isChecked()==True:
+            if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0 and len(etiqueta4)>0:
+                
+                self.ui.errorarchivo.setText("")
+                notas=pd.read_csv(excel,encoding='utf-8')
+
 
             else:
                 self.ui.errorarchivo.setText("Ingrese los datos necesarios")
