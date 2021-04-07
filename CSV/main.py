@@ -6,7 +6,7 @@ from matplotlib import dates as mpl_dates
 from PyQt5.QtWidgets import QDialog,QApplication,QMainWindow,QMessageBox,QErrorMessage,QFileDialog,QTableWidgetItem
 from codigo.ventanacsv import Ui_VentanaPrincipal
 
-
+#CHECAR COMO SOLUCIONAR CUANDO ELIGAN EL CSV Y ELIGA LA OPCION DE VERCSV EN EL LLENADO DE DATOS 
 excel=""
 notas=""
 titulo=""
@@ -17,6 +17,11 @@ etiqueta4=""
 listaEncabezados=[]
 listadatos=[]
 listacolumnas=[]
+listacolores=['#00FFFF','#0000FF', '#8A2BE2','#A52A2A','#DEB887','#5F9EA0','#7FFF00','#D2691E',
+'#6495ED','#DC143C','#00008B','#008B8B','#B8860B','#A9A9A9','#006400', '#BDB76B','#8B008B','#FF8C00','#8B0000'
+,'#483D8B','#2F4F4F','#FF1493','#1E90FF','#228B22','#FFD700','#DAA520','#7CFC00','#0000CD','#FF0000','#9ACD32']
+
+
 class VentanaP1(QMainWindow):
     def __init__(self):
         super(VentanaP1,self).__init__()
@@ -35,7 +40,7 @@ class VentanaP1(QMainWindow):
         self.ui.etiqueta_tiempo.setDisabled(True)
         self.ui.GRAFICAR.setDisabled(True)
 
-
+    #ESTA OPCION ESTA BIEN 
     def Buscar(self):
         self.ui.GRAFICAR.setDisabled(True)
         try:
@@ -43,6 +48,7 @@ class VentanaP1(QMainWindow):
             global notas
             global listaEncabezados
             listaEncabezados=[]
+            self.ui.tableWidget.setSortingEnabled(False)
             self.ui.encabezados.clear()
             self.ui.tableWidget.clear()
             self.ui.tableDescripcion.clear()
@@ -62,6 +68,7 @@ class VentanaP1(QMainWindow):
         global listacolumnas
         contador=0
         if self.ui.verCSV.isChecked()==True:
+            self.ui.tableWidget.setSortingEnabled(False)
             self.ui.titulo_Grafico.setDisabled(True)
             self.ui.etiqueta_nombre.setDisabled(True)
             self.ui.etiqueta_valor.setDisabled(True)
@@ -131,7 +138,7 @@ class VentanaP1(QMainWindow):
                 self.ui.tableWidget.clear()
                 self.ui.errorarchivo.setText("El Archivo no se puede leer")
 
-
+        #ESTA OPCION ESTA BIEN
         elif self.ui.Estadistica.isChecked()==True:
             try:
 
@@ -231,10 +238,10 @@ class VentanaP1(QMainWindow):
 
 
 
-
+        # CHECAR ESTA OPCION QEU AGRUPE LOS NOMBRES CON LA SUMA DE SUS VALORES 
         elif self.ui.graficaPastel.isChecked()==True:
             self.ui.errorarchivo.setText("")
-            
+
             self.ui.titulo_Grafico.setEnabled(True)
             self.ui.etiqueta_nombre.setEnabled(True)
             self.ui.etiqueta_valor.setEnabled(True)
@@ -268,6 +275,7 @@ class VentanaP1(QMainWindow):
             etiqueta1=self.ui.etiqueta_nombre.text()
             etiqueta2=self.ui.etiqueta_valor.text()
 
+        #ESTA OPCION ESTA BIEN
         elif self.ui.graficaBarras.isChecked()==True:
             self.ui.errorarchivo.setText("")
 
@@ -298,6 +306,7 @@ class VentanaP1(QMainWindow):
             etiqueta1=self.ui.etiqueta_nombre.text()
             etiqueta2=self.ui.etiqueta_valor.text()
 
+        #ESTA OPCION ESTA BIEN TAMBIEN
         elif self.ui.graficaTenInd.isChecked()==True:
             
             self.ui.errorarchivo.setText("")
@@ -371,27 +380,58 @@ class VentanaP1(QMainWindow):
         global etiqueta2
         global etiqueta3
         global etiqueta4
+        global listacolores
         
-       
+       #Ya Funciona esta funcion
         if self.ui.graficaPastel.isChecked()==True:
             if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0:
                 try:
-
+                
+                    listasuma=[]
+                    listanombres=[]
                     self.ui.errorarchivo.setText("")
                     notas=pd.read_csv(excel,encoding='utf-8')
-                    nombre=notas[etiqueta1]
-                    valor=notas[etiqueta2]
+
+                    nombreunicos=notas[etiqueta1].unique()
+                    
+                    
+                    for x in nombreunicos:
+                        listanombres.append(nombreunicos)
+                        
+                        valor=notas[[etiqueta1,etiqueta2]]
+                        
+
+                        dato=valor[etiqueta1]==x
+                        DATOS=notas[dato]
+                    
+                        suma=DATOS[etiqueta2].sum()
+
+                        listasuma.append(suma)
+                            
+                    
+
+                    nombre=notas[etiqueta1].unique()
+                    
+                    longitud=len(listasuma)
+
+                    listacolores2=[]
+
+                    colores=listacolores[:longitud]
+
+                    for color in colores:
+                        listacolores2.append(color)
+                    
 
                     porcentaje=notas[etiqueta2].sum()
                     porcentajeb=round(porcentaje)
-                    
+                        
                     leyenda = []
-                    for navegador, mercado in zip(nombre,valor):
+                    for navegador, mercado in zip(nombre,listasuma):
                         mercado2=round((mercado/porcentajeb*100),2)
                         leyenda.append(navegador + '  (' + str(mercado2) + '%)')
-
-                    
-                    plt.pie(valor,labels=None,autopct="%0.1f %%")
+    
+                        
+                    plt.pie(listasuma,labels=None,autopct="%0.1f %%",colors=listacolores2)
                     plt.title(titulo)
                     plt.rc('legend', fontsize=6)
                     plt.legend(leyenda,loc='best',bbox_to_anchor=(1.05, 1.0))
@@ -402,7 +442,7 @@ class VentanaP1(QMainWindow):
             else:
                 self.ui.errorarchivo.setText("Ingrese los datos necesarios")
         
-
+        #ESTA OPCION ESTA BIEN 
         elif self.ui.graficaBarras.isChecked()==True:
             if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0:
                 try:
@@ -426,7 +466,7 @@ class VentanaP1(QMainWindow):
                 self.ui.errorarchivo.setText("Ingrese los datos necesarios")
         
 
-        
+        #AQUI EL CSV TIENE QUE ESTAR LA FECHA COMO AÑO MES DIA
         if self.ui.graficaTenInd.isChecked()==True:
             if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0 and len(etiqueta3)>0 and len(etiqueta4)>0:
                 try:
@@ -437,6 +477,9 @@ class VentanaP1(QMainWindow):
 
                     dato=notas[etiqueta1]==etiqueta3
                     DATOS=notas[dato]
+
+                    
+
 
                     valor=DATOS[etiqueta2]
                     tiempo=DATOS[etiqueta4]
@@ -463,12 +506,61 @@ class VentanaP1(QMainWindow):
             else:
                 self.ui.errorarchivo.setText("Ingrese los datos necesarios")
 
-
+        # AQUI FALTA HACER EL CODIGO DE TENDENCIA GRUPAL
         if self.ui.graficarTenGru.isChecked()==True:
             if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0 and len(etiqueta4)>0:
                 
                 self.ui.errorarchivo.setText("")
                 notas=pd.read_csv(excel,encoding='utf-8')
+
+
+          
+                  
+                notas[etiqueta4]=pd.to_datetime(notas[etiqueta4])
+                
+
+                datos=notas[etiqueta1].unique()
+
+               
+                plt.style.use('seaborn')
+
+                listalegend=[]
+                contadorcolores=0
+
+                longitud=len(listacolores)
+
+                fig,ax=plt.subplots()
+
+                for x in datos:
+                    listalegend.append(x)
+                    dato=notas[etiqueta1]==x
+                    DATOS=notas[dato]
+
+                    valor=DATOS[etiqueta2]
+                    tiempo=DATOS[etiqueta4]
+                    ax.plot(tiempo,valor,marker="o",linewidth=2,color=listacolores[contadorcolores])
+                    contadorcolores=contadorcolores+1
+
+                    if longitud==contadorcolores:
+                        contadorcolores=0
+                    
+
+
+                
+                
+                plt.gcf().autofmt_xdate()
+                formato=mpl_dates.DateFormatter('%d,%b,%Y')
+                plt.gca().xaxis.set_major_formatter(formato)
+                plt.title("GRAFICA LINEAL(GRUPAL)")
+                plt.xlabel(etiqueta1)
+                plt.ylabel(etiqueta2)
+                
+                plt.rc('legend', fontsize=6)
+                plt.legend(listalegend,loc='best',bbox_to_anchor=(1.05, 1.0))
+
+                #plt.tight_layout()
+                plt.show()
+               
 
 
             else:
