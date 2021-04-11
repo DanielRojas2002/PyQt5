@@ -31,8 +31,6 @@ class VentanaP1(QMainWindow):
         self.ui.realizar.clicked.connect(self.REALIZAR)
         self.ui.GRAFICAR.clicked.connect(self.Graficar)
         
-
-
         self.ui.titulo_Grafico.setDisabled(True)
         self.ui.etiqueta_nombre.setDisabled(True)
         self.ui.etiqueta_valor.setDisabled(True)
@@ -59,6 +57,7 @@ class VentanaP1(QMainWindow):
             self.ui.nombreruta.setText(excel)
         except:
             self.ui.nombreruta.setText("No se Encontro el Archivo")
+
 
     def REALIZAR(self):
         global notas
@@ -110,8 +109,6 @@ class VentanaP1(QMainWindow):
                 self.ui.tableWidget.setRowCount(filas)
                 self.ui.tableWidget.setColumnCount(contador)
                 
-
-
                 for registros in notas.values:
                     dato=(tuple(registros))
                     listadatos.append(dato)
@@ -129,8 +126,7 @@ class VentanaP1(QMainWindow):
             
                 for x in range(0,contador+1):
                     self.ui.tableWidget.setColumnWidth(x,200)
-                
-                
+                               
             except:
                 listaEncabezados=[]
                 listadatos=[]
@@ -141,7 +137,6 @@ class VentanaP1(QMainWindow):
         #ESTA OPCION ESTA BIEN
         elif self.ui.Estadistica.isChecked()==True:
             try:
-
                 self.ui.titulo_Grafico.setDisabled(True)
                 self.ui.etiqueta_nombre.setDisabled(True)
                 self.ui.etiqueta_valor.setDisabled(True)
@@ -149,7 +144,7 @@ class VentanaP1(QMainWindow):
                 self.ui.etiqueta_tiempo.setDisabled(True)
 
                 self.ui.GRAFICAR.setDisabled(True)
-                #try:
+                
                 self.ui.tituloGrafica.setText("")
                 self.ui.titulo_Grafico.setPlaceholderText("")
                 self.ui.etiqueta_nombre.setPlaceholderText("")
@@ -171,9 +166,7 @@ class VentanaP1(QMainWindow):
 
                 for columna in descripcion:
                     listacolumnas.append(columna)
-                    
-
-            
+                                
                 lista=[]
                 listanueva=[]
                 listadatos=[]
@@ -194,9 +187,7 @@ class VentanaP1(QMainWindow):
                     listanueva.append(promedio)
 
                     lista.append(listanueva)
-
-                
-                
+  
                 registro=len(notas.index)    
 
                 filas=contador
@@ -207,13 +198,9 @@ class VentanaP1(QMainWindow):
                 self.ui.tableDescripcion.setRowCount(filas)
                 self.ui.tableDescripcion.setColumnCount(4)
 
-            
-
                 for registros in lista:
                     dato=(tuple(registros))
                     listadatos.append(dato)
-
-                
 
                 fila=0
                 for registro in listadatos:
@@ -230,13 +217,9 @@ class VentanaP1(QMainWindow):
                 for x in range(0,contador+1):
                     self.ui.tableDescripcion.setColumnWidth(x,100)
 
-
             except:
                 self.ui.tableDescripcion.clear()
                 self.ui.errorarchivo.setText("ERROR")
-
-
-
 
         # CHECAR ESTA OPCION QEU AGRUPE LOS NOMBRES CON LA SUMA DE SUS VALORES 
         elif self.ui.graficaPastel.isChecked()==True:
@@ -249,11 +232,10 @@ class VentanaP1(QMainWindow):
 
             self.ui.etiqueta_usuario.clear()
             self.ui.etiqueta_tiempo.clear()
-
-
-            
+    
             self.ui.etiqueta_usuario.setDisabled(True)
             self.ui.etiqueta_tiempo.setDisabled(True)
+
             global titulo
             global etiqueta1
             global etiqueta2
@@ -264,6 +246,7 @@ class VentanaP1(QMainWindow):
             etiqueta2=""
             etiqueta3=""
             etiqueta4=""
+
             self.ui.tituloGrafica.setText("DATOS PARA PODER GRAFICAR:\nPASTEL:")
             self.ui.titulo_Grafico.setPlaceholderText("Ingrese el Titulo del Grafico:")
             self.ui.etiqueta_nombre.setPlaceholderText("Ingrese la Etiqueta del Nombre:")
@@ -295,6 +278,7 @@ class VentanaP1(QMainWindow):
             etiqueta2=""
             etiqueta3=""
             etiqueta4=""
+
             self.ui.tituloGrafica.setText("DATOS PARA PODER GRAFICAR:\nBARRAS:")
             self.ui.titulo_Grafico.setPlaceholderText("Ingrese el Titulo del Grafico:")
             self.ui.etiqueta_nombre.setPlaceholderText("Ingrese la Etiqueta del Nombre:")
@@ -307,10 +291,9 @@ class VentanaP1(QMainWindow):
             etiqueta2=self.ui.etiqueta_valor.text()
 
         #ESTA OPCION ESTA BIEN TAMBIEN
-        elif self.ui.graficaTenInd.isChecked()==True:
-            
-            self.ui.errorarchivo.setText("")
+        elif self.ui.graficaTenInd.isChecked()==True: 
 
+            self.ui.errorarchivo.setText("")
             self.ui.titulo_Grafico.setEnabled(True)
             self.ui.etiqueta_nombre.setEnabled(True)
             self.ui.etiqueta_valor.setEnabled(True)
@@ -323,6 +306,7 @@ class VentanaP1(QMainWindow):
             etiqueta2=""
             etiqueta3=""
             etiqueta4=""
+
             self.ui.tituloGrafica.setText("DATOS PARA PODER GRAFICAR:\nTendencia(Usuario):")
             self.ui.titulo_Grafico.setPlaceholderText("Ingrese el Titulo del Grafico:")
             self.ui.etiqueta_nombre.setPlaceholderText("Ingrese la Etiqueta del Nombre:")
@@ -339,8 +323,6 @@ class VentanaP1(QMainWindow):
         elif self.ui.graficarTenGru.isChecked()==True:
 
             self.ui.errorarchivo.setText("")
-            
-
             self.ui.titulo_Grafico.setEnabled(True)
             self.ui.etiqueta_nombre.setEnabled(True)
             self.ui.etiqueta_valor.setEnabled(True)
@@ -356,20 +338,17 @@ class VentanaP1(QMainWindow):
             etiqueta2=""
             etiqueta3=""
             etiqueta4=""
-            self.ui.tituloGrafica.setText("DATOS PARA PODER GRAFICAR:\nTendencia(Grupal):")
 
+            self.ui.tituloGrafica.setText("DATOS PARA PODER GRAFICAR:\nTendencia(Grupal):")
             self.ui.titulo_Grafico.setPlaceholderText("Ingrese el Titulo del Grafico:")
             self.ui.etiqueta_nombre.setPlaceholderText("Ingrese la Etiqueta del Nombre:")
-            self.ui.etiqueta_valor.setPlaceholderText("Ingrese la Etiqueta del Valor:")
-        
+            self.ui.etiqueta_valor.setPlaceholderText("Ingrese la Etiqueta del Valor:")  
             self.ui.etiqueta_tiempo.setPlaceholderText("Ingrese la Etiqueta del Tiempo:")
 
             titulo=self.ui.titulo_Grafico.text()
             etiqueta1=self.ui.etiqueta_nombre.text()
             etiqueta2=self.ui.etiqueta_valor.text()
             etiqueta4=self.ui.etiqueta_tiempo.text()
-
-          
 
 
     def Graficar(self):
@@ -382,7 +361,7 @@ class VentanaP1(QMainWindow):
         global etiqueta4
         global listacolores
         
-       #Ya Funciona esta funcion
+       #Ya Funciona esta funcion VALORES UNICOS MAXIMO 40 SE PUEDEN MAS PERO SE VERA MAL LA GRAFICA
         if self.ui.graficaPastel.isChecked()==True:
             if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0:
                 try:
@@ -407,21 +386,28 @@ class VentanaP1(QMainWindow):
                         suma=DATOS[etiqueta2].sum()
 
                         listasuma.append(suma)
-                            
-                    
-
-                    nombre=notas[etiqueta1].unique()
-                    
+                                               
+                    nombre=notas[etiqueta1].unique()                    
                     longitud=len(listasuma)
-
                     listacolores2=[]
+                 
+                    if longitud<=len(listacolores):
+                        colores=listacolores[:longitud]
 
-                    colores=listacolores[:longitud]
+                        for color in colores:
+                            listacolores2.append(color)
 
-                    for color in colores:
-                        listacolores2.append(color)
-                    
+                    elif longitud>=len(listacolores):
+                        colorenecesarios=longitud
+                        contadorcolores=0
+                        
+                        for x in range(colorenecesarios):
+                            listacolores2.append(listacolores[contadorcolores])               
+                            contadorcolores=contadorcolores+1
 
+                            if contadorcolores==len(listacolores):
+                                contadorcolores=0
+                                                        
                     porcentaje=notas[etiqueta2].sum()
                     porcentajeb=round(porcentaje)
                         
@@ -429,20 +415,19 @@ class VentanaP1(QMainWindow):
                     for navegador, mercado in zip(nombre,listasuma):
                         mercado2=round((mercado/porcentajeb*100),2)
                         leyenda.append(navegador + '  (' + str(mercado2) + '%)')
-    
-                        
+                 
                     plt.pie(listasuma,labels=None,autopct="%0.1f %%",colors=listacolores2)
-                    plt.title(titulo)
+                    plt.title(titulo+"("+etiqueta1+":"+etiqueta2+")")
                     plt.rc('legend', fontsize=6)
                     plt.legend(leyenda,loc='best',bbox_to_anchor=(1.05, 1.0))
                     plt.show()
-                    
+                
                 except:
                     self.ui.errorarchivo.setText("Ingreso mal Una Etiqueta")
             else:
                 self.ui.errorarchivo.setText("Ingrese los datos necesarios")
         
-        #ESTA OPCION ESTA BIEN 
+        #ESTA OPCION ESTA BIEN  FALTA HACER EL .UNIQUE
         elif self.ui.graficaBarras.isChecked()==True:
             if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0:
                 try:
@@ -466,7 +451,7 @@ class VentanaP1(QMainWindow):
                 self.ui.errorarchivo.setText("Ingrese los datos necesarios")
         
 
-        #AQUI EL CSV TIENE QUE ESTAR LA FECHA COMO AÑO MES DIA
+        #AQUI EL CSV TIENE QUE ESTAR LA FECHA COMO AÑO MES DIA (INDIVIDUAL)
         if self.ui.graficaTenInd.isChecked()==True:
             if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0 and len(etiqueta3)>0 and len(etiqueta4)>0:
                 try:
@@ -478,15 +463,9 @@ class VentanaP1(QMainWindow):
                     dato=notas[etiqueta1]==etiqueta3
                     DATOS=notas[dato]
 
-                    
-
-
                     valor=DATOS[etiqueta2]
                     tiempo=DATOS[etiqueta4]
-
-                    
-
-                    
+                
                     plt.style.use('seaborn')
                     plt.plot_date(tiempo,valor,linestyle="solid")
                     plt.gcf().autofmt_xdate()
@@ -498,37 +477,26 @@ class VentanaP1(QMainWindow):
                     plt.tight_layout()
                     plt.show()
                
-                    
-
                 except:
                     self.ui.errorarchivo.setText("Ingreso mal Una Etiqueta")
-
             else:
                 self.ui.errorarchivo.setText("Ingrese los datos necesarios")
 
-        # AQUI FALTA HACER EL CODIGO DE TENDENCIA GRUPAL
+        # AQUI FALTA HACER EL CODIGO DE TENDENCIA GRUPAL DE PREFERENCIA VALORES UNICOAS MAXIMO 30 PARA QUE SE VEA BIEN LA GRAFICA
         if self.ui.graficarTenGru.isChecked()==True:
             if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0 and len(etiqueta4)>0:
                 
                 self.ui.errorarchivo.setText("")
                 notas=pd.read_csv(excel,encoding='utf-8')
 
-
-          
-                  
                 notas[etiqueta4]=pd.to_datetime(notas[etiqueta4])
                 
-
                 datos=notas[etiqueta1].unique()
-
-               
+        
                 plt.style.use('seaborn')
-
                 listalegend=[]
                 contadorcolores=0
-
                 longitud=len(listacolores)
-
                 fig,ax=plt.subplots()
 
                 for x in datos:
@@ -543,26 +511,17 @@ class VentanaP1(QMainWindow):
 
                     if longitud==contadorcolores:
                         contadorcolores=0
-                    
-
-
-                
-                
+                               
                 plt.gcf().autofmt_xdate()
                 formato=mpl_dates.DateFormatter('%d,%b,%Y')
                 plt.gca().xaxis.set_major_formatter(formato)
                 plt.title("GRAFICA LINEAL(GRUPAL)")
                 plt.xlabel(etiqueta1)
-                plt.ylabel(etiqueta2)
-                
+                plt.ylabel(etiqueta2)          
                 plt.rc('legend', fontsize=6)
-                plt.legend(listalegend,loc='best',bbox_to_anchor=(1.05, 1.0))
-
-                #plt.tight_layout()
+                plt.legend(listalegend,loc='best',bbox_to_anchor=(1.05, 1.0))          
                 plt.show()
                
-
-
             else:
                 self.ui.errorarchivo.setText("Ingrese los datos necesarios")
 
