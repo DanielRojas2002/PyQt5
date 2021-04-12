@@ -6,7 +6,6 @@ from matplotlib import dates as mpl_dates
 from PyQt5.QtWidgets import QDialog,QApplication,QMainWindow,QMessageBox,QErrorMessage,QFileDialog,QTableWidgetItem
 from codigo.ventanacsv import Ui_VentanaPrincipal
 
-#CHECAR COMO SOLUCIONAR CUANDO ELIGAN EL CSV Y ELIGA LA OPCION DE VERCSV EN EL LLENADO DE DATOS 
 excel=""
 notas=""
 titulo=""
@@ -22,6 +21,7 @@ listacolores=['#00FFFF','#0000FF', '#8A2BE2','#A52A2A','#DEB887','#5F9EA0','#7FF
 ,'#483D8B','#2F4F4F','#FF1493','#1E90FF','#228B22','#FFD700','#DAA520','#7CFC00','#0000CD','#FF0000','#9ACD32']
 
 
+#AQUI INICIA LA CLASE DE LA INTERFAZ
 class VentanaP1(QMainWindow):
     def __init__(self):
         super(VentanaP1,self).__init__()
@@ -38,7 +38,7 @@ class VentanaP1(QMainWindow):
         self.ui.etiqueta_tiempo.setDisabled(True)
         self.ui.GRAFICAR.setDisabled(True)
 
-    #ESTA OPCION ESTA BIEN 
+    #ESTA OPCION BUSCA Y SELECCIONA LA RUTA DONDE ESTA EL ARCHIVO CSV 
     def Buscar(self):
         self.ui.GRAFICAR.setDisabled(True)
         try:
@@ -58,7 +58,7 @@ class VentanaP1(QMainWindow):
         except:
             self.ui.nombreruta.setText("No se Encontro el Archivo")
 
-
+    # ESTA OPCION ES UN BOTON EL CUAL BUSCA EL RADIOBUTTON ESTA SELECCIONADO
     def REALIZAR(self):
         global notas
         global excel
@@ -66,6 +66,7 @@ class VentanaP1(QMainWindow):
         global listadatos
         global listacolumnas
         contador=0
+        # SI ESTE RAIDOBUTTON ESTA SELECCIONADO VA HACER ESTAS COSAS
         if self.ui.verCSV.isChecked()==True:
             self.ui.tableWidget.setSortingEnabled(False)
             self.ui.titulo_Grafico.setDisabled(True)
@@ -134,7 +135,7 @@ class VentanaP1(QMainWindow):
                 self.ui.tableWidget.clear()
                 self.ui.errorarchivo.setText("El Archivo no se puede leer")
 
-        #ESTA OPCION ESTA BIEN
+        # SI ESTE RAIDOBUTTON ESTA SELECCIONADO VA HACER ESTAS COSAS
         elif self.ui.Estadistica.isChecked()==True:
             try:
                 self.ui.titulo_Grafico.setDisabled(True)
@@ -221,7 +222,7 @@ class VentanaP1(QMainWindow):
                 self.ui.tableDescripcion.clear()
                 self.ui.errorarchivo.setText("ERROR")
 
-        # CHECAR ESTA OPCION QEU AGRUPE LOS NOMBRES CON LA SUMA DE SUS VALORES 
+        # SI ESTE RAIDOBUTTON ESTA SELECCIONADO VA HACER ESTAS COSAS
         elif self.ui.graficaPastel.isChecked()==True:
             self.ui.errorarchivo.setText("")
 
@@ -258,7 +259,7 @@ class VentanaP1(QMainWindow):
             etiqueta1=self.ui.etiqueta_nombre.text()
             etiqueta2=self.ui.etiqueta_valor.text()
 
-        #ESTA OPCION ESTA BIEN
+        # SI ESTE RAIDOBUTTON ESTA SELECCIONADO VA HACER ESTAS COSAS
         elif self.ui.graficaBarras.isChecked()==True:
             self.ui.errorarchivo.setText("")
 
@@ -290,7 +291,7 @@ class VentanaP1(QMainWindow):
             etiqueta1=self.ui.etiqueta_nombre.text()
             etiqueta2=self.ui.etiqueta_valor.text()
 
-        #ESTA OPCION ESTA BIEN TAMBIEN
+        # SI ESTE RAIDOBUTTON ESTA SELECCIONADO VA HACER ESTAS COSAS
         elif self.ui.graficaTenInd.isChecked()==True: 
 
             self.ui.errorarchivo.setText("")
@@ -320,6 +321,7 @@ class VentanaP1(QMainWindow):
             etiqueta3=self.ui.etiqueta_usuario.text()
             etiqueta4=self.ui.etiqueta_tiempo.text()
 
+        # SI ESTE RAIDOBUTTON ESTA SELECCIONADO VA HACER ESTAS COSAS
         elif self.ui.graficarTenGru.isChecked()==True:
 
             self.ui.errorarchivo.setText("")
@@ -350,7 +352,7 @@ class VentanaP1(QMainWindow):
             etiqueta2=self.ui.etiqueta_valor.text()
             etiqueta4=self.ui.etiqueta_tiempo.text()
 
-
+    # ESTE BOTON ES EL BOTON GRAFICAR 
     def Graficar(self):
         global notas
         global excel
@@ -427,21 +429,64 @@ class VentanaP1(QMainWindow):
             else:
                 self.ui.errorarchivo.setText("Ingrese los datos necesarios")
         
-        #ESTA OPCION ESTA BIEN  FALTA HACER EL .UNIQUE
+        #ESTA OPCION SACA GRAFICA DE BARRAS SE PERMITEN MUCHOS VALORES PERO ENTRE MENOS MEJOR SE VERA LA GRAFICA
         elif self.ui.graficaBarras.isChecked()==True:
             if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0:
                 try:
+                    listasuma=[]
+                    listanombres=[]
                     self.ui.errorarchivo.setText("")
                     notas=pd.read_csv(excel,encoding='utf-8')
-                    nombre=notas[etiqueta1]
-                    valor=notas[etiqueta2]
 
+                    nombreunicos=notas[etiqueta1].unique()
+                    
+                    
+                    for x in nombreunicos:
+                        valor=notas[[etiqueta1,etiqueta2]]
+                        
+                        dato=valor[etiqueta1]==x
+                        DATOS=notas[dato]
+                    
+                        suma=DATOS[etiqueta2].sum()
+
+                        listasuma.append(suma)
+                                                
+                    listanombres=notas[etiqueta1].unique()                   
+                    longitud=len(listasuma)
+                    listacolores2=[]
+                    
+                    if longitud<=len(listacolores):
+                        colores=listacolores[:longitud]
+
+                        for color in colores:
+                            listacolores2.append(color)
+
+                    elif longitud>=len(listacolores):
+                        colorenecesarios=longitud
+                        contadorcolores=0
+                        
+                        for x in range(colorenecesarios):
+                            listacolores2.append(listacolores[contadorcolores])               
+                            contadorcolores=contadorcolores+1
+
+                            if contadorcolores==len(listacolores):
+                                contadorcolores=0
+                    
+                    datoslimpios={}
+                    datoslimpios["Nombres"]=listanombres
+                    datoslimpios["Totales"]=listasuma
+
+                    dataframe=pd.DataFrame(datoslimpios)
+                    nombre=dataframe["Nombres"]
+                    valor=dataframe["Totales"]
+
+                
                     fig=plt.subplots()
                     plt.xlabel(etiqueta1,fontsize=20)
                     plt.ylabel(etiqueta2,fontsize=20)
                     plt.xticks(rotation=45)
-                    plt.title(titulo,fontsize=20)
-                    plt.bar(nombre,valor)
+                    plt.title(titulo+"("+etiqueta1+":"+etiqueta2+")",fontsize=20)
+                    plt.bar(nombre,valor,color=listacolores2)
                     plt.grid(True)
                     plt.show()
                     
@@ -482,7 +527,7 @@ class VentanaP1(QMainWindow):
             else:
                 self.ui.errorarchivo.setText("Ingrese los datos necesarios")
 
-        # AQUI FALTA HACER EL CODIGO DE TENDENCIA GRUPAL DE PREFERENCIA VALORES UNICOAS MAXIMO 30 PARA QUE SE VEA BIEN LA GRAFICA
+        #  TENDENCIA GRUPAL DE PREFERENCIA VALORES UNICOAS MAXIMO 30 PARA QUE SE VEA BIEN LA GRAFICA
         if self.ui.graficarTenGru.isChecked()==True:
             if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0 and len(etiqueta4)>0:
                 
@@ -527,23 +572,6 @@ class VentanaP1(QMainWindow):
 
         
                 
-           
-        
-
-            
-
-        
-
-        
-        
-            
-            
-
-            
-
-        
-
-
 if __name__=="__main__":
     app=QApplication(sys.argv)
     main=VentanaP1()
