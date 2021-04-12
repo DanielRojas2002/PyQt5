@@ -897,13 +897,13 @@ class VentanaSelecciona(QMainWindow):
 
                 self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion2)
                 self.ui.tableWidget.setSortingEnabled(True)
+                self.ui.titulo2.setText("")
 
             except Error as e:
-                print(e)
+                self.ui.titulo2.setText(e)
 
             except:
                 self.ui.titulo2.setText("No se Encontraron registros")
-
 
         elif seleccion=="Especifico":
             self.ui.tableWidget.clear()
@@ -914,57 +914,175 @@ class VentanaSelecciona(QMainWindow):
             if len(self.ui.dato.text())>0:
                 dato=self.ui.dato.text()
             
-            try:
-                selecciones=self.ui.opciones_2.itemText(self.ui.opciones_2.currentIndex())
-                valor={selecciones:dato}
-                sql="SELECT * FROM "
-                sql=sql+nombretabla+" WHERE "+selecciones+"= :"+selecciones
+                try:
+                    selecciones=self.ui.opciones_2.itemText(self.ui.opciones_2.currentIndex())
+                    valor={selecciones:dato}
+                    sql="SELECT * FROM "
+                    sql=sql+nombretabla+" WHERE "+selecciones+"= :"+selecciones
+                    
+                    
+                    base=(f"CRUD/bases/{nombre}.db")
+                    with sqlite3.connect(base) as conn:
+                        c=conn.cursor()
+                        c.execute(sql,valor)
+                        registros=c.fetchall()
+
                 
+                        for elemento in registros:
+                            lista2.append(elemento)
+                            contador=contador+1
+                    
+                        if contador==0:
+                            self.ui.titulo2.setText("No se Encontraron registros")
+
+                        if contador>=1:
+                            columnas=len(listaDescripcion2)
+                    
+
+                            filas=contador
+                            self.ui.tableWidget.setRowCount(filas)
+                            self.ui.tableWidget.setColumnCount(columnas)
+
+                            fila=0
+                            for registro in lista2:
+                                columna=0
+                                for elemento in registro:
+                                    celda=QTableWidgetItem(str(elemento))
+                                    self.ui.tableWidget.setItem(fila,columna,celda)
+                                    columna=columna+1
+                                fila=fila+1
+
+                            self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion2)
+                            self.ui.tableWidget.setSortingEnabled(True)
+                            self.ui.titulo2.setText("")
+
+                except Error as e:
+                    self.ui.titulo2.setText(e)
+
+                except:
+                    self.ui.titulo2.setText("Ingrese el dato a buscar")
+            else:
+                self.ui.titulo2.setText("Ingrese el dato a buscar")
+
+
+        elif seleccion=="Empiece con...":
+            self.ui.tableWidget.clear()
+            contador=0
+            lista2=[]
+            
+            
+            if len(self.ui.dato.text())>0:
+                dato=self.ui.dato.text()
+                datobuscar=str(dato)
+            
+                try:
+                    selecciones=self.ui.opciones_2.itemText(self.ui.opciones_2.currentIndex())
+                    sql="SELECT * FROM "
+                    sql=sql+nombretabla+" WHERE "+selecciones+" LIKE "+"'%s%%'"
+                    
+                    
+                    base=(f"CRUD/bases/{nombre}.db")
+                    with sqlite3.connect(base) as conn:
+                        c=conn.cursor()
+                        c.execute(sql%datobuscar)
+                        registros=c.fetchall()
+
                 
-                base=(f"CRUD/bases/{nombre}.db")
-                with sqlite3.connect(base) as conn:
-                    c=conn.cursor()
-                    c.execute(sql,valor)
-                    registros=c.fetchall()
+                        for elemento in registros:
+                            lista2.append(elemento)
+                            contador=contador+1
+                    
+                        if contador==0:
+                            self.ui.titulo2.setText("No se Encontraron registros")
+
+                        if contador>=1:
+                            columnas=len(listaDescripcion2)
+                    
+
+                            filas=contador
+                            self.ui.tableWidget.setRowCount(filas)
+                            self.ui.tableWidget.setColumnCount(columnas)
+
+                            fila=0
+                            for registro in lista2:
+                                columna=0
+                                for elemento in registro:
+                                    celda=QTableWidgetItem(str(elemento))
+                                    self.ui.tableWidget.setItem(fila,columna,celda)
+                                    columna=columna+1
+                                fila=fila+1
+
+                            self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion2)
+                            self.ui.tableWidget.setSortingEnabled(True)
+                            self.ui.titulo2.setText("")
+
+                except Error as e:
+                    self.ui.titulo2.setText(e)
+
+                except:
+                    self.ui.titulo2.setText("Ingrese el dato a buscar")
+            else:
+                self.ui.titulo2.setText("Ingrese el dato a buscar")
 
             
-                    for elemento in registros:
-                        lista2.append(elemento)
-                        contador=contador+1
+        elif seleccion=="Termine con...":
+            self.ui.tableWidget.clear()
+            contador=0
+            lista2=[]
+            
+            
+            if len(self.ui.dato.text())>0:
+                dato=self.ui.dato.text()
+                datobuscar=str(dato)
+            
+                try:
+                    selecciones=self.ui.opciones_2.itemText(self.ui.opciones_2.currentIndex())
+                    sql="SELECT * FROM "
+                    sql=sql+nombretabla+" WHERE "+selecciones+" LIKE "+"'%%%s'"
+                    
+                    
+                    base=(f"CRUD/bases/{nombre}.db")
+                    with sqlite3.connect(base) as conn:
+                        c=conn.cursor()
+                        c.execute(sql%datobuscar)
+                        registros=c.fetchall()
+
                 
-                    if contador==0:
-                        self.ui.titulo2.setText("No se Encontraron registros")
+                        for elemento in registros:
+                            lista2.append(elemento)
+                            contador=contador+1
+                    
+                        if contador==0:
+                            self.ui.titulo2.setText("No se Encontraron registros")
 
-                    if contador>=1:
-                        columnas=len(listaDescripcion2)
-                
+                        if contador>=1:
+                            columnas=len(listaDescripcion2)
+                    
 
-                        filas=contador
-                        self.ui.tableWidget.setRowCount(filas)
-                        self.ui.tableWidget.setColumnCount(columnas)
+                            filas=contador
+                            self.ui.tableWidget.setRowCount(filas)
+                            self.ui.tableWidget.setColumnCount(columnas)
 
-                        fila=0
-                        for registro in lista2:
-                            columna=0
-                            for elemento in registro:
-                                celda=QTableWidgetItem(str(elemento))
-                                self.ui.tableWidget.setItem(fila,columna,celda)
-                                columna=columna+1
-                            fila=fila+1
+                            fila=0
+                            for registro in lista2:
+                                columna=0
+                                for elemento in registro:
+                                    celda=QTableWidgetItem(str(elemento))
+                                    self.ui.tableWidget.setItem(fila,columna,celda)
+                                    columna=columna+1
+                                fila=fila+1
 
-                        self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion2)
-                        self.ui.tableWidget.setSortingEnabled(True)
+                            self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion2)
+                            self.ui.tableWidget.setSortingEnabled(True)
+                            self.ui.titulo2.setText("")
 
+                except Error as e:
+                    self.ui.titulo2.setText(e)
 
-            except Error as e:
-                print(e)
-
-
-
-
-
-
-
+                except:
+                    self.ui.titulo2.setText("Ingrese el dato a buscar")
+            else:
+                self.ui.titulo2.setText("Ingrese el dato a buscar")
 
 
     def atras(self):
