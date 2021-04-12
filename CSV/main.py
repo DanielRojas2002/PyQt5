@@ -530,42 +530,47 @@ class VentanaP1(QMainWindow):
         #  TENDENCIA GRUPAL DE PREFERENCIA VALORES UNICOAS MAXIMO 30 PARA QUE SE VEA BIEN LA GRAFICA
         if self.ui.graficarTenGru.isChecked()==True:
             if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0 and len(etiqueta4)>0:
-                
-                self.ui.errorarchivo.setText("")
-                notas=pd.read_csv(excel,encoding='utf-8')
+                try:
 
-                notas[etiqueta4]=pd.to_datetime(notas[etiqueta4])
-                
-                datos=notas[etiqueta1].unique()
-        
-                plt.style.use('seaborn')
-                listalegend=[]
-                contadorcolores=0
-                longitud=len(listacolores)
-                fig,ax=plt.subplots()
+                    self.ui.errorarchivo.setText("")
+                    notas=pd.read_csv(excel,encoding='utf-8')
 
-                for x in datos:
-                    listalegend.append(x)
-                    dato=notas[etiqueta1]==x
-                    DATOS=notas[dato]
+                    notas[etiqueta4]=pd.to_datetime(notas[etiqueta4])
+                    
+                    datos=notas[etiqueta1].unique()
+            
+                    plt.style.use('seaborn')
+                    listalegend=[]
+                    contadorcolores=0
+                    longitud=len(listacolores)
+                    fig,ax=plt.subplots()
 
-                    valor=DATOS[etiqueta2]
-                    tiempo=DATOS[etiqueta4]
-                    ax.plot(tiempo,valor,marker="o",linewidth=2,color=listacolores[contadorcolores])
-                    contadorcolores=contadorcolores+1
+                    for x in datos:
+                        listalegend.append(x)
+                        dato=notas[etiqueta1]==x
+                        DATOS=notas[dato]
 
-                    if longitud==contadorcolores:
-                        contadorcolores=0
-                               
-                plt.gcf().autofmt_xdate()
-                formato=mpl_dates.DateFormatter('%d,%b,%Y')
-                plt.gca().xaxis.set_major_formatter(formato)
-                plt.title("GRAFICA LINEAL(GRUPAL)")
-                plt.xlabel(etiqueta1)
-                plt.ylabel(etiqueta2)          
-                plt.rc('legend', fontsize=6)
-                plt.legend(listalegend,loc='best',bbox_to_anchor=(1.05, 1.0))          
-                plt.show()
+                        valor=DATOS[etiqueta2]
+                        tiempo=DATOS[etiqueta4]
+                        ax.plot(tiempo,valor,marker="o",linewidth=2,color=listacolores[contadorcolores])
+                        contadorcolores=contadorcolores+1
+
+                        if longitud==contadorcolores:
+                            contadorcolores=0
+                                
+                    plt.gcf().autofmt_xdate()
+                    formato=mpl_dates.DateFormatter('%d,%b,%Y')
+                    plt.gca().xaxis.set_major_formatter(formato)
+                    plt.title("GRAFICA LINEAL(GRUPAL)")
+                    plt.xlabel(etiqueta1)
+                    plt.ylabel(etiqueta2)          
+                    plt.rc('legend', fontsize=6)
+                    plt.legend(listalegend,loc='best',bbox_to_anchor=(1.05, 1.0))          
+                    plt.show()
+
+                except:
+                    self.ui.errorarchivo.setText("Ingreso mal Una Etiqueta")
+
                
             else:
                 self.ui.errorarchivo.setText("Ingrese los datos necesarios")
