@@ -18,6 +18,9 @@ from codigos.ventanavseleccionar import Ui_VentanaValidacionseleccionar
 from codigos.ventanainformacion import Ui_Ventanainformacion
 from codigos.ventanainsertar import Ui_VentanaInsertarRegistros
 from codigos.ventanaseleccionar import Ui_VentanaSeleccionar
+from codigos.ventanavborrarregistros import Ui_VentanaValidacionBorrarRegistros
+from codigos.ventanaborrarregistro import Ui_VentanaBorrarRegistro
+
 
 nombre=""
 nombretabla=""
@@ -174,7 +177,7 @@ class Ventana2(QMainWindow):
 
         elif seleccion=="BAJA":
             self.hide()
-            otraventana=VentanaVborrar(self)
+            otraventana=VentanaVBorrarRegistros(self)
             otraventana.show()
 
         elif seleccion=="CAMBIO":
@@ -719,7 +722,149 @@ class VentanaVcambiar(QMainWindow):
         self.parent().show()
         self.close()
 
+class VentanaVBorrarRegistros(QMainWindow):
+    def __init__(self,parent=None):
+        super(VentanaVBorrarRegistros,self).__init__(parent)
+        self.ui=Ui_VentanaValidacionBorrarRegistros()
+        self.ui.setupUi(self)
+        self.ui.error1.setText("")
+
+        global nombre
+        contador4=0
+        sql="SELECT name FROM sqlite_master WHERE type='table';"
+
+        try:
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql)
+                tablas=c.fetchall()
+
+                for t in tablas:
+                    for x in t:
+                        contador4=contador+1
+                        self.ui.tablascreadas.addItem(x)
+                        listavalores.append(x)
+
+                if contador4==0:
+                    self.ui.tablascreadas.addItem("No existen Tablas tiene que crear tablas")
+
+        except:
+            self.ui.tablascreadas.addItem("No existen Tablas tiene que crear tablas")
+
+        self.ui.regresar.clicked.connect(self.atras)
+        self.ui.tablascreadas.itemClicked.connect(self.agregar)
+        self.ui.enviar.clicked.connect(self.ir)
+	
+    def agregar(self):
+        dato=self.ui.tablascreadas.currentItem().text()
+        self.ui.nombretabla.setText(dato)
+
+
+    def ir(self):
+        self.ui.error1.setText("")
+        global listavalores
+        global nombretabla
+        validacion=0
+        for x in listavalores:
+            if self.ui.nombretabla.text()==x:
+                validacion=validacion+1
+                nombretabla=self.ui.nombretabla.text()
         
+        if validacion>0:
+            self.hide()
+            otraventana=ventanaborrarregistro(self)
+            otraventana.show()
+        
+        else:
+            self.ui.error1.setText("No Existe esa Tabla")
+
+   
+    def atras(self):
+        self.parent().show()
+        self.close()
+
+        
+class ventanaborrarregistro(QMainWindow):
+    def __init__(self,parent=None):
+        super(ventanaborrarregistro,self).__init__(parent)
+        self.ui=Ui_VentanaBorrarRegistro()
+        self.ui.setupUi(self)
+        self.ui.regresar.clicked.connect(self.atras)
+        self.ui.mensaje.setText("")
+
+        global nombre
+        global nombretabla
+
+        sql="PRAGMA table_info("
+        sql=sql+nombretabla+")"
+        listaDescripcion2=[]
+       
+
+        try:
+            listaDescripcion2=[]
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql)
+                tablas=c.fetchall()
+
+        
+                for a in tablas:
+                    for x in a[1:2]:
+                        listaDescripcion2.append(x)
+
+        except Error as e:
+            self.ui.mensaje.setText(e)
+            
+
+        sql2="SELECT * FROM "
+        sql2=sql2+nombretabla+";"
+        contador=0
+        lista=[]
+
+        try:
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql2)
+                tablas=c.fetchall()
+
+                for t in tablas:
+                    contador=contador+1
+                    lista.append(t)
+
+            
+            columnas=len(lista[0])
+            
+
+            filas=contador
+            self.ui.tableWidget.setRowCount(filas)
+            self.ui.tableWidget.setColumnCount(columnas)
+
+            fila=0
+            for registro in lista:
+                columna=0
+                for elemento in registro:
+                    celda=QTableWidgetItem(str(elemento))
+                    self.ui.tableWidget.setItem(fila,columna,celda)
+                    columna=columna+1
+                fila=fila+1
+
+            self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion2)
+            self.ui.tableWidget.setSortingEnabled(True)
+            
+
+        except Error as e:
+            self.ui.mensaje.setText(e)
+
+
+
+    def atras(self):
+        self.parent().show()
+        self.close()
+
+
 class VentanaVseleccionar(QMainWindow):
     def __init__(self,parent=None):
         super(VentanaVseleccionar,self).__init__(parent)
