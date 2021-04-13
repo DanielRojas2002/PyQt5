@@ -12,13 +12,12 @@ from codigos.tablas import Ui_CreacionTablas
 from codigos.ventanavtablas import Ui_VentanaVisualizadoraTablas
 from codigos.ventanaborrartablas import Ui_VentanaBTablas
 from codigos.ventanavinsertar import Ui_VentanaValidacionInsertar
-from codigos.ventanavborrar import Ui_VentanaValidacionborrar
 from codigos.ventanavcambiar import Ui_VentanaValidacioncambiar
 from codigos.ventanavseleccionar import Ui_VentanaValidacionseleccionar
 from codigos.ventanainformacion import Ui_Ventanainformacion
 from codigos.ventanainsertar import Ui_VentanaInsertarRegistros
 from codigos.ventanaseleccionar import Ui_VentanaSeleccionar
-from codigos.ventanavborrarregistros import Ui_VentanaValidacionBorrarRegistros
+from codigos.ventanavborrarregistro import Ui_VentanaValidacionBorrarRegistros
 from codigos.ventanaborrarregistro import Ui_VentanaBorrarRegistro
 
 
@@ -28,6 +27,8 @@ dato=""
 ultima=""
 sqlinsertar=""
 seleccion=""
+Datoaborrar=""
+primarykey=""
 listaquery=[]
 listadatos=[]
 listatablas=[]
@@ -37,6 +38,7 @@ listavalor=[]
 listacampos=[]
 diccInsertar={}
 listaDescripcion2=[]
+listaPrimarykey2=[]
 contador=0
 contador2=1
 contadorRegistros=1
@@ -791,16 +793,24 @@ class ventanaborrarregistro(QMainWindow):
         self.ui=Ui_VentanaBorrarRegistro()
         self.ui.setupUi(self)
         self.ui.regresar.clicked.connect(self.atras)
+        self.ui.listaid.itemClicked.connect(self.mostrar)
+        self.ui.BORRAR.clicked.connect(self.borrar)
+        self.ui.Actualizar.clicked.connect(self.Actualizar)
         self.ui.mensaje.setText("")
 
         global nombre
         global nombretabla
+        global primarykey
+        global listaPrimarykey2
 
         sql="PRAGMA table_info("
         sql=sql+nombretabla+")"
-        listaDescripcion2=[]
-       
-
+        listaDescripcion3=[]
+        primarykey=""
+        listaPrimarykey=[]
+        listaPrimarykey2=[]
+        
+        
         try:
             listaDescripcion2=[]
             base=(f"CRUD/bases/{nombre}.db")
@@ -812,7 +822,30 @@ class ventanaborrarregistro(QMainWindow):
         
                 for a in tablas:
                     for x in a[1:2]:
-                        listaDescripcion2.append(x)
+                        listaDescripcion3.append(x)
+
+                primarykey=listaDescripcion3[0]
+
+        except Error as e:
+            self.ui.mensaje.setText(e)
+
+        try:
+            sql="SELECT "+primarykey+" FROM "
+            sql=sql+nombretabla+";"
+
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql)
+                tablas=c.fetchall()
+
+                for dato in tablas:
+                    for x in dato:
+                        listaPrimarykey.append(x)
+
+                for elemento in listaPrimarykey:
+                    x=self.ui.listaid.addItem(primarykey+": "+str(elemento))
+                    listaPrimarykey2.append(x)
 
         except Error as e:
             self.ui.mensaje.setText(e)
@@ -851,16 +884,152 @@ class ventanaborrarregistro(QMainWindow):
                     columna=columna+1
                 fila=fila+1
 
-            self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion2)
-            self.ui.tableWidget.setSortingEnabled(True)
+            self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion3)
+    
             
 
         except Error as e:
             self.ui.mensaje.setText(e)
 
+        except:
+            self.ui.mensaje.setText("No Existen Registros aun")
 
+    def mostrar(self):
+        global Datoaborrar
+        Datoaborrar=self.ui.listaid.currentItem().text()
+        self.ui.datoaborrar.setText(Datoaborrar)
+
+    def Actualizar(self):
+        self.ui.tableWidget.clear()
+        self.ui.listaid.clear()
+        self.ui.mensaje.setText("")
+        self.ui.datoaborrar.setText("")
+
+        sql="PRAGMA table_info("
+        sql=sql+nombretabla+")"
+        listaDescripcion3=[]
+        primarykey=""
+        listaPrimarykey=[]
+        listaPrimarykey2=[]
+        
+        try:
+            listaDescripcion2=[]
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql)
+                tablas=c.fetchall()
+
+        
+                for a in tablas:
+                    for x in a[1:2]:
+                        listaDescripcion3.append(x)
+
+                primarykey=listaDescripcion3[0]
+
+        except Error as e:
+            self.ui.mensaje.setText(e)
+
+        try:
+            sql="SELECT "+primarykey+" FROM "
+            sql=sql+nombretabla+";"
+
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql)
+                tablas=c.fetchall()
+
+                for dato in tablas:
+                    for x in dato:
+                        listaPrimarykey.append(x)
+
+                for elemento in listaPrimarykey:
+                    x=self.ui.listaid.addItem(primarykey+": "+str(elemento))
+                    listaPrimarykey2.append(x)
+
+        except Error as e:
+            self.ui.mensaje.setText(e)
+            
+
+        sql2="SELECT * FROM "
+        sql2=sql2+nombretabla+";"
+        contador=0
+        lista=[]
+
+        try:
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql2)
+                tablas=c.fetchall()
+
+                for t in tablas:
+                    contador=contador+1
+                    lista.append(t)
+
+            
+            columnas=len(lista[0])
+            
+
+            filas=contador
+            self.ui.tableWidget.setRowCount(filas)
+            self.ui.tableWidget.setColumnCount(columnas)
+
+            fila=0
+            for registro in lista:
+                columna=0
+                for elemento in registro:
+                    celda=QTableWidgetItem(str(elemento))
+                    self.ui.tableWidget.setItem(fila,columna,celda)
+                    columna=columna+1
+                fila=fila+1
+
+            self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion3)
+           
+            
+
+        except Error as e:
+            self.ui.mensaje.setText(e)
+
+        except:
+            self.ui.mensaje.setText("No Existen Registros aun")
+        
+
+    def borrar(self):
+        global Datoaborrar
+        global primarykey
+        try:
+            if len(Datoaborrar)>0:
+                DatoABorrar=self.ui.datoaborrar.text()
+                valor=DatoABorrar.split(":")
+                
+                self.ui.mensaje.setText("")
+                base=(f"CRUD/bases/{nombre}.db")
+                
+                sql="DELETE  FROM "+nombretabla+" WHERE "+primarykey+" = :"+primarykey
+                valor={primarykey:valor[1]}
+                
+
+                try:
+                    with sqlite3.connect(base) as conn:
+                        c=conn.cursor()
+                        c.execute(sql,valor)
+                        conn.commit()
+                        self.ui.mensaje.setText("El Registro se Borro")
+
+                except Error as e:
+                    self.ui.mensaje.setText(e)
+
+            else:
+                self.ui.mensaje.setText("Seleccione el Dato a Borrar")
+        except:
+            self.ui.mensaje.setText("")
+            
 
     def atras(self):
+        global Datoaborrar
+        Datoaborrar=""
         self.parent().show()
         self.close()
 
@@ -933,6 +1102,7 @@ class VentanaSelecciona(QMainWindow):
         self.ui.atras.clicked.connect(self.atras)
         self.ui.realizar.clicked.connect(self.realizar)
         self.ui.seleccionar.clicked.connect(self.seleccionar)
+        
 
         global listaDescripcion2
         global nombre
@@ -961,6 +1131,7 @@ class VentanaSelecciona(QMainWindow):
     def seleccionar(self):
         global seleccion
         global listaDescripcion2
+        
         self.ui.titulo2.setText("")
         self.ui.dato.setText("")
         selecciones=self.ui.opciones.itemText(self.ui.opciones.currentIndex())
@@ -1007,6 +1178,7 @@ class VentanaSelecciona(QMainWindow):
         contador=0
         lista=[]
         
+        
 
         sql2="SELECT * FROM "
         sql2=sql2+nombretabla+";" 
@@ -1041,7 +1213,7 @@ class VentanaSelecciona(QMainWindow):
                     fila=fila+1
 
                 self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion2)
-                self.ui.tableWidget.setSortingEnabled(True)
+               
                 self.ui.titulo2.setText("")
 
             except Error as e:
@@ -1098,7 +1270,7 @@ class VentanaSelecciona(QMainWindow):
                                 fila=fila+1
 
                             self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion2)
-                            self.ui.tableWidget.setSortingEnabled(True)
+                            
                             self.ui.titulo2.setText("")
 
                 except Error as e:
@@ -1158,7 +1330,7 @@ class VentanaSelecciona(QMainWindow):
                                 fila=fila+1
 
                             self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion2)
-                            self.ui.tableWidget.setSortingEnabled(True)
+                            
                             self.ui.titulo2.setText("")
 
                 except Error as e:
@@ -1218,7 +1390,7 @@ class VentanaSelecciona(QMainWindow):
                                 fila=fila+1
 
                             self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion2)
-                            self.ui.tableWidget.setSortingEnabled(True)
+                            
                             self.ui.titulo2.setText("")
 
                 except Error as e:

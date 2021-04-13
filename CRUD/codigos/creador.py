@@ -51,7 +51,7 @@ class Ui_CREADORBD(object):
         self.imagen_2 = QtWidgets.QLabel(self.centralwidget)
         self.imagen_2.setGeometry(QtCore.QRect(330, 10, 31, 31))
         self.imagen_2.setText("")
-        self.imagen_2.setPixmap(QtGui.QPixmap("mutimedia/base.png"))
+        self.imagen_2.setPixmap(QtGui.QPixmap("CRUD/mutimedia/base.png"))
         self.imagen_2.setScaledContents(True)
         self.imagen_2.setObjectName("imagen_2")
         self.resultado = QtWidgets.QLabel(self.centralwidget)
