@@ -19,6 +19,7 @@ from codigos.ventanainsertar import Ui_VentanaInsertarRegistros
 from codigos.ventanaseleccionar import Ui_VentanaSeleccionar
 from codigos.ventanavborrarregistro import Ui_VentanaValidacionBorrarRegistros
 from codigos.ventanaborrarregistro import Ui_VentanaBorrarRegistro
+from codigos.ventanacambiarregistrop1 import Ui_VentanacambiarRegistro
 
 
 nombre=""
@@ -28,6 +29,8 @@ ultima=""
 sqlinsertar=""
 seleccion=""
 Datoaborrar=""
+Datoamodificar=""
+valorModificar=""
 primarykey=""
 listaquery=[]
 listadatos=[]
@@ -713,7 +716,7 @@ class VentanaVcambiar(QMainWindow):
         
         if validacion>0:
             self.hide()
-            otraventana=VentanaInsertar(self)
+            otraventana=VentanaCambiarRegistroP1(self)
             otraventana.show()
         
         else:
@@ -723,6 +726,252 @@ class VentanaVcambiar(QMainWindow):
     def atras(self):
         self.parent().show()
         self.close()
+
+class VentanaCambiarRegistroP1(QMainWindow):
+    def __init__(self,parent=None):
+        super(VentanaCambiarRegistroP1,self).__init__(parent)
+        self.ui=Ui_VentanacambiarRegistro()
+        self.ui.setupUi(self)
+        self.ui.regresar.clicked.connect(self.atras)
+
+        self.ui.listaid.itemClicked.connect(self.mostrar)
+        self.ui.irmodificar.clicked.connect(self.irmodificar1)
+        self.ui.Actualizar.clicked.connect(self.Actualizar)
+        self.ui.mensaje.setText("")
+
+        global nombre
+        global nombretabla
+        global primarykey
+        global listaPrimarykey2
+
+        sql="PRAGMA table_info("
+        sql=sql+nombretabla+")"
+        listaDescripcion3=[]
+        primarykey=""
+        listaPrimarykey=[]
+        listaPrimarykey2=[]
+        
+        
+        try:
+            listaDescripcion2=[]
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql)
+                tablas=c.fetchall()
+
+        
+                for a in tablas:
+                    for x in a[1:2]:
+                        listaDescripcion3.append(x)
+
+                primarykey=listaDescripcion3[0]
+
+        except Error as e:
+            self.ui.mensaje.setText(e)
+
+        try:
+            sql="SELECT "+primarykey+" FROM "
+            sql=sql+nombretabla+";"
+
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql)
+                tablas=c.fetchall()
+
+                for dato in tablas:
+                    for x in dato:
+                        listaPrimarykey.append(x)
+
+                for elemento in listaPrimarykey:
+                    x=self.ui.listaid.addItem(primarykey+": "+str(elemento))
+                    listaPrimarykey2.append(x)
+
+        except Error as e:
+            self.ui.mensaje.setText(e)
+            
+
+        sql2="SELECT * FROM "
+        sql2=sql2+nombretabla+";"
+        contador=0
+        lista=[]
+
+        try:
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql2)
+                tablas=c.fetchall()
+
+                for t in tablas:
+                    contador=contador+1
+                    lista.append(t)
+
+            
+            columnas=len(lista[0])
+            
+
+            filas=contador
+            self.ui.tableWidget.setRowCount(filas)
+            self.ui.tableWidget.setColumnCount(columnas)
+
+            fila=0
+            for registro in lista:
+                columna=0
+                for elemento in registro:
+                    celda=QTableWidgetItem(str(elemento))
+                    self.ui.tableWidget.setItem(fila,columna,celda)
+                    columna=columna+1
+                fila=fila+1
+
+            self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion3)
+    
+            
+
+        except Error as e:
+            self.ui.mensaje.setText(e)
+
+        except:
+            self.ui.mensaje.setText("No Existen Registros aun")
+
+    def mostrar(self):
+        global Datoamodificar
+        Datoamodificar=self.ui.listaid.currentItem().text()
+        self.ui.datoamodificar.setText(Datoamodificar)
+
+    def irmodificar1(self):
+        global Datoamodificar
+        global valorModificar
+        valorModificar=""
+        self.ui.mensaje.setText("")
+        try:
+            datorenglon=self.ui.datoamodificar.text()
+            if len(datorenglon)>0:
+                    DatoAModificar=self.ui.datoamodificar.text()
+                    valorModificar=DatoAModificar.split(":")
+                    self.ui.mensaje.setText("")
+                    self.hide()
+                    otraventana=VentanaMODIFICAR(self)
+                    otraventana.show()
+
+            else:
+                self.ui.mensaje.setText("Seleccione el Dato a Modificar")
+
+        except:
+            self.ui.mensaje.setText("e")
+
+
+    def Actualizar(self):
+        self.ui.tableWidget.clear()
+        self.ui.listaid.clear()
+        self.ui.mensaje.setText("")
+        self.ui.datoamodificar.setText("")
+
+        sql="PRAGMA table_info("
+        sql=sql+nombretabla+")"
+        listaDescripcion3=[]
+        primarykey=""
+        listaPrimarykey=[]
+        listaPrimarykey2=[]
+        
+        try:
+            listaDescripcion2=[]
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql)
+                tablas=c.fetchall()
+
+        
+                for a in tablas:
+                    for x in a[1:2]:
+                        listaDescripcion3.append(x)
+
+                primarykey=listaDescripcion3[0]
+
+        except Error as e:
+            self.ui.mensaje.setText(e)
+
+        try:
+            sql="SELECT "+primarykey+" FROM "
+            sql=sql+nombretabla+";"
+
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql)
+                tablas=c.fetchall()
+
+                for dato in tablas:
+                    for x in dato:
+                        listaPrimarykey.append(x)
+
+                for elemento in listaPrimarykey:
+                    x=self.ui.listaid.addItem(primarykey+": "+str(elemento))
+                    listaPrimarykey2.append(x)
+
+        except Error as e:
+            self.ui.mensaje.setText(e)
+            
+
+        sql2="SELECT * FROM "
+        sql2=sql2+nombretabla+";"
+        contador=0
+        lista=[]
+
+        try:
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql2)
+                tablas=c.fetchall()
+
+                for t in tablas:
+                    contador=contador+1
+                    lista.append(t)
+
+            
+            columnas=len(lista[0])
+            
+
+            filas=contador
+            self.ui.tableWidget.setRowCount(filas)
+            self.ui.tableWidget.setColumnCount(columnas)
+
+            fila=0
+            for registro in lista:
+                columna=0
+                for elemento in registro:
+                    celda=QTableWidgetItem(str(elemento))
+                    self.ui.tableWidget.setItem(fila,columna,celda)
+                    columna=columna+1
+                fila=fila+1
+
+            self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion3)
+           
+            
+
+        except Error as e:
+            self.ui.mensaje.setText(e)
+
+        except:
+            self.ui.mensaje.setText("No Existen Registros aun")
+
+
+    def atras(self):
+        self.parent().show()
+        self.close()
+
+class VentanaMODIFICAR(QMainWindow):
+    def __init__(self,parent=None):
+        super(VentanaMODIFICAR,self).__init__(parent)
+        self.ui=Ui_VentanaValidacionBorrarRegistros()  #AQUI VA LA NUEVA VENTANA 
+        self.ui.setupUi(self)
+
+        global valorModificar
+
+
 
 class VentanaVBorrarRegistros(QMainWindow):
     def __init__(self,parent=None):
@@ -1000,6 +1249,8 @@ class ventanaborrarregistro(QMainWindow):
         global Datoaborrar
         global primarykey
         try:
+
+        
             if len(Datoaborrar)>0:
                 DatoABorrar=self.ui.datoaborrar.text()
                 valor=DatoABorrar.split(":")
