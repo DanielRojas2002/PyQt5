@@ -4,6 +4,9 @@ import sys
 import os
 import time
 import webbrowser
+from tabulate import tabulate
+import datetime
+
 from PyQt5.QtWidgets import QDialog,QApplication,QMainWindow,QMessageBox,QErrorMessage,QTableWidgetItem
 from codigos.creador import Ui_CREADORBD
 from codigos.ventanap1 import Ui_VentanaP
@@ -21,6 +24,8 @@ from codigos.ventanavborrarregistro import Ui_VentanaValidacionBorrarRegistros
 from codigos.ventanaborrarregistro import Ui_VentanaBorrarRegistro
 from codigos.ventanacambiarregistrop1 import Ui_VentanacambiarRegistro
 from codigos.ventanamodificarregistro import Ui_VentanaModificarRegistros
+from codigos.ventanavtxt import Ui_VentanaValidacionTXT
+from codigos.ventanatxt import Ui_VentanaHacerTxt
 
 
 nombre=""
@@ -34,6 +39,7 @@ Datoamodificar=""
 valorModificar=""
 primarykey=""
 campos=""
+seleccionTXT=""
 contadorverificacion2=0
 contadorvalidacion2=0
 listaquery=[]
@@ -200,10 +206,204 @@ class Ventana2(QMainWindow):
             otraventana=VentanaVseleccionar(self)
             otraventana.show()
 
+        elif seleccion=="TXT":
+            self.hide()
+            otraventana=VentanaVTxt(self)
+            otraventana.show()
+
     def atras(self):
         self.parent().show()
         self.close()
 
+
+class VentanaVTxt(QMainWindow):
+    def __init__(self,parent=None):
+        super(VentanaVTxt,self).__init__(parent)
+        self.ui=Ui_VentanaValidacionTXT()
+        self.ui.setupUi(self)
+        self.ui.regresar.clicked.connect(self.atras)
+        self.ui.tablascreadas.itemClicked.connect(self.agregar)
+        self.ui.enviar.clicked.connect(self.ir)
+        
+       
+        global nombre
+        contador4=0
+        global listavalores
+        sql="SELECT name FROM sqlite_master WHERE type='table';"
+
+        try:
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql)
+                tablas=c.fetchall()
+
+                for t in tablas:
+                    for x in t:
+                        contador4=contador4+1
+                        self.ui.tablascreadas.addItem(x)
+                        listavalores.append(x)
+
+                if contador4==0:
+                    self.ui.tablascreadas.addItem("No existen Tablas tiene que crear tablas")
+
+        except:
+            self.ui.tablascreadas.addItem("No existen Tablas tiene que crear tablas")
+
+    	
+    def agregar(self):
+        dato=self.ui.tablascreadas.currentItem().text()
+        self.ui.nombretabla.setText(dato)
+
+    def ir(self):
+        global listavalores
+        global nombretabla
+        validacion=0
+        for x in listavalores:
+            if self.ui.nombretabla.text()==x:
+                validacion=validacion+1
+                nombretabla=self.ui.nombretabla.text()
+        
+        if validacion>0:
+            self.hide()
+            otraventana=VentanaTXT(self)
+            otraventana.show()
+        
+        else:
+            self.ui.error1.setText("No Existe esa Tabla")
+
+
+    def atras(self):
+        self.parent().show()
+        self.close()
+
+
+
+class VentanaTXT(QMainWindow):
+    def __init__(self,parent=None):
+        super(VentanaTXT,self).__init__(parent)
+        self.ui=Ui_VentanaHacerTxt()
+        self.ui.setupUi(self)
+        self.ui.regresar.clicked.connect(self.atras)
+        self.ui.elegir.clicked.connect(self.elegir)
+        self.ui.hacertxt.clicked.connect(self.TXT)
+        self.ui.datoabuscar.setDisabled(True)
+        self.ui.hacertxt.setDisabled(True)
+        self.ui.mensaje.setText("")
+        self.ui.nombrecampo.setText("")
+        
+
+        global nombre
+        global nombretabla
+        global listaDescripcion2
+        global seleccionTXT
+        seleccionTXT=""
+
+
+        sql="PRAGMA table_info("
+        sql=sql+nombretabla+")"
+       
+
+        try:
+            listaDescripcion2=[]
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql)
+                tablas=c.fetchall()
+
+        
+                for a in tablas:
+                    for x in a[1:2]:
+                        listaDescripcion2.append(x)
+
+                for campo in listaDescripcion2:
+                    self.ui.combocampos.addItem(str(campo))
+
+                self.ui.combocampos.addItem("Todos")
+
+        except Error as e :
+            self.ui.mensaje.setText(e)
+        
+        
+
+
+    def elegir(self):
+        global seleccionTXT
+        seleccionTXT=self.ui.combocampos.itemText(self.ui.combocampos.currentIndex())
+
+        if len(seleccionTXT)>0:
+            self.ui.mensaje.setText("")
+            self.ui.datoabuscar.setEnabled(True)
+            self.ui.hacertxt.setEnabled(True)
+            self.ui.nombrecampo.setText("Campo Seleccionado:"+seleccionTXT)
+            
+
+        else:
+            self.ui.nombrecampo.setText("Eliga un campo")
+            self.ui.mensaje.setText("Eliga una Opciones del Combobox")
+
+    def TXT(self):
+        global seleccionTXT
+        global listaDescripcion2
+
+        contador=0
+        datos=[]
+        datos.append(listaDescripcion2)
+        sql="SELECT * FROM "+nombretabla+" WHERE "+seleccionTXT+"= :"+seleccionTXT
+        dato=self.ui.datoabuscar.text()
+
+        if len(dato)>0:
+
+            valor={seleccionTXT:dato}
+            try:
+                base=(f"CRUD/bases/{nombre}.db")
+                with sqlite3.connect(base) as conn:
+                    c=conn.cursor()
+                    c.execute(sql,valor)
+                    registros=c.fetchall()
+
+            
+                for elemento in registros:
+                    contador=contador+1
+            
+                if contador==0:
+                    self.ui.mensaje.setText("No se encontro registros")
+
+                else:
+                    
+                    
+                    tiempo=datetime.datetime.now()
+                    TIEMPO=tiempo.strftime('Dia:%d Mes:%m Año:%Y Hora:%H Minuto:%M Segundo:%S')
+                    cadena=""
+                    cadena="CRUD/Reportes/Reporte_por_"+seleccionTXT+"_"+dato
+                    archivoA=open(cadena ,'a',encoding="utf-8")
+                    archivoA.write("\n")
+                    archivoA.write("-"*20+"Buscado por : "+seleccionTXT+":"+dato+" ("+TIEMPO+")"+"-"*20)
+                    archivoA.write("\n")
+                    for conjunto in registros:
+                        datos.append(conjunto)
+
+                   
+                    archivoA.write(tabulate(datos))
+                    archivoA.write("\n")
+                    archivoA.write("-"*100)
+                    archivoA.close()
+                    
+                    self.ui.mensaje.setText("El Reporte TXT esta hecho")
+
+            except Error as e:
+                self.ui.mensaje.setText(e)
+
+        else:
+            self.ui.mensaje.setText("Ingrese el valor a buscar")
+
+                
+        
+
+    def atras(self):
+        self.parent().show()
+        self.close()
 
 
 class VentanaInfoo(QMainWindow):
@@ -1205,11 +1405,6 @@ class VentanaMODIFICAR(QMainWindow):
         self.close()
 
 
-
-        
-
-
-
 class VentanaVBorrarRegistros(QMainWindow):
     def __init__(self,parent=None):
         super(VentanaVBorrarRegistros,self).__init__(parent)
@@ -1616,7 +1811,7 @@ class VentanaSelecciona(QMainWindow):
                         listaDescripcion2.append(x)
 
         except Error as e :
-            print(e)
+            self.ui.titulo2.setText(e)
 
     def seleccionar(self):
         global seleccion
@@ -1897,7 +2092,6 @@ class VentanaSelecciona(QMainWindow):
         self.close()
 
 
-
 class VentanaInsertar(QMainWindow):
     def __init__(self,parent=None):
         super(VentanaInsertar,self).__init__(parent)
@@ -1938,7 +2132,7 @@ class VentanaInsertar(QMainWindow):
                     
                 
         except Error as e:
-            print(e)
+            sle.ui.error.setText(e)
 
         
     def seleccioncampo(self):
@@ -2071,7 +2265,7 @@ class VentanaInsertar(QMainWindow):
                 
                 
         except Error as e:
-            print(e)
+            self.ui.error.setText(e)
 
 
 
@@ -2099,7 +2293,6 @@ class VentanaInsertar(QMainWindow):
         self.hide()
         self.parent().show()
         self.close()
-
 
 
 
