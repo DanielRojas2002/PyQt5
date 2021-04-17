@@ -20,6 +20,7 @@ from codigos.ventanaseleccionar import Ui_VentanaSeleccionar
 from codigos.ventanavborrarregistro import Ui_VentanaValidacionBorrarRegistros
 from codigos.ventanaborrarregistro import Ui_VentanaBorrarRegistro
 from codigos.ventanacambiarregistrop1 import Ui_VentanacambiarRegistro
+from codigos.ventanamodificarregistro import Ui_VentanaModificarRegistros
 
 
 nombre=""
@@ -32,12 +33,16 @@ Datoaborrar=""
 Datoamodificar=""
 valorModificar=""
 primarykey=""
+campos=""
+contadorverificacion2=0
+contadorvalidacion2=0
 listaquery=[]
 listadatos=[]
 listatablas=[]
 listavalores=[]
 listaValoresInsertar=[]
 listavalor=[]
+listavalores2=[]
 listacampos=[]
 diccInsertar={}
 listaDescripcion2=[]
@@ -744,6 +749,10 @@ class VentanaCambiarRegistroP1(QMainWindow):
         global primarykey
         global listaPrimarykey2
 
+        global verdad
+
+     
+
         sql="PRAGMA table_info("
         sql=sql+nombretabla+")"
         listaDescripcion3=[]
@@ -966,10 +975,238 @@ class VentanaCambiarRegistroP1(QMainWindow):
 class VentanaMODIFICAR(QMainWindow):
     def __init__(self,parent=None):
         super(VentanaMODIFICAR,self).__init__(parent)
-        self.ui=Ui_VentanaValidacionBorrarRegistros()  #AQUI VA LA NUEVA VENTANA 
+        self.ui=Ui_VentanaModificarRegistros()
         self.ui.setupUi(self)
-
+        self.ui.regresar.clicked.connect(self.atras)
+        self.ui.guardar.clicked.connect(self.derecha)
+        self.ui.Campos.itemClicked.connect(self.seleccioncampo)
+        self.ui.insertar.clicked.connect(self.insertar)
+    
         global valorModificar
+        global nombre
+        global nombretabla       
+        global primarykey
+        global listaPrimarykey2
+        global contadorverificacion2
+        global contadorvalidacion2
+        global listavalores2
+        global listacampos
+
+        listacampos=[]
+        listavalores2=[]
+
+        sql="PRAGMA table_info("
+        sql=sql+nombretabla+")"
+        listaDescripcion3=[]
+        primarykey=""
+        listaPrimarykey=[]
+        listaPrimarykey2=[]
+        contadorverificacion2=0
+        contadorvalidacion2=0
+        
+        
+        try:
+            listaDescripcion2=[]
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql)
+                tablas=c.fetchall()
+
+        
+                for a in tablas:
+                    for x in a[1:2]:
+                        listaDescripcion3.append(x)
+                        
+                        
+                primarykey=listaDescripcion3[0]
+
+        except Error as e:
+            self.ui.mensaje.setText(e)
+
+        try:
+            for campo in listaDescripcion3[1::]:
+                self.ui.Campos.addItem(str(campo))
+                contadorverificacion2=contadorverificacion2+1
+
+        except:
+            self.ui.mensaje.setText("AQUI")
+
+        
+        valor={valorModificar[0]:valorModificar[1]}
+        sql="SELECT * FROM "
+        sql=sql+nombretabla+" WHERE "+valorModificar[0]+"= :"+valorModificar[0]
+
+        
+        contador=0
+        lista=[]
+
+        try:
+            base=(f"CRUD/bases/{nombre}.db")
+            with sqlite3.connect(base) as conn:
+                c=conn.cursor()
+                c.execute(sql,valor)
+                tablas=c.fetchall()
+
+                for t in tablas:
+                    contador=contador+1
+                    lista.append(t)
+
+            
+            columnas=len(lista[0])
+            
+
+            filas=contador
+            self.ui.tableWidget.setRowCount(filas)
+            self.ui.tableWidget.setColumnCount(columnas)
+
+            fila=0
+            for registro in lista:
+                columna=0
+                for elemento in registro:
+                    celda=QTableWidgetItem(str(elemento))
+                    self.ui.tableWidget.setItem(fila,columna,celda)
+                    columna=columna+1
+                fila=fila+1
+
+            self.ui.tableWidget.setHorizontalHeaderLabels(listaDescripcion3)
+    
+            
+
+        except Error as e:
+            self.ui.mensaje.setText(e)
+
+        except:
+            self.ui.mensaje.setText("No Existen Registros aun")
+
+
+    def seleccioncampo(self):
+        global dato
+        dato=""
+        dato=self.ui.Campos.currentItem().text()
+        self.ui.campo.setText(dato)
+
+    def derecha(self):
+        global dato
+        global listacampos
+        global contadorvalidacion2
+        global listavalores2
+        
+        
+        if len(self.ui.campo.text())>0 and len(self.ui.valor.text())>0:
+            campo=self.ui.campo.text()
+            valor=self.ui.valor.text()
+            listavalores2.append(valor)
+            listacampos.append(campo)
+
+            
+            contadorvalidacion2=contadorvalidacion2+1
+            
+            
+            self.ui.error.setText("")
+            self.ui.campo.setText("")
+            self.ui.Campos.takeItem(self.ui.Campos.currentRow())
+            self.ui.valorcampo.addItem(campo+": "+valor)
+            self.ui.valor.clear()
+            
+        else:
+            self.ui.error.setText("Seleccione el campo y/o el valor")
+
+    def insertar(self):
+        global nombre
+        global nombretabla
+        global listacampos
+        global listavalores2
+        global valorModificar
+        global campos
+        
+        global contadorverificacion2
+        global contadorvalidacion2  
+        global sqlinsertar
+
+        campos=""
+        sqlinsertar=""
+        listavaloresregulados=[]
+        
+        
+        try:
+            if contadorverificacion2==contadorvalidacion2:
+
+                for x in listacampos:
+                    listavaloresregulados.append(x+" = ? , ")
+                    
+
+                listavaloresregulados.pop()
+
+                longitud=len(listavaloresregulados)
+
+                ultimovalor=listacampos[longitud]
+
+                listavaloresregulados.append(ultimovalor+" = ? ")
+
+                for campo in listavaloresregulados:
+                    campos=campos+campo
+
+                
+                sqlinsertar="UPDATE "+nombretabla+" SET "+campos+" WHERE "+primarykey+" = ? ;"
+                listavalores2.append(valorModificar[1])
+                tuplavalores=tuple(listavalores2)
+            
+                try:
+                    base=(f"CRUD/bases/{nombre}.db")
+                    with sqlite3.connect(base) as conn:
+                        c=conn.cursor()
+                        c.execute(sqlinsertar,tuplavalores)
+                        self.ui.exito.setText("Se Aplico La Modificacion (Regresar <--)")
+                        self.ui.tableWidget.clear()
+
+
+                        
+                        
+
+                except Error as e:
+                    self.ui.error.setText(e)
+                    self.ui.exito.setText("No se Pudo Aplicar las Modificaciones")
+                
+
+            else:
+                self.ui.error.setText("Faltan Campos Tiene que agregar todos los\nCampos")
+
+
+        except:
+            self.ui.error.setText("ERROR")
+            
+       
+    
+    def atras(self):
+
+        global listacampos
+        listacampos=[]
+        global listavalores2
+        global valorModificar
+        global campos
+        
+        global contadorverificacion2
+        global contadorvalidacion2  
+        global sqlinsertar
+        
+        contadorverificacion2=0
+        contadorvalidacion2=0
+        listavalores2=[]
+        valorModificar=[]
+        
+        sqlinsertar=""
+        campos=""
+
+        self.ui.Campos.clear()
+        self.ui.exito.setText("")
+
+        self.parent().show()
+        self.close()
+
+
+
+        
 
 
 
@@ -981,6 +1218,8 @@ class VentanaVBorrarRegistros(QMainWindow):
         self.ui.error1.setText("")
 
         global nombre
+        
+
         contador4=0
         sql="SELECT name FROM sqlite_master WHERE type='table';"
 
