@@ -343,24 +343,29 @@ class VentanaTXT(QMainWindow):
             self.ui.nombrecampo.setText("Eliga un campo")
             self.ui.mensaje.setText("Eliga una Opciones del Combobox")
 
+        if seleccionTXT=="Todos":
+            self.ui.datoabuscar.setDisabled(True)
+
+        else:
+            self.ui.datoabuscar.setEnabled(True)
+
+
     def TXT(self):
         global seleccionTXT
         global listaDescripcion2
 
-        contador=0
-        datos=[]
-        datos.append(listaDescripcion2)
-        sql="SELECT * FROM "+nombretabla+" WHERE "+seleccionTXT+"= :"+seleccionTXT
-        dato=self.ui.datoabuscar.text()
+        if seleccionTXT=="Todos":
+            self.ui.datoabuscar.setDisabled(True)
+            contador=0
+            datos=[]
+            datos.append(listaDescripcion2)
+            sql="SELECT * FROM "+nombretabla
 
-        if len(dato)>0:
-
-            valor={seleccionTXT:dato}
             try:
                 base=(f"CRUD/bases/{nombre}.db")
                 with sqlite3.connect(base) as conn:
                     c=conn.cursor()
-                    c.execute(sql,valor)
+                    c.execute(sql)
                     registros=c.fetchall()
 
             
@@ -371,15 +376,13 @@ class VentanaTXT(QMainWindow):
                     self.ui.mensaje.setText("No se encontro registros")
 
                 else:
-                    
-                    
                     tiempo=datetime.datetime.now()
                     TIEMPO=tiempo.strftime('Dia:%d Mes:%m Año:%Y Hora:%H Minuto:%M Segundo:%S')
                     cadena=""
-                    cadena="CRUD/Reportes/Reporte_por_"+seleccionTXT+"_"+dato
+                    cadena="CRUD/Reportes/Reporte_por_"+"TODOS"
                     archivoA=open(cadena ,'a',encoding="utf-8")
                     archivoA.write("\n")
-                    archivoA.write("-"*20+"Buscado por : "+seleccionTXT+":"+dato+" ("+TIEMPO+")"+"-"*20)
+                    archivoA.write("-"*20+"Buscado por : "+"Todos"+":"+" ("+TIEMPO+")"+"-"*20)
                     archivoA.write("\n")
                     for conjunto in registros:
                         datos.append(conjunto)
@@ -396,7 +399,57 @@ class VentanaTXT(QMainWindow):
                 self.ui.mensaje.setText(e)
 
         else:
-            self.ui.mensaje.setText("Ingrese el valor a buscar")
+            self.ui.datoabuscar.setEnabled(True)
+            contador=0
+            datos=[]
+            datos.append(listaDescripcion2)
+            sql="SELECT * FROM "+nombretabla+" WHERE "+seleccionTXT+"= :"+seleccionTXT
+            dato=self.ui.datoabuscar.text()
+
+            if len(dato)>0:
+
+                valor={seleccionTXT:dato}
+                try:
+                    base=(f"CRUD/bases/{nombre}.db")
+                    with sqlite3.connect(base) as conn:
+                        c=conn.cursor()
+                        c.execute(sql,valor)
+                        registros=c.fetchall()
+
+                
+                    for elemento in registros:
+                        contador=contador+1
+                
+                    if contador==0:
+                        self.ui.mensaje.setText("No se encontro registros")
+
+                    else:
+                        
+                        
+                        tiempo=datetime.datetime.now()
+                        TIEMPO=tiempo.strftime('Dia:%d Mes:%m Año:%Y Hora:%H Minuto:%M Segundo:%S')
+                        cadena=""
+                        cadena="CRUD/Reportes/Reporte_por_"+seleccionTXT+"_"+dato
+                        archivoA=open(cadena ,'a',encoding="utf-8")
+                        archivoA.write("\n")
+                        archivoA.write("-"*20+"Buscado por : "+seleccionTXT+":"+dato+" ("+TIEMPO+")"+"-"*20)
+                        archivoA.write("\n")
+                        for conjunto in registros:
+                            datos.append(conjunto)
+
+                    
+                        archivoA.write(tabulate(datos))
+                        archivoA.write("\n")
+                        archivoA.write("-"*100)
+                        archivoA.close()
+                        
+                        self.ui.mensaje.setText("El Reporte TXT esta hecho")
+
+                except Error as e:
+                    self.ui.mensaje.setText(e)
+
+            else:
+                self.ui.mensaje.setText("Ingrese el valor a buscar")
 
                 
         
