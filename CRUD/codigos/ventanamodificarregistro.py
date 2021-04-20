@@ -15,7 +15,7 @@ class Ui_VentanaModificarRegistros(object):
     def setupUi(self, VentanaModificarRegistros):
         VentanaModificarRegistros.setObjectName("VentanaModificarRegistros")
         VentanaModificarRegistros.resize(764, 494)
-        VentanaModificarRegistros.setStyleSheet("background-color: rgb(85, 85, 255);")
+        VentanaModificarRegistros.setStyleSheet("background-color: rgb(255, 255, 0);")
         self.centralwidget = QtWidgets.QWidget(VentanaModificarRegistros)
         self.centralwidget.setObjectName("centralwidget")
         self.imagen = QtWidgets.QLabel(self.centralwidget)
@@ -228,7 +228,7 @@ class Ui_VentanaModificarRegistros(object):
         self.titulo.setText(_translate("VentanaModificarRegistros", "MODIFICAR REGISTRO"))
         self.valor.setPlaceholderText(_translate("VentanaModificarRegistros", "Ingrese el valor"))
         self.guardar.setText(_translate("VentanaModificarRegistros", "->"))
-        self.insertar.setText(_translate("VentanaModificarRegistros", "MODIFICAR"))
+        self.insertar.setText(_translate("VentanaModificarRegistros", "MODIFIFCAR"))
         self.regresar.setText(_translate("VentanaModificarRegistros", "<-"))
         self.titulo_2.setText(_translate("VentanaModificarRegistros", "CAMPOS:"))
         self.titulo_4.setText(_translate("VentanaModificarRegistros", "DATOS A MODIFICAR"))

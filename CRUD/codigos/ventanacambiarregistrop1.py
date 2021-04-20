@@ -15,7 +15,7 @@ class Ui_VentanacambiarRegistro(object):
     def setupUi(self, VentanacambiarRegistro):
         VentanacambiarRegistro.setObjectName("VentanacambiarRegistro")
         VentanacambiarRegistro.resize(679, 552)
-        VentanacambiarRegistro.setStyleSheet("background-color: rgb(170, 170, 255);")
+        VentanacambiarRegistro.setStyleSheet("background-color: rgb(255, 255, 127);")
         self.centralwidget = QtWidgets.QWidget(VentanacambiarRegistro)
         self.centralwidget.setObjectName("centralwidget")
         self.widget = QtWidgets.QWidget(self.centralwidget)
