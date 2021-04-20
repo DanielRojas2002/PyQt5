@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>243</width>
-    <height>475</height>
+    <height>467</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
       <x>20</x>
       <y>10</y>
       <width>204</width>
-      <height>432</height>
+      <height>436</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -90,6 +90,10 @@
        <property name="text">
         <string>ENTRAR</string>
        </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../mutimedia/entrar0.png</normaloff>../mutimedia/entrar0.png</iconset>
+       </property>
       </widget>
      </item>
      <item>
@@ -108,6 +112,10 @@
        </property>
        <property name="text">
         <string>CREAR</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../mutimedia/crearbase.ico</normaloff>../mutimedia/crearbase.ico</iconset>
        </property>
       </widget>
      </item>
@@ -128,6 +136,10 @@
        <property name="text">
         <string>INFORMACION</string>
        </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../mutimedia/info.png</normaloff>../mutimedia/info.png</iconset>
+       </property>
       </widget>
      </item>
      <item>
@@ -146,6 +158,10 @@
        </property>
        <property name="text">
         <string>SALIR</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../mutimedia/salir.ico</normaloff>../mutimedia/salir.ico</iconset>
        </property>
       </widget>
      </item>
