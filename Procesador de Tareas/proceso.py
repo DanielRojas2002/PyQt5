@@ -79,7 +79,7 @@ class VentanaAgregar(QMainWindow):
             diccionariooriginal["FECHA"]=listafecha
             diccionariooriginal["TAREA"]=listatarea
             diccionario2=pd.DataFrame(diccionariooriginal)
-            ruta="archivos/Tareas.csv"
+            ruta="Procesador de Tareas/archivos/Tareas.csv"
 
             diccionario2.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
            
@@ -101,7 +101,7 @@ class VentanaMirar(QMainWindow):
 
         self.ui.regresar.clicked.connect(self.atras)
         try:
-            tareas=pd.read_csv("archivos/Tareas.csv")
+            tareas=pd.read_csv("Procesador de Tareas/archivos/Tareas.csv")
             listaEncabezados=["FECHA","TAREA"] 
             listadatos=[]	
             filas=len(tareas.index)	
@@ -193,7 +193,7 @@ class VentanaEliminar(QMainWindow):
         self.ui.eliminar.clicked.connect(self.eliminar)
 
         try:
-            tareas=pd.read_csv("archivos/Tareas.csv")
+            tareas=pd.read_csv("Procesador de Tareas/archivos/Tareas.csv")
             listaEncabezados=["FECHA","TAREA"] 
             listadatos=[]	
             filas=len(tareas.index)	
@@ -230,17 +230,17 @@ class VentanaEliminar(QMainWindow):
 
     def eliminar(self):
         try:
-            tareas=pd.read_csv("archivos/Tareas.csv")
+            tareas=pd.read_csv("Procesador de Tareas/archivos/Tareas.csv")
             seleccion=int(self.ui.opciones.itemText(self.ui.opciones.currentIndex()))
             seleccion=seleccion-1
             tareas.drop([seleccion],axis="index",inplace=True)
-            remove("archivos/Tareas.csv")
+            remove("Procesador de Tareas/archivos/Tareas.csv")
 
-            ruta="archivos/Tareas.csv"
+            ruta="Procesador de Tareas/archivos/Tareas.csv"
 
             tareas.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
 
-            tareas=pd.read_csv("archivos/Tareas.csv")
+            tareas=pd.read_csv("Procesador de Tareas/archivos/Tareas.csv")
             listaEncabezados=["FECHA","TAREA"] 
             listadatos=[]	
             filas=len(tareas.index)	
