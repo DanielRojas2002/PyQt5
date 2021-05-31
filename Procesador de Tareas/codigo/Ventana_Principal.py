@@ -82,7 +82,7 @@ class Ui_Ventana_Padre(object):
         self.imagen = QtWidgets.QLabel(self.VentanaPadre)
         self.imagen.setGeometry(QtCore.QRect(210, 60, 171, 151))
         self.imagen.setText("")
-        self.imagen.setPixmap(QtGui.QPixmap("img/tarea.jpg"))
+        self.imagen.setPixmap(QtGui.QPixmap("Procesador de Tareas/img/tarea.jpg"))
         self.imagen.setScaledContents(True)
         self.imagen.setObjectName("imagen")
         Ventana_Padre.setCentralWidget(self.VentanaPadre)

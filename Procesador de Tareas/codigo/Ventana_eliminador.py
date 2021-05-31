@@ -66,7 +66,7 @@ class Ui_Ventana_Eliminar(object):
         self.img = QtWidgets.QLabel(self.centralwidget)
         self.img.setGeometry(QtCore.QRect(0, 230, 81, 51))
         self.img.setText("")
-        self.img.setPixmap(QtGui.QPixmap("img/eliminar.png"))
+        self.img.setPixmap(QtGui.QPixmap("Procesador de Tareas/img/eliminar.png"))
         self.img.setScaledContents(True)
         self.img.setObjectName("img")
         self.eliminarhecho = QtWidgets.QLabel(self.centralwidget)
