@@ -207,7 +207,7 @@
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>311</width>
+      <width>321</width>
       <height>341</height>
      </rect>
     </property>
@@ -259,6 +259,9 @@
           <weight>50</weight>
           <bold>false</bold>
          </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Buscar Archivo CSV&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -378,6 +381,23 @@
       </widget>
      </item>
      <item>
+      <widget class="QRadioButton" name="masopciones">
+       <property name="font">
+        <font>
+         <family>Arial Black</family>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Estadistica Descriptiva&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Se podra ver la Estadistiva Descriptiva del CSV&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Mas Opciones</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="realizar">
        <property name="font">
         <font>
@@ -385,6 +405,9 @@
          <weight>50</weight>
          <bold>false</bold>
         </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Actualizar Opcion&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -508,6 +531,9 @@
          <weight>50</weight>
          <bold>false</bold>
         </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Graficar CSV&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

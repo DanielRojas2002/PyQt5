@@ -1,10 +1,16 @@
 import sys
 import pandas as pd 
 import matplotlib.pyplot as plt 
+import os 
+from os import remove
 
 from matplotlib import dates as mpl_dates
 from PyQt5.QtWidgets import QDialog,QApplication,QMainWindow,QMessageBox,QErrorMessage,QFileDialog,QTableWidgetItem
 from codigo.ventanacsv import Ui_VentanaPrincipal
+from codigo.ventanaopciones import Ui_VentanaOpciones
+from codigo.ventana_eliminador import Ui_Ventana_Eliminar
+from codigo.ventanaunircsv import Ui_Ventana_Unir
+
 
 excel=""
 notas=""
@@ -13,6 +19,8 @@ etiqueta1=""
 etiqueta2=""
 etiqueta3=""
 etiqueta4=""
+csv1=""
+csv2=""
 listaEncabezados=[]
 listadatos=[]
 listacolumnas=[]
@@ -111,8 +119,12 @@ class VentanaP1(QMainWindow):
                 self.ui.tableWidget.setColumnCount(contador)
                 
                 for registros in notas.values:
+                    
                     dato=(tuple(registros))
+                    
                     listadatos.append(dato)
+
+               
                 
                 fila=0
                 for registro in listadatos:
@@ -352,6 +364,18 @@ class VentanaP1(QMainWindow):
             etiqueta2=self.ui.etiqueta_valor.text()
             etiqueta4=self.ui.etiqueta_tiempo.text()
 
+        elif self.ui.masopciones.isChecked()==True:
+            try:
+                notas=pd.read_csv(excel,encoding='utf-8')
+                self.hide()
+                otraventana=VentanaOpciones(self)
+                otraventana.show()
+                self.ui.errorarchivo.setText("")
+            except:
+                self.ui.errorarchivo.setText("Tiene que seleccionar el Archivo")
+
+
+
     # ESTE BOTON ES EL BOTON GRAFICAR 
     def Graficar(self):
         global notas
@@ -532,6 +556,7 @@ class VentanaP1(QMainWindow):
             if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0 and len(etiqueta4)>0:
                 try:
 
+                
                     self.ui.errorarchivo.setText("")
                     notas=pd.read_csv(excel,encoding='utf-8')
 
@@ -575,8 +600,268 @@ class VentanaP1(QMainWindow):
             else:
                 self.ui.errorarchivo.setText("Ingrese los datos necesarios")
 
+
+
+
+class VentanaOpciones(QMainWindow):
+    def __init__(self,parent=None):
+        super(VentanaOpciones,self).__init__(parent) 
+        self.ui=Ui_VentanaOpciones()
+        self.ui.setupUi(self)
+
+        self.ui.regresar.clicked.connect(self.atras)
+
+        self.ui.elegir.clicked.connect(self.elegir)
+
+    def elegir(self):
+        seleccion=self.ui.opciones.itemText(self.ui.opciones.currentIndex())
         
+        if seleccion=="Agregar Columnas":
+            pass
+        
+        elif seleccion=="Agregar Registros":
+            pass
+        
+        elif seleccion=="Eliminar Columnas":
+            pass
+        
+        elif seleccion=="Eliminar Registros":
+            self.hide()
+            otraventana=VentanaEliminarRegistros(self)
+            otraventana.show()
+        
+        elif seleccion=="Segmentar dos CSV´s":
+            self.hide()
+            otraventana=VentanaUnirDosCSV(self)
+            otraventana.show()
+        
+        elif seleccion=="Cambiar el Tipo de Dato de una columna":
+            pass
+
+        
+        elif seleccion=="Hacer Operaciones entre columnas":
+            pass
+
+        
+
+        
+        
+    def atras(self):
+        self.parent().show()
+        self.close()
+
+class VentanaEliminarRegistros(QMainWindow):
+    def __init__ (self,parent=None):
+        super(VentanaEliminarRegistros,self).__init__(parent)
+        self.ui=Ui_Ventana_Eliminar()
+        self.ui.setupUi(self)
+
+        self.ui.regresar.clicked.connect(self.atras)
+        self.ui.eliminar.clicked.connect(self.eliminar)
+
+        try:
+            global excel
+            notas=pd.read_csv(excel,encoding='utf-8')
+
+            for encabezados in notas.columns:
+                listaEncabezados.append(encabezados) 
+
+            listadatos=[]	
+            filas=len(notas.index)	
+            contador=len(notas.columns)
+            self.ui.tableWidget.setRowCount(filas)	
+            self.ui.tableWidget.setColumnCount(contador) 
                 
+            for registros in notas.values: 
+                dato=(tuple(registros)) 
+                listadatos.append(dato) 
+        
+                    
+            fila=0
+            for registro in listadatos: 
+                columna=0 
+                for elemento in registro: 
+                    celda=QTableWidgetItem(str(elemento)) 
+                    self.ui.tableWidget.setItem(fila,columna,celda) 			
+                    columna=columna+1 
+                fila=fila+1																	
+            self.ui.tableWidget.setHorizontalHeaderLabels(listaEncabezados)
+          
+            self.ui.tableWidget.setColumnWidth(0,100)
+            self.ui.tableWidget.setColumnWidth(1,220)
+
+          
+            for x in range(1,filas+1):
+                self.ui.opciones.addItem(str(x))
+
+        except:
+            self.ui.titulo.setText("No Hay Registros a borrar")
+
+    def eliminar(self):
+        try:
+
+            global excel
+            notas=pd.read_csv(excel,encoding='utf-8')
+
+            seleccion=int(self.ui.opciones.itemText(self.ui.opciones.currentIndex()))
+            seleccion=seleccion-1
+            notas.drop([seleccion],axis="index",inplace=True)
+            remove(excel)
+
+            ruta=excel
+            
+
+            notas.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+
+            notas=pd.read_csv(excel,encoding='utf-8')
+            listaEncabezados=[]
+            listadatos=[]
+
+            for encabezados in notas.columns:
+                listaEncabezados.append(encabezados)
+            
+                
+            filas=len(notas.index)	
+            contador=len(notas.columns)
+            self.ui.tableWidget.setRowCount(filas)	
+            self.ui.tableWidget.setColumnCount(contador) 
+                
+            for registros in notas.values: 
+                dato=(tuple(registros)) 
+                listadatos.append(dato) 
+        
+                    
+            fila=0
+            for registro in listadatos: 
+                columna=0 
+                for elemento in registro: 
+                    celda=QTableWidgetItem(str(elemento)) 
+                    self.ui.tableWidget.setItem(fila,columna,celda) 			
+                    columna=columna+1 
+                fila=fila+1																	
+            self.ui.tableWidget.setHorizontalHeaderLabels(listaEncabezados)
+            
+
+            
+            self.ui.tableWidget.setColumnWidth(0,100)
+            self.ui.tableWidget.setColumnWidth(1,220)
+
+            self.ui.opciones.clear()
+            for x in range(1,filas+1):
+                self.ui.opciones.addItem(str(x))
+
+        except:
+            self.ui.titulo.setText("No Hay Registros a borrar")
+
+
+            
+        
+
+    def atras(self):
+        self.parent().show()
+        self.close()
+
+
+class VentanaUnirDosCSV(QMainWindow):
+    def __init__ (self,parent=None):
+        super(VentanaUnirDosCSV,self).__init__(parent)
+        self.ui=Ui_Ventana_Unir()
+        self.ui.setupUi(self)
+       
+        self.ui.regresar.clicked.connect(self.atras)
+
+        self.ui.botoncsv1.clicked.connect(self.csv1)
+        self.ui.botoncsv2.clicked.connect(self.csv2)
+        self.ui.unir.clicked.connect(self.UNIR)
+
+    
+    def csv1(self):
+        global csv1
+        global listaEncabezados
+        listaEncabezados=[]
+        try:
+            ruta=QFileDialog.getOpenFileName(self,'Open file')
+            for dato in ruta[::-1]:
+                csv1=dato
+            self.ui.ruta1.setText(csv1)
+            csvreferencia=pd.read_csv(csv1,encoding='utf-8')
+            self.ui.columnajoin.clear()
+            for encabezados in csvreferencia.columns:
+                listaEncabezados.append(encabezados)
+                self.ui.columnajoin.addItem(str(encabezados))
+
+        except:
+            self.ui.ruta1.setText("No se Encontro el Archivo")
+
+    def csv2(self):
+        global csv2
+        try:
+            ruta=QFileDialog.getOpenFileName(self,'Open file')
+            for dato in ruta[::-1]:
+                csv2=dato
+            self.ui.ruta2.setText(csv2)
+        except:
+            self.ui.ruta2.setText("No se Encontro el Archivo")
+
+    def UNIR(self):
+        try:
+            global csv1
+            global csv2
+            columna=self.ui.columnajoin.itemText(self.ui.columnajoin.currentIndex())
+            join=self.ui.tipo_join.itemText(self.ui.tipo_join.currentIndex())
+            df1=pd.read_csv(csv1,encoding='utf-8')
+            df2=pd.read_csv(csv2,encoding='utf-8')
+
+            try:
+  
+                if len(self.ui.nombrearchivo.text())>0:
+                    ruta="./"+self.ui.nombrearchivo.text()+".csv"
+                else:
+                    self.ui.resultado.setText("Nombre del Archivo?")
+
+                if join=="Inner" and len(self.ui.nombrearchivo.text())>0:
+                    df_unido=df1.merge(df2,on=columna,how="inner")
+                    DF_UNIDO=pd.DataFrame(df_unido)
+                    DF_UNIDO.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                    self.ui.resultado.setText("Ya se guardo el csv")
+                    self.ui.nombrearchivo.clear()
+                    
+                    
+
+                elif join=="Outer" and len(self.ui.nombrearchivo.text())>0:
+                    df_unido=df1.merge(df2,on=columna,how="outer")
+                    DF_UNIDO=pd.DataFrame(df_unido)
+                    DF_UNIDO.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                    self.ui.resultado.setText("Ya se guardo el csv")
+                    self.ui.nombrearchivo.clear()
+
+                elif join=="Left" and len(self.ui.nombrearchivo.text())>0:
+                    df_unido=df1.merge(df2,on=columna,how="left")
+                    DF_UNIDO=pd.DataFrame(df_unido)
+                    DF_UNIDO.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                    self.ui.resultado.setText("Ya se guardo el csv")
+                    self.ui.nombrearchivo.clear()
+
+                elif join=="Right" and len(self.ui.nombrearchivo.text())>0:
+                    df_unido=df1.merge(df2,on=columna,how="right")
+                    DF_UNIDO=pd.DataFrame(df_unido)
+                    DF_UNIDO.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                    self.ui.resultado.setText("Ya se guardo el csv")
+                    self.ui.nombrearchivo.clear()
+
+                
+
+            except:
+                self.ui.resultado.setText("La columna no coincide")
+        except:
+            self.ui.resultado.setText("Eliga los Archivos")
+            
+       
+
+    def atras(self):
+        self.parent().show()
+        self.close()
+
 if __name__=="__main__":
     app=QApplication(sys.argv)
     main=VentanaP1()

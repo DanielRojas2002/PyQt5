@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VentanaOpciones</class>
+ <widget class="QMainWindow" name="VentanaOpciones">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>337</width>
+    <height>199</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Opciones CSV</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 170, 0);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="titulo">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>40</y>
+      <width>251</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>MAS OPCIONES PARA EL CSV:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="elegir">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>142</y>
+      <width>261</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton:hover{
+	
+	background-color: rgb(165, 175, 173);
+}
+QPushButton{
+	background-color: rgb(255, 255, 255);
+}</string>
+    </property>
+    <property name="text">
+     <string>ELEGIR</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="opciones">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>100</y>
+      <width>261</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string/>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="whatsThis">
+     <string/>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <item>
+     <property name="text">
+      <string comment="ggggggggggg" extracomment="f">Agregar Columnas</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Agregar Registros</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Eliminar Columnas</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Eliminar Registros</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Segmentar dos CSV´s</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Segmentar por Rangos</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Unir dos CSV´s</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Buscar Datos en especifico del CSV</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Cambiar el Tipo de Dato de una columna</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Hacer Operaciones entre columnas</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Referencia Cruzada</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="regresar">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>321</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton:hover{
+	
+	background-color: rgb(165, 175, 173);
+}
+QPushButton{
+	background-color: rgb(255, 255, 255);
+}</string>
+    </property>
+    <property name="text">
+     <string>&lt;--</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>337</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

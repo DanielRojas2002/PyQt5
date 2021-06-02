@@ -19,7 +19,7 @@ class Ui_VentanaPrincipal(object):
         font.setFamily("Arial")
         VentanaPrincipal.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("CSV/multimedia/vector.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../multimedia/vector.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         VentanaPrincipal.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(VentanaPrincipal)
         self.centralwidget.setObjectName("centralwidget")
@@ -105,7 +105,7 @@ class Ui_VentanaPrincipal(object):
         self.errorarchivo.setObjectName("errorarchivo")
         self.verticalLayout_2.addWidget(self.errorarchivo)
         self.layoutWidget1 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget1.setGeometry(QtCore.QRect(20, 20, 311, 341))
+        self.layoutWidget1.setGeometry(QtCore.QRect(20, 20, 321, 341))
         self.layoutWidget1.setObjectName("layoutWidget1")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget1)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -138,6 +138,7 @@ class Ui_VentanaPrincipal(object):
         font.setBold(False)
         font.setWeight(50)
         self.BUSCAR.setFont(font)
+        self.BUSCAR.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.BUSCAR.setStyleSheet("QPushButton:hover{\n"
 "    \n"
 "    background-color: rgb(165, 175, 173);\n"
@@ -192,12 +193,21 @@ class Ui_VentanaPrincipal(object):
         self.Estadistica.setFont(font)
         self.Estadistica.setObjectName("Estadistica")
         self.verticalLayout.addWidget(self.Estadistica)
+        self.masopciones = QtWidgets.QRadioButton(self.layoutWidget1)
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setBold(True)
+        font.setWeight(75)
+        self.masopciones.setFont(font)
+        self.masopciones.setObjectName("masopciones")
+        self.verticalLayout.addWidget(self.masopciones)
         self.realizar = QtWidgets.QPushButton(self.layoutWidget1)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setBold(False)
         font.setWeight(50)
         self.realizar.setFont(font)
+        self.realizar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.realizar.setStyleSheet("QPushButton:hover{\n"
 "    \n"
 "    background-color: rgb(165, 175, 173);\n"
@@ -258,6 +268,7 @@ class Ui_VentanaPrincipal(object):
         font.setBold(False)
         font.setWeight(50)
         self.GRAFICAR.setFont(font)
+        self.GRAFICAR.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.GRAFICAR.setStyleSheet("QPushButton:hover{\n"
 "    \n"
 "    background-color: rgb(165, 175, 173);\n"
@@ -312,6 +323,8 @@ class Ui_VentanaPrincipal(object):
         self.graficarTenGru.setText(_translate("VentanaPrincipal", "Graficar Tendencia (Grupal)"))
         self.Estadistica.setToolTip(_translate("VentanaPrincipal", "<html><head/><body><p><span style=\" font-weight:600;\">Estadistica Descriptiva</span></p><p align=\"center\">Se podra ver la Estadistiva Descriptiva del CSV</p></body></html>"))
         self.Estadistica.setText(_translate("VentanaPrincipal", "Ver Estadistica Descriptiva"))
+        self.masopciones.setToolTip(_translate("VentanaPrincipal", "<html><head/><body><p><span style=\" font-weight:600;\">Estadistica Descriptiva</span></p><p align=\"center\">Se podra ver la Estadistiva Descriptiva del CSV</p></body></html>"))
+        self.masopciones.setText(_translate("VentanaPrincipal", "Mas Opciones"))
         self.realizar.setToolTip(_translate("VentanaPrincipal", "<html><head/><body><p><span style=\" font-weight:600;\">Actualizar Opcion</span></p></body></html>"))
         self.realizar.setText(_translate("VentanaPrincipal", "ACTUALIZACION"))
         self.titulo_Grafico.setToolTip(_translate("VentanaPrincipal", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Ingrese el Nombre del Grafico</span></p><p align=\"center\">(El que usted desee)</p></body></html>"))
