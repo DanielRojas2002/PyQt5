@@ -10,6 +10,7 @@ from codigo.ventanacsv import Ui_VentanaPrincipal
 from codigo.ventanaopciones import Ui_VentanaOpciones
 from codigo.ventana_eliminador import Ui_Ventana_Eliminar
 from codigo.ventanaunircsv import Ui_Ventana_Unir
+from codigo.ventana_eliminador_columnas import Ui_Ventana_Eliminar_Columnas
 
 
 excel=""
@@ -623,7 +624,9 @@ class VentanaOpciones(QMainWindow):
             pass
         
         elif seleccion=="Eliminar Columnas":
-            pass
+            self.hide()
+            otraventana=VentanaEliminarColumnas(self)
+            otraventana.show()
         
         elif seleccion=="Eliminar Registros":
             self.hide()
@@ -861,6 +864,64 @@ class VentanaUnirDosCSV(QMainWindow):
     def atras(self):
         self.parent().show()
         self.close()
+
+
+class VentanaEliminarColumnas(QMainWindow):
+    def __init__(self,parent=None):
+        super(VentanaEliminarColumnas,self).__init__(parent)
+        self.ui=Ui_Ventana_Eliminar_Columnas()
+        self.ui.setupUi(self)
+
+        self.ui.regresar.clicked.connect(self.atras)
+        self.ui.listaColumnas.itemClicked.connect(self.seleccion) 
+        self.ui.eliminar.clicked.connect(self.eliminar)
+		
+
+        try:
+            global excel
+            notas=pd.read_csv(excel,encoding='utf-8')
+
+            for encabezados in notas.columns:
+                self.ui.listaColumnas.addItem(str(encabezados)) 
+        except:
+            self.ui.titulo.setText("No hay Columnas")
+
+    def seleccion(self):
+        global datocolumna 
+        datocolumna=self.ui.listaColumnas.currentItem().text()
+        self.ui.columna.setText(str(datocolumna))
+
+    def eliminar(self):
+        try:
+            global datocolumna 
+            global excel
+            df=pd.read_csv(excel,encoding='utf-8')
+            df.drop([datocolumna],axis="columns",inplace=True)
+            remove(excel)
+
+            ruta=excel
+            
+            df.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+
+            df=pd.read_csv(excel,encoding='utf-8')
+            self.ui.listaColumnas.clear()
+            self.ui.columna.clear()
+
+            for encabezados in df.columns:
+                self.ui.listaColumnas.addItem(str(encabezados)) 
+            
+
+        except:
+            self.ui.listaColumnas.clear()
+            self.ui.columna.clear()
+            self.ui.titulo.setText("No Hay Columnas")
+
+        
+
+    def atras(self):
+        self.parent().show()
+        self.close()
+
 
 if __name__=="__main__":
     app=QApplication(sys.argv)
