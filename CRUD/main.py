@@ -1162,7 +1162,7 @@ class VentanaVInsertar(QMainWindow):
 class VentanaVborrar(QMainWindow):
     def __init__(self,parent=None):
         super(VentanaVborrar,self).__init__(parent)
-        self.ui=Ui_VentanaValidacionborrar()
+        self.ui=Ui_VentanaValidacionBorrarRegistros()
         self.ui.setupUi(self)
         global nombre
         contador4=0
@@ -2477,7 +2477,7 @@ class VentanaInsertar(QMainWindow):
                     
                 
         except Error as e:
-            sle.ui.error.setText(e)
+            self.ui.error.setText(e)
 
         
     def seleccioncampo(self):
