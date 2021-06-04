@@ -922,7 +922,230 @@ class VentanaEliminarColumnas(QMainWindow):
         self.parent().show()
         self.close()
 
+class VentanaSeleccionar(QMainWindow):
+    def __init__(self,parent=None):
+        super(VentanaSeleccionar,self).__init__(parent)
+        self.ui=Ui_VentanaSeleccionar()
+        self.ui.setupUi(self)
 
+        self.ui.atras.clicked.connect(self.atras)
+        self.ui.realizar.clicked.connect(self.realizar)
+        self.ui.seleccionar.clicked.connect(self.seleccionar)
+        self.ui.generarinforme.clicked.connect(self.generarcsv)
+        
+        global listaEncabezados
+        notas=pd.read_csv(excel,encoding='utf-8')
+        listaEncabezados=[]
+
+        for encabezados in notas.columns:
+            listaEncabezados.append(encabezados)
+
+        
+
+    def seleccionar(self):
+        global seleccion
+        global listaEncabezados
+        
+        self.ui.titulo2.setText("")
+        self.ui.dato.setText("")
+        selecciones=self.ui.opciones.itemText(self.ui.opciones.currentIndex())
+
+        if selecciones=="TODOS":
+            seleccion="TODOS"
+            self.ui.dato.setDisabled(True)
+            self.ui.opciones_2.setDisabled(True)
+            self.ui.opciones_2.clear()
+            self.ui.tableWidget.clear()
+            
+
+        elif selecciones=="Especifico":
+            seleccion="Especifico"
+            self.ui.dato.setEnabled(True)
+            self.ui.opciones_2.setEnabled(True)
+            self.ui.opciones_2.clear()
+            self.ui.tableWidget.clear()
+        
+            for elemento in listaEncabezados:
+                self.ui.opciones_2.addItem(elemento)
+
+        elif selecciones=="Empiece con...":
+            seleccion="Empiece con..."
+            self.ui.dato.setEnabled(True)
+            self.ui.opciones_2.setEnabled(True)
+            self.ui.opciones_2.clear()
+            self.ui.tableWidget.clear()
+
+            for elemento in listaEncabezados:
+                self.ui.opciones_2.addItem(elemento)
+
+        elif selecciones=="Termine con...":
+            seleccion="Termine con..."
+            self.ui.dato.setEnabled(True)
+            self.ui.opciones_2.setEnabled(True)
+            self.ui.opciones_2.clear()
+            self.ui.tableWidget.clear()
+
+            for elemento in listaEncabezados:
+                self.ui.opciones_2.addItem(elemento)
+
+
+    def realizar(self):
+        global seleccion
+        global listaEncabezados
+        global excel
+        global statuscsv
+        global validacioninforme
+        statuscsv=""
+
+        if seleccion=="TODOS":
+            statuscsv="TODOS"
+            try:
+                notas=pd.read_csv(excel,encoding='utf-8')
+                self.ui.tableWidget.clear()
+                listadatos=[]
+                contador=0
+                otrocontador=0
+                
+                for x in listaEncabezados:
+                    contador=contador+1
+
+                filas=len(notas.index)
+                self.ui.tableWidget.setRowCount(filas)
+                self.ui.tableWidget.setColumnCount(contador)
+                
+                for registros in notas.values:
+                    otrocontador=otrocontador+1
+                    dato=(tuple(registros))
+                    listadatos.append(dato)
+
+                if otrocontador==0:
+                    self.ui.titulo2.setText("No Hay Registros")
+                    validacioninforme=0
+
+                else:
+                    fila=0
+                    for registro in listadatos:
+                        columna=0
+                        for elemento in registro:
+                            celda=QTableWidgetItem(str(elemento))
+                            self.ui.tableWidget.setItem(fila,columna,celda)
+                            columna=columna+1
+                        fila=fila+1
+                    self.ui.tableWidget.setHorizontalHeaderLabels(listaEncabezados)
+                    self.ui.tableWidget.setSortingEnabled(True)
+                
+                    for x in range(0,contador+1):
+                        self.ui.tableWidget.setColumnWidth(x,200)
+
+            except:
+                self.ui.titulo2.setText("No Hay Registros")
+
+
+        elif seleccion=="Especifico":
+            global df_condicion
+            statuscsv=""
+            statuscsv="Especifico"
+            try:
+
+                notas=pd.read_csv(excel,encoding='utf-8')
+                columna=str(self.ui.opciones_2.itemText(self.ui.opciones_2.currentIndex()))
+                dato=str((self.ui.dato.text()))
+
+                for encabezado in listaEncabezados:
+                    notas[encabezado]=notas[encabezado].astype('object')
+
+                df=pd.DataFrame(notas)
+                
+                try:
+                    df_condicion=df.loc[(df[columna]==int(dato))]
+                    
+                except:
+                    df_condicion=df.loc[(df[columna]==str(dato))]
+                    
+                self.ui.tableWidget.clear()
+                listadatos=[]
+                contador=0
+                otrocontador=0
+
+                for x in listaEncabezados:
+                    contador=contador+1
+                    
+
+                filas=len(df_condicion.index)
+                self.ui.tableWidget.setRowCount(filas)
+                self.ui.tableWidget.setColumnCount(contador)
+                
+                for registros in df_condicion.values:
+                    otrocontador=otrocontador+1
+                    dato=(tuple(registros))
+                    listadatos.append(dato)
+
+                if otrocontador==0:
+                    self.ui.titulo2.setText("No Hay Registros")
+                    validacioninforme=0
+
+                else:
+                    fila=0
+                    for registro in listadatos:
+                        columna=0
+                        for elemento in registro:
+                            celda=QTableWidgetItem(str(elemento))
+                            self.ui.tableWidget.setItem(fila,columna,celda)
+                            columna=columna+1
+                        fila=fila+1
+                    self.ui.tableWidget.setHorizontalHeaderLabels(listaEncabezados)
+                    self.ui.tableWidget.setSortingEnabled(True)
+                
+                    for x in range(0,contador+1):
+                        self.ui.tableWidget.setColumnWidth(x,200)
+
+            except:
+                self.ui.titulo2.setText("No Hay Registros")
+
+    def generarcsv(self):
+        global statuscsv 
+        global df_condicion
+        global excel
+        global validacioninforme
+        
+        
+        if statuscsv=="TODOS":
+            if validacioninforme==0:
+                self.ui.titulo2.setText("No se puede generar el Informe")
+
+            else:
+                try:
+                    ruta="./"+"Reporte TODOS"+".csv"
+                    remove(ruta)
+                    notas=pd.read_csv(excel,encoding='utf-8')
+                    notas.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                except:
+                    ruta="./"+"Reporte TODOS"+".csv"
+                    notas=pd.read_csv(excel,encoding='utf-8')
+                    notas.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                
+            
+
+        elif statuscsv=="Especifico":
+            if validacioninforme==0:
+                self.ui.titulo2.setText("No se puede generar el Informe")
+                
+            else:
+                try:
+                    ruta="./"+"Reporte "+self.ui.dato.text()+".csv"
+                    remove(ruta)
+                    df_condicion.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                except:
+                    ruta="./"+"Reporte "+self.ui.dato.text()+".csv"
+                    df_condicion.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+
+
+
+    def atras(self):
+        self.parent().show()
+        self.close()
+
+        
 if __name__=="__main__":
     app=QApplication(sys.argv)
     main=VentanaP1()
