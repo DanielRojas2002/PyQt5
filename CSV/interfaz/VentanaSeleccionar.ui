@@ -118,16 +118,6 @@ QPushButton{
           <string>Especifico</string>
          </property>
         </item>
-        <item>
-         <property name="text">
-          <string>Empiece con...</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Termine con...</string>
-         </property>
-        </item>
        </widget>
       </item>
       <item>
