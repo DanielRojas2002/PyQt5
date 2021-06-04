@@ -1034,6 +1034,7 @@ class VentanaSeleccionar(QMainWindow):
                     validacioninforme=0
 
                 else:
+                    validacioninforme=1
                     fila=0
                     for registro in listadatos:
                         columna=0
@@ -1096,6 +1097,7 @@ class VentanaSeleccionar(QMainWindow):
                     validacioninforme=0
 
                 else:
+                    validacioninforme=1
                     fila=0
                     for registro in listadatos:
                         columna=0
