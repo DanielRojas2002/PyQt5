@@ -11,6 +11,7 @@ from codigo.ventanaopciones import Ui_VentanaOpciones
 from codigo.ventana_eliminador import Ui_Ventana_Eliminar
 from codigo.ventanaunircsv import Ui_Ventana_Unir
 from codigo.ventana_eliminador_columnas import Ui_Ventana_Eliminar_Columnas
+from codigo.ventanaseleccion import Ui_VentanaSeleccionar
 
 
 excel=""
@@ -22,9 +23,14 @@ etiqueta3=""
 etiqueta4=""
 csv1=""
 csv2=""
+datocolumna=""
+seleccion=""
+df_condicion=""
 listaEncabezados=[]
 listadatos=[]
 listacolumnas=[]
+statuscsv=""
+validacioninforme=""
 listacolores=['#00FFFF','#0000FF', '#8A2BE2','#A52A2A','#DEB887','#5F9EA0','#7FFF00','#D2691E',
 '#6495ED','#DC143C','#00008B','#008B8B','#B8860B','#A9A9A9','#006400', '#BDB76B','#8B008B','#FF8C00','#8B0000'
 ,'#483D8B','#2F4F4F','#FF1493','#1E90FF','#228B22','#FFD700','#DAA520','#7CFC00','#0000CD','#FF0000','#9ACD32']
@@ -645,6 +651,11 @@ class VentanaOpciones(QMainWindow):
         elif seleccion=="Hacer Operaciones entre columnas":
             pass
 
+        elif seleccion=="Buscar Datos en especifico del CSV":
+            self.hide()
+            otraventana=VentanaSeleccionar(self)
+            otraventana.show()
+
         
 
         
@@ -1119,10 +1130,12 @@ class VentanaSeleccionar(QMainWindow):
                     remove(ruta)
                     notas=pd.read_csv(excel,encoding='utf-8')
                     notas.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                    self.ui.titulo2.setText("Ya se genero el CSV")
                 except:
                     ruta="./"+"Reporte TODOS"+".csv"
                     notas=pd.read_csv(excel,encoding='utf-8')
                     notas.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                    self.ui.titulo2.setText("Ya se genero el CSV")
                 
             
 
@@ -1135,9 +1148,11 @@ class VentanaSeleccionar(QMainWindow):
                     ruta="./"+"Reporte "+self.ui.dato.text()+".csv"
                     remove(ruta)
                     df_condicion.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                    self.ui.titulo2.setText("Ya se genero el CSV")
                 except:
                     ruta="./"+"Reporte "+self.ui.dato.text()+".csv"
                     df_condicion.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                    self.ui.titulo2.setText("Ya se genero el CSV")
 
 
 
@@ -1145,7 +1160,7 @@ class VentanaSeleccionar(QMainWindow):
         self.parent().show()
         self.close()
 
-        
+
 if __name__=="__main__":
     app=QApplication(sys.argv)
     main=VentanaP1()
