@@ -623,13 +623,8 @@ class VentanaOpciones(QMainWindow):
     def elegir(self):
         seleccion=self.ui.opciones.itemText(self.ui.opciones.currentIndex())
         
-        if seleccion=="Agregar Columnas":
-            pass
         
-        elif seleccion=="Agregar Registros":
-            pass
-        
-        elif seleccion=="Eliminar Columnas":
+        if seleccion=="Eliminar Columnas":
             self.hide()
             otraventana=VentanaEliminarColumnas(self)
             otraventana.show()
@@ -644,14 +639,11 @@ class VentanaOpciones(QMainWindow):
             otraventana=VentanaUnirDosCSV(self)
             otraventana.show()
         
-        elif seleccion=="Cambiar el Tipo de Dato de una columna":
-            pass
-
         
         elif seleccion=="Hacer Operaciones entre columnas":
             pass
 
-        elif seleccion=="Buscar Datos en especifico del CSV":
+        elif seleccion=="Buscar Datos en especifico del CSV y Generar CSV":
             self.hide()
             otraventana=VentanaSeleccionar(self)
             otraventana.show()

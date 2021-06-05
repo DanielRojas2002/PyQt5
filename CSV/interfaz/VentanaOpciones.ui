@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>337</width>
+    <width>391</width>
     <height>199</height>
    </rect>
   </property>
@@ -14,7 +14,7 @@
    <string>Opciones CSV</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 170, 0);</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="titulo">
@@ -22,7 +22,7 @@
      <rect>
       <x>40</x>
       <y>40</y>
-      <width>251</width>
+      <width>311</width>
       <height>41</height>
      </rect>
     </property>
@@ -48,7 +48,7 @@
      <rect>
       <x>40</x>
       <y>142</y>
-      <width>261</width>
+      <width>311</width>
       <height>21</height>
      </rect>
     </property>
@@ -80,7 +80,7 @@ QPushButton{
      <rect>
       <x>40</x>
       <y>100</y>
-      <width>261</width>
+      <width>311</width>
       <height>21</height>
      </rect>
     </property>
@@ -101,16 +101,6 @@ QPushButton{
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
-    <item>
-     <property name="text">
-      <string comment="ggggggggggg" extracomment="f">Agregar Columnas</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Agregar Registros</string>
-     </property>
-    </item>
     <item>
      <property name="text">
       <string>Eliminar Columnas</string>
@@ -138,12 +128,12 @@ QPushButton{
     </item>
     <item>
      <property name="text">
-      <string>Buscar Datos en especifico del CSV</string>
+      <string>Buscar Datos en especifico del CSV y Generar CSV</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>Cambiar el Tipo de Dato de una columna</string>
+      <string>Elegir Columnas y Generar un CSV</string>
      </property>
     </item>
     <item>
@@ -160,9 +150,9 @@ QPushButton{
    <widget class="QPushButton" name="regresar">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>20</x>
       <y>10</y>
-      <width>321</width>
+      <width>341</width>
       <height>21</height>
      </rect>
     </property>
@@ -191,7 +181,7 @@ QPushButton{
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>337</width>
+     <width>391</width>
      <height>21</height>
     </rect>
    </property>
