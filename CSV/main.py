@@ -5,7 +5,8 @@ import os
 from os import remove
 
 from matplotlib import dates as mpl_dates
-from PyQt5.QtWidgets import QDialog,QApplication,QMainWindow,QMessageBox,QErrorMessage,QFileDialog,QTableWidgetItem
+from PyQt5.QtWidgets import QDialog,QApplication,QMainWindow,QMessageBox,QErrorMessage,QFileDialog,QTableWidgetItem,QColorDialog
+from PyQt5.QtGui import QColor 
 from codigo.ventanacsv import Ui_VentanaPrincipal
 from codigo.ventanaopciones import Ui_VentanaOpciones
 from codigo.ventana_eliminador import Ui_Ventana_Eliminar
@@ -52,6 +53,26 @@ class VentanaP1(QMainWindow):
         self.ui.etiqueta_usuario.setDisabled(True)
         self.ui.etiqueta_tiempo.setDisabled(True)
         self.ui.GRAFICAR.setDisabled(True)
+
+        self.ui.color_ventanas.clicked.connect(self.Guardar_Color_Ventanas)
+        
+
+    def Guardar_Color_Ventanas(self):
+        colorFrame=""
+        colorFrame=QColorDialog.getColor()
+        COLORFINAL=colorFrame.name()
+        if colorFrame.isValid():
+            dicc={}
+            lista=[]
+            ruta="CSV/Configuracion/colores.csv"
+            lista.append(COLORFINAL)
+            dicc["Color_Ventana"]=lista
+            df_color=pd.DataFrame(dicc)
+            df_color.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+            QMessageBox.question(self,"Mensaje","Seleccion Satisfactoria",QMessageBox.Ok,QMessageBox.Ok)
+
+        else:
+            QMessageBox.question(self,"Mensaje","Error",QMessageBox.Ok,QMessageBox.Ok)
 
     #ESTA OPCION BUSCA Y SELECCIONA LA RUTA DONDE ESTA EL ARCHIVO CSV 
     def Buscar(self):
@@ -620,6 +641,14 @@ class VentanaOpciones(QMainWindow):
 
         self.ui.elegir.clicked.connect(self.elegir)
 
+        try:
+            colores=pd.read_csv("CSV/Configuracion/colores.csv",encoding='utf-8')
+            longitud=len(colores.index)
+            datocolor=colores["Color_Ventana"][longitud-1]
+            self.ui.frame.setStyleSheet(f"background-color:{datocolor}")
+        except:
+            pass
+
     def elegir(self):
         seleccion=self.ui.opciones.itemText(self.ui.opciones.currentIndex())
         
@@ -664,6 +693,14 @@ class VentanaEliminarRegistros(QMainWindow):
 
         self.ui.regresar.clicked.connect(self.atras)
         self.ui.eliminar.clicked.connect(self.eliminar)
+
+        try:
+            colores=pd.read_csv("CSV/Configuracion/colores.csv",encoding='utf-8')
+            longitud=len(colores.index)
+            datocolor=colores["Color_Ventana"][longitud-1]
+            self.ui.frame.setStyleSheet(f"background-color:{datocolor}")
+        except:
+            pass
 
         try:
             global excel
@@ -780,6 +817,14 @@ class VentanaUnirDosCSV(QMainWindow):
         self.ui.botoncsv2.clicked.connect(self.csv2)
         self.ui.unir.clicked.connect(self.UNIR)
 
+        try:
+            colores=pd.read_csv("CSV/Configuracion/colores.csv",encoding='utf-8')
+            longitud=len(colores.index)
+            datocolor=colores["Color_Ventana"][longitud-1]
+            self.ui.frame.setStyleSheet(f"background-color:{datocolor}")
+        except:
+            pass
+
     
     def csv1(self):
         global csv1
@@ -878,6 +923,14 @@ class VentanaEliminarColumnas(QMainWindow):
         self.ui.regresar.clicked.connect(self.atras)
         self.ui.listaColumnas.itemClicked.connect(self.seleccion) 
         self.ui.eliminar.clicked.connect(self.eliminar)
+
+        try:
+            colores=pd.read_csv("CSV/Configuracion/colores.csv",encoding='utf-8')
+            longitud=len(colores.index)
+            datocolor=colores["Color_Ventana"][longitud-1]
+            self.ui.frame.setStyleSheet(f"background-color:{datocolor}")
+        except:
+            pass
 		
 
         try:
@@ -935,6 +988,16 @@ class VentanaSeleccionar(QMainWindow):
         self.ui.realizar.clicked.connect(self.realizar)
         self.ui.seleccionar.clicked.connect(self.seleccionar)
         self.ui.generarinforme.clicked.connect(self.generarcsv)
+
+        try:
+            colores=pd.read_csv("CSV/Configuracion/colores.csv",encoding='utf-8')
+            longitud=len(colores.index)
+            datocolor=colores["Color_Ventana"][longitud-1]
+            self.ui.frame_ventana.setStyleSheet(f"background-color:{datocolor}")
+            self.ui.frame_particular.setStyleSheet("background-color:#e2e6d4")
+            
+        except:
+            pass
         
         global listaEncabezados
         notas=pd.read_csv(excel,encoding='utf-8')
