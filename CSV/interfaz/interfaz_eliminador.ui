@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>397</width>
+    <width>410</width>
     <height>307</height>
    </rect>
   </property>
@@ -14,7 +14,7 @@
    <string>Eliminador</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 127);</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTableWidget" name="tableWidget">
@@ -33,9 +33,9 @@
    <widget class="QLabel" name="titulo">
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>70</x>
       <y>10</y>
-      <width>241</width>
+      <width>271</width>
       <height>31</height>
      </rect>
     </property>
@@ -46,6 +46,9 @@
       <italic>true</italic>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>ELIMINADOR DE REGISTROS</string>
@@ -147,37 +150,33 @@ QPushButton{
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="eliminarhecho">
+   <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>260</y>
-      <width>31</width>
-      <height>21</height>
+      <x>0</x>
+      <y>0</y>
+      <width>411</width>
+      <height>311</height>
      </rect>
     </property>
-    <property name="text">
-     <string/>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
-    <property name="textFormat">
-     <enum>Qt::PlainText</enum>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
     </property>
-    <property name="scaledContents">
-     <bool>true</bool>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
     </property>
    </widget>
+   <zorder>frame</zorder>
+   <zorder>tableWidget</zorder>
+   <zorder>titulo</zorder>
+   <zorder>regresar</zorder>
+   <zorder>opciones</zorder>
+   <zorder>eliminar</zorder>
+   <zorder>img</zorder>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>397</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

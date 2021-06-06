@@ -6,23 +6,23 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>885</width>
-    <height>540</height>
+    <width>897</width>
+    <height>535</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Buscador de Registros</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 127);</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
       <x>280</x>
-      <y>10</y>
-      <width>591</width>
+      <y>20</y>
+      <width>601</width>
       <height>501</height>
      </rect>
     </property>
@@ -42,25 +42,25 @@
      <enum>QFrame::Sunken</enum>
     </property>
    </widget>
-   <widget class="QWidget" name="widget" native="true">
+   <widget class="QFrame" name="frame_particular">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>20</y>
       <width>261</width>
       <height>501</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(240, 255, 67);</string>
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>20</y>
-       <width>227</width>
-       <height>462</height>
+       <x>10</x>
+       <y>10</y>
+       <width>241</width>
+       <height>481</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -246,18 +246,29 @@ QPushButton:hover{
      </layout>
     </widget>
    </widget>
+   <widget class="QFrame" name="frame_ventana">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>-10</y>
+      <width>911</width>
+      <height>551</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
+   <zorder>frame_ventana</zorder>
+   <zorder>frame_particular</zorder>
+   <zorder>tableWidget</zorder>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>885</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
