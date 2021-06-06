@@ -817,15 +817,6 @@ class VentanaUnirDosCSV(QMainWindow):
         self.ui.botoncsv2.clicked.connect(self.csv2)
         self.ui.unir.clicked.connect(self.UNIR)
 
-        try:
-            colores=pd.read_csv("CSV/Configuracion/colores.csv",encoding='utf-8')
-            longitud=len(colores.index)
-            datocolor=colores["Color_Ventana"][longitud-1]
-            self.ui.frame.setStyleSheet(f"background-color:{datocolor}")
-        except:
-            pass
-
-    
     def csv1(self):
         global csv1
         global listaEncabezados
