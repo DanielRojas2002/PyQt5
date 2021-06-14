@@ -55,6 +55,20 @@ class VentanaP1(QMainWindow):
         self.ui.GRAFICAR.setDisabled(True)
 
         self.ui.color_ventanas.clicked.connect(self.Guardar_Color_Ventanas)
+        self.ui.color_botones.clicked.connect(self.Guardar_Color_Botones)
+
+        try:
+            colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
+            longitud=len(colores_boton.index)
+            datocolor=colores_boton["Color_Botones"][longitud-1]
+            estilo="QPushButton::hover{background-color:"+str(datocolor)+";}"
+            self.ui.color_botones.setStyleSheet(estilo)
+            self.ui.color_ventanas.setStyleSheet(estilo)
+            self.ui.GRAFICAR.setStyleSheet(estilo)
+            self.ui.BUSCAR.setStyleSheet(estilo)
+            self.ui.realizar.setStyleSheet(estilo)
+        except:
+            pass
         
 
     def Guardar_Color_Ventanas(self):
@@ -70,6 +84,37 @@ class VentanaP1(QMainWindow):
             df_color=pd.DataFrame(dicc)
             df_color.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
             QMessageBox.question(self,"Mensaje","Seleccion Satisfactoria",QMessageBox.Ok,QMessageBox.Ok)
+
+        else:
+            QMessageBox.question(self,"Mensaje","Error",QMessageBox.Ok,QMessageBox.Ok)
+
+
+    def Guardar_Color_Botones(self):
+        colorFrame=""
+        colorFrame=QColorDialog.getColor()
+        COLORFINAL=colorFrame.name()
+        if colorFrame.isValid():
+            dicc={}
+            lista=[]
+            ruta="CSV/Configuracion/colores_botones.csv"
+            lista.append(COLORFINAL)
+            dicc["Color_Botones"]=lista
+            df_color=pd.DataFrame(dicc)
+            df_color.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+            QMessageBox.question(self,"Mensaje","Seleccion Satisfactoria",QMessageBox.Ok,QMessageBox.Ok)
+
+            try:
+                colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
+                longitud=len(colores_boton.index)
+                datocolor=colores_boton["Color_Botones"][longitud-1]
+                estilo="QPushButton::hover{background-color:"+str(datocolor)+";}"
+                self.ui.color_botones.setStyleSheet(estilo)
+                self.ui.color_ventanas.setStyleSheet(estilo)
+                self.ui.GRAFICAR.setStyleSheet(estilo)
+                self.ui.BUSCAR.setStyleSheet(estilo)
+                self.ui.realizar.setStyleSheet(estilo)
+            except:
+                pass
 
         else:
             QMessageBox.question(self,"Mensaje","Error",QMessageBox.Ok,QMessageBox.Ok)
@@ -649,6 +694,17 @@ class VentanaOpciones(QMainWindow):
         except:
             pass
 
+        try:
+            colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
+            longitud=len(colores_boton.index)
+            datocolor=colores_boton["Color_Botones"][longitud-1]
+            estilo="QPushButton::hover{background-color:"+str(datocolor)+";}"
+            self.ui.regresar.setStyleSheet(estilo)
+            self.ui.elegir.setStyleSheet(estilo)
+           
+        except:
+            pass
+
     def elegir(self):
         seleccion=self.ui.opciones.itemText(self.ui.opciones.currentIndex())
         
@@ -699,6 +755,17 @@ class VentanaEliminarRegistros(QMainWindow):
             longitud=len(colores.index)
             datocolor=colores["Color_Ventana"][longitud-1]
             self.ui.frame.setStyleSheet(f"background-color:{datocolor}")
+        except:
+            pass
+
+        try:
+            colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
+            longitud=len(colores_boton.index)
+            datocolor=colores_boton["Color_Botones"][longitud-1]
+            estilo="QPushButton::hover{background-color:"+str(datocolor)+";}"
+            self.ui.regresar.setStyleSheet(estilo)
+            self.ui.eliminar.setStyleSheet(estilo)
+           
         except:
             pass
 
@@ -812,10 +879,23 @@ class VentanaUnirDosCSV(QMainWindow):
         self.ui.setupUi(self)
        
         self.ui.regresar.clicked.connect(self.atras)
-
         self.ui.botoncsv1.clicked.connect(self.csv1)
         self.ui.botoncsv2.clicked.connect(self.csv2)
         self.ui.unir.clicked.connect(self.UNIR)
+
+
+        try:
+            colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
+            longitud=len(colores_boton.index)
+            datocolor=colores_boton["Color_Botones"][longitud-1]
+            estilo="QPushButton::hover{background-color:"+str(datocolor)+";}"
+            self.ui.regresar.setStyleSheet(estilo)
+            self.ui.botoncsv1.setStyleSheet(estilo)
+            self.ui.botoncsv2.setStyleSheet(estilo)
+            self.ui.unir.setStyleSheet(estilo)
+           
+        except:
+            pass
 
     def csv1(self):
         global csv1
@@ -922,6 +1002,17 @@ class VentanaEliminarColumnas(QMainWindow):
             self.ui.frame.setStyleSheet(f"background-color:{datocolor}")
         except:
             pass
+
+        try:
+            colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
+            longitud=len(colores_boton.index)
+            datocolor=colores_boton["Color_Botones"][longitud-1]
+            estilo="QPushButton::hover{background-color:"+str(datocolor)+";}"
+            self.ui.regresar.setStyleSheet(estilo)
+            self.ui.eliminar.setStyleSheet(estilo)
+           
+        except:
+            pass
 		
 
         try:
@@ -987,6 +1078,20 @@ class VentanaSeleccionar(QMainWindow):
             self.ui.frame_ventana.setStyleSheet(f"background-color:{datocolor}")
             self.ui.frame_particular.setStyleSheet("background-color:#e2e6d4")
             
+        except:
+            pass
+
+
+        try:
+            colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
+            longitud=len(colores_boton.index)
+            datocolor=colores_boton["Color_Botones"][longitud-1]
+            estilo="QPushButton::hover{background-color:"+str(datocolor)+";}"
+            self.ui.atras.setStyleSheet(estilo)
+            self.ui.realizar.setStyleSheet(estilo)
+            self.ui.seleccionar.setStyleSheet(estilo)
+            self.ui.generarinforme.setStyleSheet(estilo)
+           
         except:
             pass
         
