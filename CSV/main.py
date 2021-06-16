@@ -513,7 +513,7 @@ class VentanaP1(QMainWindow):
                     leyenda = []
                     for navegador, mercado in zip(nombre,listasuma):
                         mercado2=round((mercado/porcentajeb*100),2)
-                        leyenda.append(navegador + '  (' + str(mercado2) + '%)')
+                        leyenda.append(str(navegador) + '  (' + str(mercado2) + '%)')
                  
                     plt.pie(listasuma,labels=None,autopct="%0.1f %%",colors=listacolores2)
                     plt.title(titulo+"("+etiqueta1+":"+etiqueta2+")")
