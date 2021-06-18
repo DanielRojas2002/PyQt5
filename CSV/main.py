@@ -61,12 +61,13 @@ class VentanaP1(QMainWindow):
             colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
             longitud=len(colores_boton.index)
             datocolor=colores_boton["Color_Botones"][longitud-1]
-            estilo="QPushButton::hover{background-color:"+str(datocolor)+";}"
+            estilo="QPushButton{"+"\n"+"padding:5px;"+"\n"+"border-radius:10px;"+"\n""border:1.5px solid black;}"+"\n"+"\n"+"QPushButton:hover{"+"\n"+"background-color:"+str(datocolor)+"\n"+";}"
             self.ui.color_botones.setStyleSheet(estilo)
             self.ui.color_ventanas.setStyleSheet(estilo)
             self.ui.GRAFICAR.setStyleSheet(estilo)
             self.ui.BUSCAR.setStyleSheet(estilo)
             self.ui.realizar.setStyleSheet(estilo)
+            self.ui.tipo_fuente.setStyleSheet(estilo)
         except:
             pass
         
@@ -107,12 +108,13 @@ class VentanaP1(QMainWindow):
                 colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
                 longitud=len(colores_boton.index)
                 datocolor=colores_boton["Color_Botones"][longitud-1]
-                estilo="QPushButton::hover{background-color:"+str(datocolor)+";}"
+                estilo="QPushButton{"+"\n"+"padding:5px;"+"\n"+"border-radius:10px;"+"\n""border:1.5px solid black;}"+"\n"+"\n"+"QPushButton:hover{"+"\n"+"background-color:"+str(datocolor)+"\n"+";}"
                 self.ui.color_botones.setStyleSheet(estilo)
                 self.ui.color_ventanas.setStyleSheet(estilo)
                 self.ui.GRAFICAR.setStyleSheet(estilo)
                 self.ui.BUSCAR.setStyleSheet(estilo)
                 self.ui.realizar.setStyleSheet(estilo)
+                self.ui.tipo_fuente.setStyleSheet(estilo)
             except:
                 pass
 
@@ -698,7 +700,7 @@ class VentanaOpciones(QMainWindow):
             colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
             longitud=len(colores_boton.index)
             datocolor=colores_boton["Color_Botones"][longitud-1]
-            estilo="QPushButton::hover{background-color:"+str(datocolor)+";}"
+            estilo="QPushButton{"+"\n"+"padding:5px;"+"\n"+"border-radius:10px;"+"\n""border:1.5px solid black;}"+"\n"+"\n"+"QPushButton:hover{"+"\n"+"background-color:"+str(datocolor)+"\n"+";}"
             self.ui.regresar.setStyleSheet(estilo)
             self.ui.elegir.setStyleSheet(estilo)
            
@@ -762,7 +764,7 @@ class VentanaEliminarRegistros(QMainWindow):
             colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
             longitud=len(colores_boton.index)
             datocolor=colores_boton["Color_Botones"][longitud-1]
-            estilo="QPushButton::hover{background-color:"+str(datocolor)+";}"
+            estilo="QPushButton{"+"\n"+"padding:5px;"+"\n"+"border-radius:10px;"+"\n""border:1.5px solid black;}"+"\n"+"\n"+"QPushButton:hover{"+"\n"+"background-color:"+str(datocolor)+"\n"+";}"
             self.ui.regresar.setStyleSheet(estilo)
             self.ui.eliminar.setStyleSheet(estilo)
            
@@ -888,7 +890,7 @@ class VentanaUnirDosCSV(QMainWindow):
             colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
             longitud=len(colores_boton.index)
             datocolor=colores_boton["Color_Botones"][longitud-1]
-            estilo="QPushButton::hover{background-color:"+str(datocolor)+";}"
+            estilo="QPushButton{"+"\n"+"padding:5px;"+"\n"+"border-radius:10px;"+"\n""border:1.5px solid black;}"+"\n"+"\n"+"QPushButton:hover{"+"\n"+"background-color:"+str(datocolor)+"\n"+";}"
             self.ui.regresar.setStyleSheet(estilo)
             self.ui.botoncsv1.setStyleSheet(estilo)
             self.ui.botoncsv2.setStyleSheet(estilo)
@@ -1007,7 +1009,7 @@ class VentanaEliminarColumnas(QMainWindow):
             colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
             longitud=len(colores_boton.index)
             datocolor=colores_boton["Color_Botones"][longitud-1]
-            estilo="QPushButton::hover{background-color:"+str(datocolor)+";}"
+            estilo="QPushButton{"+"\n"+"padding:5px;"+"\n"+"border-radius:10px;"+"\n""border:1.5px solid black;}"+"\n"+"\n"+"QPushButton:hover{"+"\n"+"background-color:"+str(datocolor)+"\n"+";}"
             self.ui.regresar.setStyleSheet(estilo)
             self.ui.eliminar.setStyleSheet(estilo)
            
@@ -1086,7 +1088,7 @@ class VentanaSeleccionar(QMainWindow):
             colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
             longitud=len(colores_boton.index)
             datocolor=colores_boton["Color_Botones"][longitud-1]
-            estilo="QPushButton::hover{background-color:"+str(datocolor)+";}"
+            estilo="QPushButton{"+"\n"+"padding:5px;"+"\n"+"border-radius:10px;"+"\n""border:1.5px solid black;}"+"\n"+"\n"+"QPushButton:hover{"+"\n"+"background-color:"+str(datocolor)+"\n"+";}"
             self.ui.atras.setStyleSheet(estilo)
             self.ui.realizar.setStyleSheet(estilo)
             self.ui.seleccionar.setStyleSheet(estilo)
