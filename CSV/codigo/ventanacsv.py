@@ -116,7 +116,7 @@ class Ui_VentanaPrincipal(object):
         self.errorarchivo.setObjectName("errorarchivo")
         self.verticalLayout_2.addWidget(self.errorarchivo)
         self.layoutWidget1 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget1.setGeometry(QtCore.QRect(20, 20, 331, 341))
+        self.layoutWidget1.setGeometry(QtCore.QRect(20, 20, 331, 351))
         self.layoutWidget1.setObjectName("layoutWidget1")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget1)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -249,10 +249,7 @@ class Ui_VentanaPrincipal(object):
         self.verticalLayout.addWidget(self.realizar)
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setGeometry(QtCore.QRect(20, 390, 1321, 301))
-        self.tableWidget.setStyleSheet("\n"
-"\n"
-"\n"
-"")
+        self.tableWidget.setStyleSheet("")
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(0)
         self.tableWidget.setRowCount(0)
@@ -262,7 +259,7 @@ class Ui_VentanaPrincipal(object):
         self.line_8.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_8.setObjectName("line_8")
         self.layoutWidget2 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget2.setGeometry(QtCore.QRect(380, 170, 311, 191))
+        self.layoutWidget2.setGeometry(QtCore.QRect(380, 170, 311, 201))
         self.layoutWidget2.setObjectName("layoutWidget2")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.layoutWidget2)
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -323,10 +320,7 @@ class Ui_VentanaPrincipal(object):
         self.verticalLayout_3.addWidget(self.GRAFICAR)
         self.tableDescripcion = QtWidgets.QTableWidget(self.centralwidget)
         self.tableDescripcion.setGeometry(QtCore.QRect(720, 80, 611, 291))
-        self.tableDescripcion.setStyleSheet("\n"
-"\n"
-"\n"
-"")
+        self.tableDescripcion.setStyleSheet("")
         self.tableDescripcion.setObjectName("tableDescripcion")
         self.tableDescripcion.setColumnCount(0)
         self.tableDescripcion.setRowCount(0)
@@ -402,6 +396,7 @@ class Ui_VentanaPrincipal(object):
         font.setWeight(50)
         self.tipo_fuente.setFont(font)
         self.tipo_fuente.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.tipo_fuente.setWhatsThis("")
         self.tipo_fuente.setStyleSheet("QPushButton{\n"
 "    padding :5px;\n"
 "    border-radius:10px;\n"
@@ -457,7 +452,7 @@ class Ui_VentanaPrincipal(object):
         self.color_ventanas.setText(_translate("VentanaPrincipal", "COLOR VENTANAS"))
         self.color_botones.setToolTip(_translate("VentanaPrincipal", "<html><head/><body><p>Cambiar el Color de todos los Botones</p></body></html>"))
         self.color_botones.setText(_translate("VentanaPrincipal", "COLOR BOTONES"))
-        self.tipo_fuente.setToolTip(_translate("VentanaPrincipal", "<html><head/><body><p>Cambiar el Color de todos los Botones</p></body></html>"))
+        self.tipo_fuente.setToolTip(_translate("VentanaPrincipal", "<html><head/><body><p>Cambiar el Tipo de Letra de Los Componentes</p></body></html>"))
         self.tipo_fuente.setText(_translate("VentanaPrincipal", "FUENTE LETRAS"))
 
 

@@ -229,7 +229,7 @@ border-left: 5px solid gray;</string>
       <x>20</x>
       <y>20</y>
       <width>331</width>
-      <height>341</height>
+      <height>351</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -499,10 +499,7 @@ QPushButton:hover
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-
-
-</string>
+     <string notr="true"/>
     </property>
    </widget>
    <widget class="Line" name="line_8">
@@ -524,7 +521,7 @@ QPushButton:hover
       <x>380</x>
       <y>170</y>
       <width>311</width>
-      <height>191</height>
+      <height>201</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -640,10 +637,7 @@ QPushButton:hover
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-
-
-</string>
+     <string notr="true"/>
     </property>
    </widget>
    <widget class="QWidget" name="layoutWidget">
@@ -784,7 +778,10 @@ QPushButton:hover
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cambiar el Color de todos los Botones&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cambiar el Tipo de Letra de Los Componentes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="whatsThis">
+          <string/>
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton{
