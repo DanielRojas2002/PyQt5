@@ -93,6 +93,10 @@ class Ui_VentanaPrincipal(object):
         font.setBold(True)
         font.setWeight(75)
         self.titulo2.setFont(font)
+        self.titulo2.setStyleSheet("\n"
+"border:none;\n"
+"border-right: 5px solid gray;\n"
+"border-left: 5px solid gray;")
         self.titulo2.setAlignment(QtCore.Qt.AlignCenter)
         self.titulo2.setObjectName("titulo2")
         self.verticalLayout_2.addWidget(self.titulo2)
@@ -118,6 +122,8 @@ class Ui_VentanaPrincipal(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.imagen = QtWidgets.QLabel(self.layoutWidget1)
+        self.imagen.setMaximumSize(QtCore.QSize(325, 150))
+        self.imagen.setStyleSheet("")
         self.imagen.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.imagen.setText("")
         self.imagen.setPixmap(QtGui.QPixmap("CSV/multimedia/vector.ico"))
@@ -131,6 +137,7 @@ class Ui_VentanaPrincipal(object):
         font.setBold(True)
         font.setWeight(75)
         self.titulo.setFont(font)
+        self.titulo.setStyleSheet("")
         self.titulo.setAlignment(QtCore.Qt.AlignCenter)
         self.titulo.setObjectName("titulo")
         self.verticalLayout.addWidget(self.titulo)
@@ -138,6 +145,7 @@ class Ui_VentanaPrincipal(object):
         self.splitter.setOrientation(QtCore.Qt.Horizontal)
         self.splitter.setObjectName("splitter")
         self.nombreruta = QtWidgets.QLineEdit(self.splitter)
+        self.nombreruta.setReadOnly(True)
         self.nombreruta.setObjectName("nombreruta")
         self.BUSCAR = QtWidgets.QPushButton(self.splitter)
         font = QtGui.QFont()
@@ -146,10 +154,19 @@ class Ui_VentanaPrincipal(object):
         font.setWeight(50)
         self.BUSCAR.setFont(font)
         self.BUSCAR.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.BUSCAR.setStyleSheet("QPushButton:hover{\n"
-"    \n"
+        self.BUSCAR.setStyleSheet("QPushButton{\n"
+"    padding :5px;\n"
+"    border-radius:10px;\n"
+"    border:1.5px solid black;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
 "    background-color: rgb(165, 175, 173);\n"
-"}")
+"}\n"
+"\n"
+"")
         self.BUSCAR.setObjectName("BUSCAR")
         self.verticalLayout.addWidget(self.splitter)
         self.verCSV = QtWidgets.QRadioButton(self.layoutWidget1)
@@ -215,14 +232,27 @@ class Ui_VentanaPrincipal(object):
         font.setWeight(50)
         self.realizar.setFont(font)
         self.realizar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.realizar.setStyleSheet("QPushButton:hover{\n"
-"    \n"
+        self.realizar.setStyleSheet("QPushButton{\n"
+"    padding :5px;\n"
+"    border-radius:10px;\n"
+"    border:1.5px solid black;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
 "    background-color: rgb(165, 175, 173);\n"
-"}")
+"}\n"
+"\n"
+"")
         self.realizar.setObjectName("realizar")
         self.verticalLayout.addWidget(self.realizar)
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setGeometry(QtCore.QRect(20, 390, 1321, 301))
+        self.tableWidget.setStyleSheet("\n"
+"\n"
+"\n"
+"")
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(0)
         self.tableWidget.setRowCount(0)
@@ -276,55 +306,116 @@ class Ui_VentanaPrincipal(object):
         font.setWeight(50)
         self.GRAFICAR.setFont(font)
         self.GRAFICAR.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.GRAFICAR.setStyleSheet("QPushButton:hover{\n"
-"    \n"
+        self.GRAFICAR.setStyleSheet("QPushButton{\n"
+"    padding :5px;\n"
+"    border-radius:10px;\n"
+"    border:1.5px solid black;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
 "    background-color: rgb(165, 175, 173);\n"
-"}")
+"}\n"
+"\n"
+"")
         self.GRAFICAR.setObjectName("GRAFICAR")
         self.verticalLayout_3.addWidget(self.GRAFICAR)
         self.tableDescripcion = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableDescripcion.setGeometry(QtCore.QRect(730, 50, 601, 311))
+        self.tableDescripcion.setGeometry(QtCore.QRect(720, 80, 611, 291))
+        self.tableDescripcion.setStyleSheet("\n"
+"\n"
+"\n"
+"")
         self.tableDescripcion.setObjectName("tableDescripcion")
         self.tableDescripcion.setColumnCount(0)
         self.tableDescripcion.setRowCount(0)
-        self.cantidad_registros = QtWidgets.QLabel(self.centralwidget)
-        self.cantidad_registros.setGeometry(QtCore.QRect(730, 20, 351, 21))
+        self.layoutWidget3 = QtWidgets.QWidget(self.centralwidget)
+        self.layoutWidget3.setGeometry(QtCore.QRect(720, 30, 611, 41))
+        self.layoutWidget3.setObjectName("layoutWidget3")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.layoutWidget3)
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.cantidad_registros = QtWidgets.QLabel(self.layoutWidget3)
+        self.cantidad_registros.setMinimumSize(QtCore.QSize(145, 0))
         font = QtGui.QFont()
         font.setPointSize(13)
         font.setBold(True)
         font.setWeight(75)
         self.cantidad_registros.setFont(font)
+        self.cantidad_registros.setStyleSheet("border-radius:8px;\n"
+"border:1.5px solid black;")
         self.cantidad_registros.setText("")
         self.cantidad_registros.setAlignment(QtCore.Qt.AlignCenter)
         self.cantidad_registros.setObjectName("cantidad_registros")
-        self.splitter_2 = QtWidgets.QSplitter(self.centralwidget)
-        self.splitter_2.setGeometry(QtCore.QRect(1090, 20, 231, 23))
-        self.splitter_2.setOrientation(QtCore.Qt.Horizontal)
-        self.splitter_2.setObjectName("splitter_2")
-        self.color_ventanas = QtWidgets.QPushButton(self.splitter_2)
+        self.horizontalLayout_2.addWidget(self.cantidad_registros)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setContentsMargins(0, 5, 0, 0)
+        self.horizontalLayout.setSpacing(9)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.color_ventanas = QtWidgets.QPushButton(self.layoutWidget3)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setBold(False)
         font.setWeight(50)
         self.color_ventanas.setFont(font)
         self.color_ventanas.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.color_ventanas.setStyleSheet("QPushButton:hover{\n"
-"    \n"
+        self.color_ventanas.setStyleSheet("QPushButton{\n"
+"    padding :5px;\n"
+"    border-radius:10px;\n"
+"    border:1.5px solid black;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
 "    background-color: rgb(165, 175, 173);\n"
-"}")
+"}\n"
+"\n"
+"")
         self.color_ventanas.setObjectName("color_ventanas")
-        self.color_botones = QtWidgets.QPushButton(self.splitter_2)
+        self.horizontalLayout.addWidget(self.color_ventanas)
+        self.color_botones = QtWidgets.QPushButton(self.layoutWidget3)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setBold(False)
         font.setWeight(50)
         self.color_botones.setFont(font)
         self.color_botones.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.color_botones.setStyleSheet("QPushButton:hover{\n"
-"    \n"
+        self.color_botones.setStyleSheet("QPushButton{\n"
+"    padding :5px;\n"
+"    border-radius:10px;\n"
+"    border:1.5px solid black;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
 "    background-color: rgb(165, 175, 173);\n"
 "}")
         self.color_botones.setObjectName("color_botones")
+        self.horizontalLayout.addWidget(self.color_botones)
+        self.tipo_fuente = QtWidgets.QPushButton(self.layoutWidget3)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setBold(False)
+        font.setWeight(50)
+        self.tipo_fuente.setFont(font)
+        self.tipo_fuente.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.tipo_fuente.setStyleSheet("QPushButton{\n"
+"    padding :5px;\n"
+"    border-radius:10px;\n"
+"    border:1.5px solid black;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
+"    background-color: rgb(165, 175, 173);\n"
+"}")
+        self.tipo_fuente.setObjectName("tipo_fuente")
+        self.horizontalLayout.addWidget(self.tipo_fuente)
+        self.horizontalLayout_2.addLayout(self.horizontalLayout)
         VentanaPrincipal.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(VentanaPrincipal)
@@ -366,6 +457,8 @@ class Ui_VentanaPrincipal(object):
         self.color_ventanas.setText(_translate("VentanaPrincipal", "COLOR VENTANAS"))
         self.color_botones.setToolTip(_translate("VentanaPrincipal", "<html><head/><body><p>Cambiar el Color de todos los Botones</p></body></html>"))
         self.color_botones.setText(_translate("VentanaPrincipal", "COLOR BOTONES"))
+        self.tipo_fuente.setToolTip(_translate("VentanaPrincipal", "<html><head/><body><p>Cambiar el Color de todos los Botones</p></body></html>"))
+        self.tipo_fuente.setText(_translate("VentanaPrincipal", "FUENTE LETRAS"))
 
 
 if __name__ == "__main__":

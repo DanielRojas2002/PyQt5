@@ -23,7 +23,7 @@
       <x>240</x>
       <y>190</y>
       <width>111</width>
-      <height>21</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -34,13 +34,19 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton:hover{
-	
+     <string notr="true">QPushButton{
+	padding :5px;
+	border-radius:10px;
+	border:1.5px solid black;
+
+}
+
+QPushButton:hover
+{
 	background-color: rgb(165, 175, 173);
 }
-QPushButton{
-	background-color: rgb(255, 255, 255);
-}</string>
+
+</string>
     </property>
     <property name="text">
      <string>ELIMINAR</string>
@@ -75,7 +81,8 @@ QPushButton{
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
+     <string notr="true">background-color: rgb(255, 255, 255);
+border:2px solid gray;</string>
     </property>
    </widget>
    <widget class="QLabel" name="titulo_2">
@@ -147,65 +154,6 @@ QPushButton{
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>341</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QPushButton" name="regresar">
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>OpenHandCursor</cursorShape>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton:hover{
-	
-	background-color: rgb(165, 175, 173);
-}
-QPushButton{
-	background-color: rgb(255, 255, 255);
-}</string>
-       </property>
-       <property name="text">
-        <string>&lt;---</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="titulo">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <italic>true</italic>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>ELIMINADOR DE COLUMNAS</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
@@ -225,6 +173,71 @@ QPushButton{
      <enum>QFrame::Raised</enum>
     </property>
    </widget>
+   <widget class="QLabel" name="titulo">
+    <property name="geometry">
+     <rect>
+      <x>21</x>
+      <y>50</y>
+      <width>331</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>ELIMINADOR DE COLUMNAS</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="regresar">
+    <property name="geometry">
+     <rect>
+      <x>21</x>
+      <y>10</y>
+      <width>331</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>OpenHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	padding :5px;
+	border-radius:10px;
+	border:1.5px solid black;
+
+}
+
+QPushButton:hover
+{
+	background-color: rgb(165, 175, 173);
+}
+
+</string>
+    </property>
+    <property name="text">
+     <string>&lt;---</string>
+    </property>
+   </widget>
    <zorder>frame</zorder>
    <zorder>eliminar</zorder>
    <zorder>img</zorder>
@@ -233,6 +246,8 @@ QPushButton{
    <zorder>columna</zorder>
    <zorder>flechita</zorder>
    <zorder>layoutWidget</zorder>
+   <zorder>titulo</zorder>
+   <zorder>regresar</zorder>
   </widget>
  </widget>
  <resources/>

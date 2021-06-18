@@ -19,19 +19,28 @@ class Ui_Ventana_Eliminar_Columnas(object):
         self.centralwidget = QtWidgets.QWidget(Ventana_Eliminar_Columnas)
         self.centralwidget.setObjectName("centralwidget")
         self.eliminar = QtWidgets.QPushButton(self.centralwidget)
-        self.eliminar.setGeometry(QtCore.QRect(240, 190, 111, 21))
+        self.eliminar.setGeometry(QtCore.QRect(240, 190, 111, 31))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("CSV/multimedia/vector.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Ventana_Eliminar_Columnas.setWindowIcon(icon)
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.eliminar.setFont(font)
-        self.eliminar.setStyleSheet("QPushButton:hover{\n"
-"    \n"
+        self.eliminar.setStyleSheet("QPushButton{\n"
+"    padding :5px;\n"
+"    border-radius:10px;\n"
+"    border:1.5px solid black;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
 "    background-color: rgb(165, 175, 173);\n"
 "}\n"
-"QPushButton{\n"
-"    background-color: rgb(255, 255, 255);\n"
-"}")
+"\n"
+"")
         self.eliminar.setObjectName("eliminar")
         self.img = QtWidgets.QLabel(self.centralwidget)
         self.img.setGeometry(QtCore.QRect(260, 90, 71, 51))
@@ -41,7 +50,8 @@ class Ui_Ventana_Eliminar_Columnas(object):
         self.img.setObjectName("img")
         self.listaColumnas = QtWidgets.QListWidget(self.centralwidget)
         self.listaColumnas.setGeometry(QtCore.QRect(20, 120, 151, 91))
-        self.listaColumnas.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.listaColumnas.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border:2px solid gray;")
         self.listaColumnas.setObjectName("listaColumnas")
         self.titulo_2 = QtWidgets.QLabel(self.centralwidget)
         self.titulo_2.setGeometry(QtCore.QRect(20, 80, 151, 31))
@@ -69,45 +79,45 @@ class Ui_Ventana_Eliminar_Columnas(object):
         self.flechita.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.flechita.setAlignment(QtCore.Qt.AlignCenter)
         self.flechita.setObjectName("flechita")
-        self.layoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget.setGeometry(QtCore.QRect(20, 10, 341, 51))
-        self.layoutWidget.setObjectName("layoutWidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.regresar = QtWidgets.QPushButton(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        self.regresar.setFont(font)
-        self.regresar.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
-        self.regresar.setStyleSheet("QPushButton:hover{\n"
-"    \n"
-"    background-color: rgb(165, 175, 173);\n"
-"}\n"
-"QPushButton{\n"
-"    background-color: rgb(255, 255, 255);\n"
-"}")
-        self.regresar.setObjectName("regresar")
-        self.verticalLayout.addWidget(self.regresar)
-        self.titulo = QtWidgets.QLabel(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(True)
-        font.setItalic(True)
-        font.setWeight(75)
-        self.titulo.setFont(font)
-        self.titulo.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.titulo.setAlignment(QtCore.Qt.AlignCenter)
-        self.titulo.setObjectName("titulo")
-        self.verticalLayout.addWidget(self.titulo)
         self.frame = QtWidgets.QFrame(self.centralwidget)
         self.frame.setGeometry(QtCore.QRect(0, 0, 391, 261))
         self.frame.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
+        self.titulo = QtWidgets.QLabel(self.centralwidget)
+        self.titulo.setGeometry(QtCore.QRect(21, 50, 331, 19))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setItalic(True)
+        font.setWeight(75)
+        self.titulo.setFont(font)
+        self.titulo.setStyleSheet("")
+        self.titulo.setAlignment(QtCore.Qt.AlignCenter)
+        self.titulo.setObjectName("titulo")
+        self.regresar = QtWidgets.QPushButton(self.centralwidget)
+        self.regresar.setGeometry(QtCore.QRect(21, 10, 331, 30))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.regresar.setFont(font)
+        self.regresar.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
+        self.regresar.setStyleSheet("QPushButton{\n"
+"    padding :5px;\n"
+"    border-radius:10px;\n"
+"    border:1.5px solid black;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
+"    background-color: rgb(165, 175, 173);\n"
+"}\n"
+"\n"
+"")
+        self.regresar.setObjectName("regresar")
         self.frame.raise_()
         self.eliminar.raise_()
         self.img.raise_()
@@ -115,7 +125,8 @@ class Ui_Ventana_Eliminar_Columnas(object):
         self.titulo_2.raise_()
         self.columna.raise_()
         self.flechita.raise_()
-        self.layoutWidget.raise_()
+        self.titulo.raise_()
+        self.regresar.raise_()
         Ventana_Eliminar_Columnas.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(Ventana_Eliminar_Columnas)
@@ -127,8 +138,8 @@ class Ui_Ventana_Eliminar_Columnas(object):
         self.eliminar.setText(_translate("Ventana_Eliminar_Columnas", "ELIMINAR"))
         self.titulo_2.setText(_translate("Ventana_Eliminar_Columnas", "COLUMNAS:"))
         self.flechita.setText(_translate("Ventana_Eliminar_Columnas", "---->"))
-        self.regresar.setText(_translate("Ventana_Eliminar_Columnas", "<---"))
         self.titulo.setText(_translate("Ventana_Eliminar_Columnas", "ELIMINADOR DE COLUMNAS"))
+        self.regresar.setText(_translate("Ventana_Eliminar_Columnas", "<---"))
 
 
 if __name__ == "__main__":

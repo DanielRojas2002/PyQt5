@@ -62,7 +62,7 @@
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>41</width>
+      <width>51</width>
       <height>21</height>
      </rect>
     </property>
@@ -77,13 +77,19 @@
      <cursorShape>OpenHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton:hover{
-	
+     <string notr="true">QPushButton{
+	padding :5px;
+	border-radius:10px;
+	border:1.5px solid black;
+
+}
+
+QPushButton:hover
+{
 	background-color: rgb(165, 175, 173);
 }
-QPushButton{
-	background-color: rgb(255, 255, 255);
-}</string>
+
+</string>
     </property>
     <property name="text">
      <string>&lt;---</string>
@@ -108,7 +114,7 @@ QPushButton{
       <x>180</x>
       <y>260</y>
       <width>115</width>
-      <height>21</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -119,13 +125,19 @@ QPushButton{
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton:hover{
-	
+     <string notr="true">QPushButton{
+	padding :5px;
+	border-radius:10px;
+	border:1.5px solid black;
+
+}
+
+QPushButton:hover
+{
 	background-color: rgb(165, 175, 173);
 }
-QPushButton{
-	background-color: rgb(255, 255, 255);
-}</string>
+
+</string>
     </property>
     <property name="text">
      <string>ELIMINAR</string>

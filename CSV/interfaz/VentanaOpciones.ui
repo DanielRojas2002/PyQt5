@@ -21,9 +21,9 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>50</y>
+      <y>60</y>
       <width>311</width>
-      <height>41</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -34,7 +34,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>MAS OPCIONES PARA EL CSV:</string>
@@ -49,7 +49,7 @@
       <x>50</x>
       <y>152</y>
       <width>311</width>
-      <height>21</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -63,13 +63,19 @@
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton:hover{
-	
+     <string notr="true">QPushButton{
+	padding :5px;
+	border-radius:10px;
+	border:1.5px solid black;
+
+}
+
+QPushButton:hover
+{
 	background-color: rgb(165, 175, 173);
 }
-QPushButton{
-	background-color: rgb(255, 255, 255);
-}</string>
+
+</string>
     </property>
     <property name="text">
      <string>ELEGIR</string>
@@ -150,10 +156,10 @@ QPushButton{
    <widget class="QPushButton" name="regresar">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>50</x>
       <y>20</y>
-      <width>341</width>
-      <height>20</height>
+      <width>311</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -163,13 +169,19 @@ QPushButton{
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton:hover{
-	
+     <string notr="true">QPushButton{
+	padding :5px;
+	border-radius:10px;
+	border:1.5px solid black;
+
+}
+
+QPushButton:hover
+{
 	background-color: rgb(165, 175, 173);
 }
-QPushButton{
-	background-color: rgb(255, 255, 255);
-}</string>
+
+</string>
     </property>
     <property name="text">
      <string>&lt;--</string>

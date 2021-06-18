@@ -26,6 +26,9 @@ class Ui_Ventana_Eliminar(object):
         self.tableWidget.setRowCount(0)
         self.titulo = QtWidgets.QLabel(self.centralwidget)
         self.titulo.setGeometry(QtCore.QRect(70, 10, 271, 31))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("CSV/multimedia/vector.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Ventana_Eliminar.setWindowIcon(icon)
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
@@ -36,44 +39,56 @@ class Ui_Ventana_Eliminar(object):
         self.titulo.setAlignment(QtCore.Qt.AlignCenter)
         self.titulo.setObjectName("titulo")
         self.regresar = QtWidgets.QPushButton(self.centralwidget)
-        self.regresar.setGeometry(QtCore.QRect(20, 20, 41, 21))
+        self.regresar.setGeometry(QtCore.QRect(20, 20, 51, 21))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.regresar.setFont(font)
         self.regresar.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
-        self.regresar.setStyleSheet("QPushButton:hover{\n"
-"    \n"
+        self.regresar.setStyleSheet("QPushButton{\n"
+"    padding :5px;\n"
+"    border-radius:10px;\n"
+"    border:1.5px solid black;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
 "    background-color: rgb(165, 175, 173);\n"
 "}\n"
-"QPushButton{\n"
-"    background-color: rgb(255, 255, 255);\n"
-"}")
+"\n"
+"")
         self.regresar.setObjectName("regresar")
         self.opciones = QtWidgets.QComboBox(self.centralwidget)
         self.opciones.setGeometry(QtCore.QRect(100, 240, 71, 21))
         self.opciones.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.opciones.setObjectName("opciones")
         self.eliminar = QtWidgets.QPushButton(self.centralwidget)
-        self.eliminar.setGeometry(QtCore.QRect(180, 260, 115, 21))
+        self.eliminar.setGeometry(QtCore.QRect(180, 260, 115, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.eliminar.setFont(font)
-        self.eliminar.setStyleSheet("QPushButton:hover{\n"
-"    \n"
+        self.eliminar.setStyleSheet("QPushButton{\n"
+"    padding :5px;\n"
+"    border-radius:10px;\n"
+"    border:1.5px solid black;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
 "    background-color: rgb(165, 175, 173);\n"
 "}\n"
-"QPushButton{\n"
-"    background-color: rgb(255, 255, 255);\n"
-"}")
+"\n"
+"")
         self.eliminar.setObjectName("eliminar")
         self.img = QtWidgets.QLabel(self.centralwidget)
         self.img.setGeometry(QtCore.QRect(20, 230, 61, 51))
         self.img.setText("")
-        self.img.setPixmap(QtGui.QPixmap("csv/multimedia/eliminar.png"))
+        self.img.setPixmap(QtGui.QPixmap("CSV/multimedia/eliminar.png"))
         self.img.setScaledContents(True)
         self.img.setObjectName("img")
         self.frame = QtWidgets.QFrame(self.centralwidget)

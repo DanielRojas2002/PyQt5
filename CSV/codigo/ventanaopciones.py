@@ -19,30 +19,42 @@ class Ui_VentanaOpciones(object):
         self.centralwidget = QtWidgets.QWidget(VentanaOpciones)
         self.centralwidget.setObjectName("centralwidget")
         self.titulo = QtWidgets.QLabel(self.centralwidget)
-        self.titulo.setGeometry(QtCore.QRect(50, 50, 311, 41))
+        self.titulo.setGeometry(QtCore.QRect(50, 60, 311, 31))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("CSV/multimedia/vector.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        VentanaOpciones.setWindowIcon(icon)
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
         font.setWeight(75)
         self.titulo.setFont(font)
-        self.titulo.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.titulo.setStyleSheet("")
         self.titulo.setAlignment(QtCore.Qt.AlignCenter)
         self.titulo.setObjectName("titulo")
         self.elegir = QtWidgets.QPushButton(self.centralwidget)
-        self.elegir.setGeometry(QtCore.QRect(50, 152, 311, 21))
+        self.elegir.setGeometry(QtCore.QRect(50, 152, 311, 31))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("CSV/multimedia/vector.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        VentanaOpciones.setWindowIcon(icon)
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.elegir.setFont(font)
         self.elegir.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.elegir.setStyleSheet("QPushButton:hover{\n"
-"    \n"
+        self.elegir.setStyleSheet("QPushButton{\n"
+"    padding :5px;\n"
+"    border-radius:10px;\n"
+"    border:1.5px solid black;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
 "    background-color: rgb(165, 175, 173);\n"
 "}\n"
-"QPushButton{\n"
-"    background-color: rgb(255, 255, 255);\n"
-"}")
+"\n"
+"")
         self.elegir.setObjectName("elegir")
         self.opciones = QtWidgets.QComboBox(self.centralwidget)
         self.opciones.setGeometry(QtCore.QRect(50, 110, 311, 21))
@@ -64,18 +76,24 @@ class Ui_VentanaOpciones(object):
         self.opciones.addItem("")
         self.opciones.addItem("")
         self.regresar = QtWidgets.QPushButton(self.centralwidget)
-        self.regresar.setGeometry(QtCore.QRect(30, 20, 341, 20))
+        self.regresar.setGeometry(QtCore.QRect(50, 20, 311, 31))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
         self.regresar.setFont(font)
-        self.regresar.setStyleSheet("QPushButton:hover{\n"
-"    \n"
+        self.regresar.setStyleSheet("QPushButton{\n"
+"    padding :5px;\n"
+"    border-radius:10px;\n"
+"    border:1.5px solid black;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
 "    background-color: rgb(165, 175, 173);\n"
 "}\n"
-"QPushButton{\n"
-"    background-color: rgb(255, 255, 255);\n"
-"}")
+"\n"
+"")
         self.regresar.setObjectName("regresar")
         self.frame = QtWidgets.QFrame(self.centralwidget)
         self.frame.setGeometry(QtCore.QRect(0, 0, 411, 221))
