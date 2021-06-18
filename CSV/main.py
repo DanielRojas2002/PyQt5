@@ -62,9 +62,10 @@ class VentanaP1(QMainWindow):
             longitud=len(colores_boton.index)
             datocolor=colores_boton["Color_Botones"][longitud-1]
             estilo="QPushButton{"+"\n"+"padding:5px;"+"\n"+"border-radius:10px;"+"\n""border:1.5px solid black;}"+"\n"+"\n"+"QPushButton:hover{"+"\n"+"background-color:"+str(datocolor)+"\n"+";}"
+            estilog="QPushButton{"+"\n"+"padding:5px;"+"\n"+"border-radius:10px;"+"\n""border:1.4px solid black;}"+"\n"+"\n"+"QPushButton:hover{"+"\n"+"background-color:"+str(datocolor)+"\n"+";}"
             self.ui.color_botones.setStyleSheet(estilo)
             self.ui.color_ventanas.setStyleSheet(estilo)
-            self.ui.GRAFICAR.setStyleSheet(estilo)
+            self.ui.GRAFICAR.setStyleSheet(estilog)
             self.ui.BUSCAR.setStyleSheet(estilo)
             self.ui.realizar.setStyleSheet(estilo)
             self.ui.tipo_fuente.setStyleSheet(estilo)
