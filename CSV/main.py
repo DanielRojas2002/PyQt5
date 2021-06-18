@@ -862,6 +862,7 @@ class VentanaEliminarRegistros(QMainWindow):
             self.ui.opciones.clear()
             for x in range(1,filas+1):
                 self.ui.opciones.addItem(str(x))
+            QMessageBox.information(self,"Mensaje","Registro Borrado Satisfactoriamente",QMessageBox.Ok,QMessageBox.Ok)
 
         except:
             self.ui.titulo.setText("No Hay Registros a borrar")
@@ -1050,6 +1051,7 @@ class VentanaEliminarColumnas(QMainWindow):
 
             for encabezados in df.columns:
                 self.ui.listaColumnas.addItem(str(encabezados)) 
+            QMessageBox.information(self,"Mensaje","Columna Borrada Satisfactoriamente",QMessageBox.Ok,QMessageBox.Ok)
             
 
         except:
