@@ -5,14 +5,16 @@ import os
 from os import remove
 
 from matplotlib import dates as mpl_dates
-from PyQt5.QtWidgets import QDialog,QApplication,QMainWindow,QMessageBox,QErrorMessage,QFileDialog,QTableWidgetItem,QColorDialog
+from PyQt5.QtWidgets import QDialog,QApplication,QMainWindow,QMessageBox,QErrorMessage,QFileDialog,QTableWidgetItem,QColorDialog,QPushButton
 from PyQt5.QtGui import QColor 
+from PyQt5 import QtGui 
 from codigo.ventanacsv import Ui_VentanaPrincipal
 from codigo.ventanaopciones import Ui_VentanaOpciones
 from codigo.ventana_eliminador import Ui_Ventana_Eliminar
 from codigo.ventanaunircsv import Ui_Ventana_Unir
 from codigo.ventana_eliminador_columnas import Ui_Ventana_Eliminar_Columnas
 from codigo.ventanaseleccion import Ui_VentanaSeleccionar
+from codigo.ventana_fuente import Ui_Ventana_Fuentes
 
 
 excel=""
@@ -27,6 +29,7 @@ csv2=""
 datocolumna=""
 seleccion=""
 df_condicion=""
+
 listaEncabezados=[]
 listadatos=[]
 listacolumnas=[]
@@ -54,13 +57,17 @@ class VentanaP1(QMainWindow):
         self.ui.etiqueta_tiempo.setDisabled(True)
         self.ui.GRAFICAR.setDisabled(True)
 
+        
         self.ui.color_ventanas.clicked.connect(self.Guardar_Color_Ventanas)
         self.ui.color_botones.clicked.connect(self.Guardar_Color_Botones)
+        self.ui.tipo_fuente.clicked.connect(self.Guardar_Fuente)
+        
 
         try:
             colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
             longitud=len(colores_boton.index)
             datocolor=colores_boton["Color_Botones"][longitud-1]
+           
             estilo="QPushButton{"+"\n"+"padding:5px;"+"\n"+"border-radius:10px;"+"\n""border:1.5px solid black;}"+"\n"+"\n"+"QPushButton:hover{"+"\n"+"background-color:"+str(datocolor)+"\n"+";}"
             estilog="QPushButton{"+"\n"+"padding:5px;"+"\n"+"border-radius:10px;"+"\n""border:1.4px solid black;}"+"\n"+"\n"+"QPushButton:hover{"+"\n"+"background-color:"+str(datocolor)+"\n"+";}"
             self.ui.color_botones.setStyleSheet(estilo)
@@ -71,7 +78,46 @@ class VentanaP1(QMainWindow):
             self.ui.tipo_fuente.setStyleSheet(estilo)
         except:
             pass
-        
+
+
+        try:
+            fuentes=pd.read_csv("CSV/Configuracion/fuentes.csv",encoding='utf-8')
+            longitud=len(fuentes.index)
+            datofuente=fuentes["Fuentes"][longitud-1]
+
+            fuente_seleccionadatitulo=QtGui.QFont(datofuente,16)
+            fuente_seleccionadatitulo2=QtGui.QFont(datofuente,14)
+            fuente_seleccionadacantidadregistros=QtGui.QFont(datofuente,13)
+            fuente_seleccionada_encabezados=QtGui.QFont(datofuente,9)
+            fuente_seleccionada_error_archivo=QtGui.QFont(datofuente,8)
+            fuente_seleccionada_titulo_grafica=QtGui.QFont(datofuente,10)
+            fuente_seleccionada_puntos=QtGui.QFont(datofuente,8)
+            fuente_seleccionada_botones=QtGui.QFont(datofuente,8)
+
+            self.ui.titulo.setFont(fuente_seleccionadatitulo)
+            self.ui.titulo2.setFont(fuente_seleccionadatitulo2)
+            self.ui.cantidad_registros.setFont(fuente_seleccionadacantidadregistros)
+            self.ui.encabezados.setFont(fuente_seleccionada_encabezados)
+            self.ui.errorarchivo.setFont(fuente_seleccionada_error_archivo)
+            self.ui.tituloGrafica.setFont(fuente_seleccionada_titulo_grafica)
+            self.ui.verCSV.setFont(fuente_seleccionada_puntos)
+
+            self.ui.graficaPastel.setFont(fuente_seleccionada_puntos)
+            self.ui.graficaBarras.setFont(fuente_seleccionada_puntos)
+            self.ui.graficaTenInd.setFont(fuente_seleccionada_puntos)
+            self.ui.graficarTenGru.setFont(fuente_seleccionada_puntos)
+            self.ui.Estadistica.setFont(fuente_seleccionada_puntos)
+            self.ui.masopciones.setFont(fuente_seleccionada_puntos)
+
+            self.ui.BUSCAR.setFont(fuente_seleccionada_botones)
+            self.ui.GRAFICAR.setFont(fuente_seleccionada_botones)
+            self.ui.color_ventanas.setFont(fuente_seleccionada_botones)
+            self.ui.color_botones.setFont(fuente_seleccionada_botones)
+            self.ui.tipo_fuente.setFont(fuente_seleccionada_botones)
+            self.ui.realizar.setFont(fuente_seleccionada_botones)
+        except:
+            pass
+
 
     def Guardar_Color_Ventanas(self):
         colorFrame=""
@@ -122,6 +168,11 @@ class VentanaP1(QMainWindow):
         else:
             QMessageBox.question(self,"Mensaje","Error",QMessageBox.Ok,QMessageBox.Ok)
 
+    def Guardar_Fuente(self):
+        self.hide()
+        otraventana=VentanaFuentes(self)
+        otraventana.show()
+
     #ESTA OPCION BUSCA Y SELECCIONA LA RUTA DONDE ESTA EL ARCHIVO CSV 
     def Buscar(self):
         self.ui.GRAFICAR.setDisabled(True)
@@ -150,6 +201,45 @@ class VentanaP1(QMainWindow):
         global listadatos
         global listacolumnas
         contador=0
+
+        try:
+            fuentes=pd.read_csv("CSV/Configuracion/fuentes.csv",encoding='utf-8')
+            longitud=len(fuentes.index)
+            datofuente=fuentes["Fuentes"][longitud-1]
+
+            fuente_seleccionadatitulo=QtGui.QFont(datofuente,16)
+            fuente_seleccionadatitulo2=QtGui.QFont(datofuente,14)
+            fuente_seleccionadacantidadregistros=QtGui.QFont(datofuente,13)
+            fuente_seleccionada_encabezados=QtGui.QFont(datofuente,9)
+            fuente_seleccionada_error_archivo=QtGui.QFont(datofuente,8)
+            fuente_seleccionada_titulo_grafica=QtGui.QFont(datofuente,10)
+            fuente_seleccionada_puntos=QtGui.QFont(datofuente,8)
+            fuente_seleccionada_botones=QtGui.QFont(datofuente,8)
+
+            self.ui.titulo.setFont(fuente_seleccionadatitulo)
+            self.ui.titulo2.setFont(fuente_seleccionadatitulo2)
+            self.ui.cantidad_registros.setFont(fuente_seleccionadacantidadregistros)
+            self.ui.encabezados.setFont(fuente_seleccionada_encabezados)
+            self.ui.errorarchivo.setFont(fuente_seleccionada_error_archivo)
+            self.ui.tituloGrafica.setFont(fuente_seleccionada_titulo_grafica)
+            self.ui.verCSV.setFont(fuente_seleccionada_puntos)
+
+            self.ui.graficaPastel.setFont(fuente_seleccionada_puntos)
+            self.ui.graficaBarras.setFont(fuente_seleccionada_puntos)
+            self.ui.graficaTenInd.setFont(fuente_seleccionada_puntos)
+            self.ui.graficarTenGru.setFont(fuente_seleccionada_puntos)
+            self.ui.Estadistica.setFont(fuente_seleccionada_puntos)
+            self.ui.masopciones.setFont(fuente_seleccionada_puntos)
+
+            self.ui.BUSCAR.setFont(fuente_seleccionada_botones)
+            self.ui.GRAFICAR.setFont(fuente_seleccionada_botones)
+            self.ui.color_ventanas.setFont(fuente_seleccionada_botones)
+            self.ui.color_botones.setFont(fuente_seleccionada_botones)
+            self.ui.tipo_fuente.setFont(fuente_seleccionada_botones)
+            self.ui.realizar.setFont(fuente_seleccionada_botones)
+        except:
+            pass
+
         # SI ESTE RAIDOBUTTON ESTA SELECCIONADO VA HACER ESTAS COSAS
         if self.ui.verCSV.isChecked()==True:
             self.ui.tableWidget.setSortingEnabled(False)
@@ -177,6 +267,8 @@ class VentanaP1(QMainWindow):
 
                 self.ui.encabezados.clear()
                 self.ui.tableWidget.clear()
+
+            
                 listaEncabezados=[]
                 listadatos=[]
                 notas=pd.read_csv(excel,encoding='utf-8')
@@ -684,11 +776,6 @@ class VentanaOpciones(QMainWindow):
         super(VentanaOpciones,self).__init__(parent) 
         self.ui=Ui_VentanaOpciones()
         self.ui.setupUi(self)
-
-        self.ui.regresar.clicked.connect(self.atras)
-
-        self.ui.elegir.clicked.connect(self.elegir)
-
         try:
             colores=pd.read_csv("CSV/Configuracion/colores.csv",encoding='utf-8')
             longitud=len(colores.index)
@@ -708,9 +795,32 @@ class VentanaOpciones(QMainWindow):
         except:
             pass
 
+
+        try:
+            fuentes=pd.read_csv("CSV/Configuracion/fuentes.csv",encoding='utf-8')
+            longitud=len(fuentes.index)
+            datofuente=fuentes["Fuentes"][longitud-1]
+
+            fuente_seleccionadatitulo=QtGui.QFont(datofuente,11)
+            fuente_opciones=QtGui.QFont(datofuente,10)
+            fuente_elegir=QtGui.QFont(datofuente,10)
+            self.ui.titulo.setFont(fuente_seleccionadatitulo)
+            self.ui.opciones.setFont(fuente_opciones)
+            self.ui.elegir.setFont(fuente_elegir)
+            
+        except:
+            pass
+        
+
+        self.ui.regresar.clicked.connect(self.atras)
+
+        self.ui.elegir.clicked.connect(self.elegir)
+
+
     def elegir(self):
         seleccion=self.ui.opciones.itemText(self.ui.opciones.currentIndex())
         
+      
         
         if seleccion=="Eliminar Columnas":
             self.hide()
@@ -727,7 +837,6 @@ class VentanaOpciones(QMainWindow):
             otraventana=VentanaUnirDosCSV(self)
             otraventana.show()
         
-        
         elif seleccion=="Hacer Operaciones entre columnas":
             pass
 
@@ -736,10 +845,6 @@ class VentanaOpciones(QMainWindow):
             otraventana=VentanaSeleccionar(self)
             otraventana.show()
 
-        
-
-        
-        
     def atras(self):
         self.parent().show()
         self.close()
@@ -771,6 +876,7 @@ class VentanaEliminarRegistros(QMainWindow):
            
         except:
             pass
+
 
         try:
             global excel
@@ -862,6 +968,7 @@ class VentanaEliminarRegistros(QMainWindow):
             self.ui.opciones.clear()
             for x in range(1,filas+1):
                 self.ui.opciones.addItem(str(x))
+
             QMessageBox.information(self,"Mensaje","Registro Borrado Satisfactoriamente",QMessageBox.Ok,QMessageBox.Ok)
 
         except:
@@ -883,10 +990,10 @@ class VentanaUnirDosCSV(QMainWindow):
         self.ui.setupUi(self)
        
         self.ui.regresar.clicked.connect(self.atras)
+
         self.ui.botoncsv1.clicked.connect(self.csv1)
         self.ui.botoncsv2.clicked.connect(self.csv2)
         self.ui.unir.clicked.connect(self.UNIR)
-
 
         try:
             colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
@@ -901,6 +1008,8 @@ class VentanaUnirDosCSV(QMainWindow):
         except:
             pass
 
+      
+    
     def csv1(self):
         global csv1
         global listaEncabezados
@@ -998,7 +1107,7 @@ class VentanaEliminarColumnas(QMainWindow):
         self.ui.regresar.clicked.connect(self.atras)
         self.ui.listaColumnas.itemClicked.connect(self.seleccion) 
         self.ui.eliminar.clicked.connect(self.eliminar)
-
+		
         try:
             colores=pd.read_csv("CSV/Configuracion/colores.csv",encoding='utf-8')
             longitud=len(colores.index)
@@ -1017,7 +1126,6 @@ class VentanaEliminarColumnas(QMainWindow):
            
         except:
             pass
-		
 
         try:
             global excel
@@ -1051,6 +1159,7 @@ class VentanaEliminarColumnas(QMainWindow):
 
             for encabezados in df.columns:
                 self.ui.listaColumnas.addItem(str(encabezados)) 
+
             QMessageBox.information(self,"Mensaje","Columna Borrada Satisfactoriamente",QMessageBox.Ok,QMessageBox.Ok)
             
 
@@ -1065,6 +1174,7 @@ class VentanaEliminarColumnas(QMainWindow):
         self.parent().show()
         self.close()
 
+
 class VentanaSeleccionar(QMainWindow):
     def __init__(self,parent=None):
         super(VentanaSeleccionar,self).__init__(parent)
@@ -1075,7 +1185,7 @@ class VentanaSeleccionar(QMainWindow):
         self.ui.realizar.clicked.connect(self.realizar)
         self.ui.seleccionar.clicked.connect(self.seleccionar)
         self.ui.generarinforme.clicked.connect(self.generarcsv)
-
+        
         try:
             colores=pd.read_csv("CSV/Configuracion/colores.csv",encoding='utf-8')
             longitud=len(colores.index)
@@ -1085,7 +1195,6 @@ class VentanaSeleccionar(QMainWindow):
             
         except:
             pass
-
 
         try:
             colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
@@ -1099,7 +1208,7 @@ class VentanaSeleccionar(QMainWindow):
            
         except:
             pass
-        
+
         global listaEncabezados
         notas=pd.read_csv(excel,encoding='utf-8')
         listaEncabezados=[]
@@ -1300,7 +1409,7 @@ class VentanaSeleccionar(QMainWindow):
         elif statuscsv=="Especifico":
             if validacioninforme==0:
                 self.ui.titulo2.setText("No se puede generar el Informe")
-                
+
             else:
                 try:
                     ruta="./"+"Reporte "+self.ui.dato.text()+".csv"
@@ -1313,6 +1422,53 @@ class VentanaSeleccionar(QMainWindow):
                     self.ui.titulo2.setText("Ya se genero el CSV")
 
 
+
+    def atras(self):
+        self.parent().show()
+        self.close()
+            
+
+class VentanaFuentes(QMainWindow):
+    def __init__(self,parent=None):
+        super(VentanaFuentes,self).__init__(parent)
+        self.ui=Ui_Ventana_Fuentes()
+        self.ui.setupUi(self)
+
+        try:
+            colores_boton=pd.read_csv("CSV/Configuracion/colores_botones.csv",encoding='utf-8')
+            longitud=len(colores_boton.index)
+            datocolor=colores_boton["Color_Botones"][longitud-1]
+           
+            estilo="QPushButton{"+"\n"+"padding:5px;"+"\n"+"border-radius:10px;"+"\n""border:1.5px solid black;}"+"\n"+"\n"+"QPushButton:hover{"+"\n"+"background-color:"+str(datocolor)+"\n"+";}"
+            
+            self.ui.regresar.setStyleSheet(estilo)
+            self.ui.elegir.setStyleSheet(estilo)
+
+        except:
+            pass
+
+        self.ui.elegir.clicked.connect(self.cambiar_fuente)
+        self.ui.regresar.clicked.connect(self.atras)
+        
+
+    def cambiar_fuente(self):
+        try:
+            dicc={}
+            lista=[]
+            ruta="CSV/Configuracion/fuentes.csv"
+            
+            indice=self.ui.fuentes.currentIndex()
+            tipo=self.ui.fuentes.itemText(self.ui.fuentes.currentIndex())
+            fuente_deseada=QtGui.QFont(self.ui.fuentes.itemText(indice),12) 
+            self.ui.titulo1.setFont(fuente_deseada) 
+            lista.append(tipo)
+            dicc["Fuentes"]=lista
+            df_fuente=pd.DataFrame(dicc)
+            df_fuente.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+
+            QMessageBox.information(self,"Mensaje","Seleccion Satisfactoria",QMessageBox.Ok,QMessageBox.Ok)
+        except:
+            QMessageBox.warning(self,"Mensaje","Error",QMessageBox.Ok,QMessageBox.Ok)
 
     def atras(self):
         self.parent().show()
