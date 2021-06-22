@@ -19,7 +19,7 @@ class Ui_Ventana_Fuentes(object):
         Ventana_Fuentes.setMaximumSize(QtCore.QSize(276, 167))
         self.centralwidget = QtWidgets.QWidget(Ventana_Fuentes)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("multimedia/vector.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("CSV/multimedia/vector.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Ventana_Fuentes.setWindowIcon(icon)
         self.centralwidget.setObjectName("centralwidget")
         self.frame = QtWidgets.QFrame(self.centralwidget)
@@ -71,7 +71,7 @@ class Ui_Ventana_Fuentes(object):
         self.fuentes.setObjectName("fuentes")
         self.verticalLayout.addWidget(self.fuentes)
         self.elegir = QtWidgets.QPushButton(self.frame)
-        self.elegir.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.elegir.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
         self.elegir.setStyleSheet("QPushButton{\n"
 "    padding :5px;\n"
 "    border-radius:10px;\n"

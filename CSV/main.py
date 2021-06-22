@@ -87,7 +87,7 @@ class VentanaP1(QMainWindow):
 
             fuente_seleccionadatitulo=QtGui.QFont(datofuente,16)
             fuente_seleccionadatitulo2=QtGui.QFont(datofuente,14)
-            fuente_seleccionadacantidadregistros=QtGui.QFont(datofuente,13)
+            fuente_seleccionadacantidadregistros=QtGui.QFont(datofuente,8)
             fuente_seleccionada_encabezados=QtGui.QFont(datofuente,9)
             fuente_seleccionada_error_archivo=QtGui.QFont(datofuente,8)
             fuente_seleccionada_titulo_grafica=QtGui.QFont(datofuente,10)
@@ -879,6 +879,21 @@ class VentanaEliminarRegistros(QMainWindow):
 
 
         try:
+            fuentes=pd.read_csv("CSV/Configuracion/fuentes.csv",encoding='utf-8')
+            longitud=len(fuentes.index)
+            datofuente=fuentes["Fuentes"][longitud-1]
+
+            fuente_seleccionadatitulo=QtGui.QFont(datofuente,12)
+            fuente_eliminar=QtGui.QFont(datofuente,10)
+           
+            self.ui.titulo.setFont(fuente_seleccionadatitulo)
+            self.ui.eliminar.setFont(fuente_eliminar)
+            
+        except:
+            pass
+
+
+        try:
             global excel
             notas=pd.read_csv(excel,encoding='utf-8')
 
@@ -1127,6 +1142,22 @@ class VentanaEliminarColumnas(QMainWindow):
         except:
             pass
 
+
+        try:
+            fuentes=pd.read_csv("CSV/Configuracion/fuentes.csv",encoding='utf-8')
+            longitud=len(fuentes.index)
+            datofuente=fuentes["Fuentes"][longitud-1]
+
+            fuente_seleccionadatitulo=QtGui.QFont(datofuente,12)
+            fuente_eliminar=QtGui.QFont(datofuente,10)
+           
+            self.ui.titulo.setFont(fuente_seleccionadatitulo)
+            self.ui.titulo_2.setFont(fuente_seleccionadatitulo)
+            self.ui.eliminar.setFont(fuente_eliminar)
+            
+        except:
+            pass
+
         try:
             global excel
             notas=pd.read_csv(excel,encoding='utf-8')
@@ -1206,6 +1237,23 @@ class VentanaSeleccionar(QMainWindow):
             self.ui.seleccionar.setStyleSheet(estilo)
             self.ui.generarinforme.setStyleSheet(estilo)
            
+        except:
+            pass
+
+        try:
+            fuentes=pd.read_csv("CSV/Configuracion/fuentes.csv",encoding='utf-8')
+            longitud=len(fuentes.index)
+            datofuente=fuentes["Fuentes"][longitud-1]
+
+            fuente_seleccionadatitulo=QtGui.QFont(datofuente,11)
+            fuente_seleccionar=QtGui.QFont(datofuente,8)
+            fuente_botones=QtGui.QFont(datofuente,10)
+
+            self.ui.titulo.setFont(fuente_seleccionadatitulo)
+            self.ui.seleccionar.setFont(fuente_seleccionar)
+            self.ui.realizar.setFont(fuente_botones)
+            self.ui.generarinforme.setFont(fuente_botones)
+            
         except:
             pass
 
@@ -1446,6 +1494,21 @@ class VentanaFuentes(QMainWindow):
 
         except:
             pass
+        
+        try:
+            fuentes=pd.read_csv("CSV/Configuracion/fuentes.csv",encoding='utf-8')
+            longitud=len(fuentes.index)
+            datofuente=fuentes["Fuentes"][longitud-1]
+
+            fuente_seleccionadatitulo=QtGui.QFont(datofuente,12)
+            fuente_seleccionadaelegir=QtGui.QFont(datofuente,8)
+            self.ui.titulo1.setFont(fuente_seleccionadatitulo)
+            self.ui.elegir.setFont(fuente_seleccionadaelegir)
+
+        except:
+            pass
+
+       
 
         self.ui.elegir.clicked.connect(self.cambiar_fuente)
         self.ui.regresar.clicked.connect(self.atras)
@@ -1460,7 +1523,9 @@ class VentanaFuentes(QMainWindow):
             indice=self.ui.fuentes.currentIndex()
             tipo=self.ui.fuentes.itemText(self.ui.fuentes.currentIndex())
             fuente_deseada=QtGui.QFont(self.ui.fuentes.itemText(indice),12) 
-            self.ui.titulo1.setFont(fuente_deseada) 
+            fuente_seleccionadaelegir=QtGui.QFont(self.ui.fuentes.itemText(indice),8)
+            self.ui.titulo1.setFont(fuente_deseada)
+            self.ui.elegir.setFont(fuente_seleccionadaelegir)  
             lista.append(tipo)
             dicc["Fuentes"]=lista
             df_fuente=pd.DataFrame(dicc)

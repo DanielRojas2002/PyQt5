@@ -16,6 +16,14 @@ class Ui_Ventana_Unir(object):
         Ventana_Unir.setObjectName("Ventana_Unir")
         Ventana_Unir.resize(536, 428)
         Ventana_Unir.setStyleSheet("")
+
+        Ventana_Unir.setMinimumSize(QtCore.QSize(536, 428))
+        Ventana_Unir.setMaximumSize(QtCore.QSize(536, 428))
+        
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("CSV/multimedia/vector.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Ventana_Unir.setWindowIcon(icon)
+
         self.centralwidget = QtWidgets.QWidget(Ventana_Unir)
         self.centralwidget.setObjectName("centralwidget")
         self.unir = QtWidgets.QPushButton(self.centralwidget)
@@ -36,6 +44,7 @@ class Ui_Ventana_Unir(object):
 "    color: rgb(0, 0, 0);\n"
 "}")
         self.unir.setObjectName("unir")
+        self.unir.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
         self.layoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.layoutWidget.setGeometry(QtCore.QRect(30, 140, 161, 51))
         self.layoutWidget.setObjectName("layoutWidget")
@@ -56,6 +65,7 @@ class Ui_Ventana_Unir(object):
         self.ruta1.setObjectName("ruta1")
         self.verticalLayout_4.addWidget(self.ruta1)
         self.botoncsv1 = QtWidgets.QPushButton(self.layoutWidget)
+        self.botoncsv1.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -192,7 +202,7 @@ class Ui_Ventana_Unir(object):
         font.setBold(True)
         font.setWeight(75)
         self.regresar.setFont(font)
-        self.regresar.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
+        self.regresar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.regresar.setStyleSheet("QPushButton:hover{\n"
 "background-color: rgb(255, 0, 0);\n"
 "    color: rgb(255, 255, 255);\n"
@@ -250,6 +260,7 @@ class Ui_Ventana_Unir(object):
 "    color: rgb(255, 255, 255);\n"
 "}")
         self.botoncsv2.setObjectName("botoncsv2")
+        self.botoncsv2.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
         self.verticalLayout_3.addWidget(self.botoncsv2)
         self.nombrearchivo = QtWidgets.QLineEdit(self.centralwidget)
         self.nombrearchivo.setGeometry(QtCore.QRect(120, 360, 113, 20))

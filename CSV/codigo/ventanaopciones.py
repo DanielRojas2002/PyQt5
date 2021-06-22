@@ -15,14 +15,15 @@ class Ui_VentanaOpciones(object):
     def setupUi(self, VentanaOpciones):
         VentanaOpciones.setObjectName("VentanaOpciones")
         VentanaOpciones.resize(402, 219)
+
+        VentanaOpciones.setMinimumSize(QtCore.QSize(402, 219))
+        VentanaOpciones.setMaximumSize(QtCore.QSize(402, 219))
+
         VentanaOpciones.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(VentanaOpciones)
         self.centralwidget.setObjectName("centralwidget")
         self.titulo = QtWidgets.QLabel(self.centralwidget)
         self.titulo.setGeometry(QtCore.QRect(50, 60, 311, 31))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("CSV/multimedia/vector.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        VentanaOpciones.setWindowIcon(icon)
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
@@ -56,6 +57,7 @@ class Ui_VentanaOpciones(object):
 "\n"
 "")
         self.elegir.setObjectName("elegir")
+        self.elegir.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
         self.opciones = QtWidgets.QComboBox(self.centralwidget)
         self.opciones.setGeometry(QtCore.QRect(50, 110, 311, 21))
         font = QtGui.QFont()
@@ -95,6 +97,7 @@ class Ui_VentanaOpciones(object):
 "\n"
 "")
         self.regresar.setObjectName("regresar")
+        self.regresar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.frame = QtWidgets.QFrame(self.centralwidget)
         self.frame.setGeometry(QtCore.QRect(0, 0, 411, 221))
         self.frame.setStyleSheet("background-color: rgb(255, 255, 255);")

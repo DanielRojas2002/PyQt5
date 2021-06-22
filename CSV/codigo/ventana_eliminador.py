@@ -16,6 +16,10 @@ class Ui_Ventana_Eliminar(object):
         Ventana_Eliminar.setObjectName("Ventana_Eliminar")
         Ventana_Eliminar.resize(410, 307)
         Ventana_Eliminar.setStyleSheet("")
+
+        Ventana_Eliminar.setMinimumSize(QtCore.QSize(410, 307))
+        Ventana_Eliminar.setMaximumSize(QtCore.QSize(410, 307))
+
         self.centralwidget = QtWidgets.QWidget(Ventana_Eliminar)
         self.centralwidget.setObjectName("centralwidget")
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
@@ -45,7 +49,7 @@ class Ui_Ventana_Eliminar(object):
         font.setBold(True)
         font.setWeight(75)
         self.regresar.setFont(font)
-        self.regresar.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
+        self.regresar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.regresar.setStyleSheet("QPushButton{\n"
 "    padding :5px;\n"
 "    border-radius:10px;\n"
@@ -71,6 +75,7 @@ class Ui_Ventana_Eliminar(object):
         font.setBold(True)
         font.setWeight(75)
         self.eliminar.setFont(font)
+        self.eliminar.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
         self.eliminar.setStyleSheet("QPushButton{\n"
 "    padding :5px;\n"
 "    border-radius:10px;\n"

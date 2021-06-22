@@ -16,6 +16,10 @@ class Ui_VentanaSeleccionar(object):
         VentanaSeleccionar.setObjectName("VentanaSeleccionar")
         VentanaSeleccionar.resize(897, 535)
         VentanaSeleccionar.setStyleSheet("")
+
+        VentanaSeleccionar.setMinimumSize(QtCore.QSize(897, 535))
+        VentanaSeleccionar.setMaximumSize(QtCore.QSize(897, 535))
+
         self.centralwidget = QtWidgets.QWidget(VentanaSeleccionar)
         self.centralwidget.setObjectName("centralwidget")
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
@@ -111,7 +115,7 @@ class Ui_VentanaSeleccionar(object):
         font.setBold(True)
         font.setWeight(75)
         self.realizar.setFont(font)
-        self.realizar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.realizar.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
         self.realizar.setStyleSheet("QPushButton{\n"
 "    background-color: rgb(255, 255, 255);\n"
 "}\n"
@@ -128,7 +132,7 @@ class Ui_VentanaSeleccionar(object):
         font.setBold(True)
         font.setWeight(75)
         self.generarinforme.setFont(font)
-        self.generarinforme.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.generarinforme.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
         self.generarinforme.setStyleSheet("QPushButton{\n"
 "    background-color: rgb(255, 255, 255);\n"
 "}\n"

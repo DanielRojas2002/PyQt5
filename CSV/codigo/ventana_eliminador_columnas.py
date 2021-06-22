@@ -15,6 +15,10 @@ class Ui_Ventana_Eliminar_Columnas(object):
     def setupUi(self, Ventana_Eliminar_Columnas):
         Ventana_Eliminar_Columnas.setObjectName("Ventana_Eliminar_Columnas")
         Ventana_Eliminar_Columnas.resize(383, 259)
+
+        Ventana_Eliminar_Columnas.setMinimumSize(QtCore.QSize(383, 260))
+        Ventana_Eliminar_Columnas.setMaximumSize(QtCore.QSize(383, 260))
+
         Ventana_Eliminar_Columnas.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.centralwidget = QtWidgets.QWidget(Ventana_Eliminar_Columnas)
         self.centralwidget.setObjectName("centralwidget")
@@ -42,6 +46,7 @@ class Ui_Ventana_Eliminar_Columnas(object):
 "\n"
 "")
         self.eliminar.setObjectName("eliminar")
+        self.eliminar.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
         self.img = QtWidgets.QLabel(self.centralwidget)
         self.img.setGeometry(QtCore.QRect(260, 90, 71, 51))
         self.img.setText("")
@@ -61,7 +66,7 @@ class Ui_Ventana_Eliminar_Columnas(object):
         font.setItalic(True)
         font.setWeight(75)
         self.titulo_2.setFont(font)
-        self.titulo_2.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.titulo_2.setStyleSheet("")
         self.titulo_2.setAlignment(QtCore.Qt.AlignCenter)
         self.titulo_2.setObjectName("titulo_2")
         self.columna = QtWidgets.QLabel(self.centralwidget)
@@ -103,7 +108,7 @@ class Ui_Ventana_Eliminar_Columnas(object):
         font.setBold(True)
         font.setWeight(75)
         self.regresar.setFont(font)
-        self.regresar.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
+        self.regresar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.regresar.setStyleSheet("QPushButton{\n"
 "    padding :5px;\n"
 "    border-radius:10px;\n"
