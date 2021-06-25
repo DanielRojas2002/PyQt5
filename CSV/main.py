@@ -1442,9 +1442,12 @@ class VentanaSeleccionar(QMainWindow):
 
             else:
                 try:
-                    ruta="./"+"Reporte TODOS"+".csv"
-                    remove(ruta)
                     notas=pd.read_csv(excel,encoding='utf-8')
+                    options = QFileDialog.Options()
+                    options = QFileDialog.DontUseNativeDialog
+                    fileName= QFileDialog.getSaveFileName(self,"Guardar Como:","","CSV(.csv)", options=options)
+                    ruta=fileName[0]+".csv"
+                    
                     notas.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
                     x=0
                     while x<100:
@@ -1455,27 +1458,20 @@ class VentanaSeleccionar(QMainWindow):
 
                     
                 except:
-                    ruta="./"+"Reporte TODOS"+".csv"
-                    notas=pd.read_csv(excel,encoding='utf-8')
-                    notas.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
-                    x=0
-                    while x<100:
-                        x+=0.001
-                        self.ui.progressBar.setValue(x)
-                    self.ui.progressBar.setValue(0)
-                    QMessageBox.information(self,"Mensaje","Ya se genero el CSV",QMessageBox.Ok,QMessageBox.Ok)
+                    pass
                 
-            
-
         elif statuscsv=="Especifico":
             if validacioninforme==0:
                 QMessageBox.information(self,"Mensaje","No se puede generar el Informe",QMessageBox.Ok,QMessageBox.Ok)
 
             else:
                 try:
-                    ruta="./"+"Reporte "+self.ui.dato.text()+".csv"
-                    remove(ruta)
+                    options = QFileDialog.Options()
+                    options = QFileDialog.DontUseNativeDialog
+                    fileName= QFileDialog.getSaveFileName(self,"Guardar Como:","","CSV(.csv)", options=options)
+                    ruta=fileName[0]+".csv"
                     df_condicion.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+
                     x=0
                     while x<100:
                         x+=0.001
@@ -1483,7 +1479,12 @@ class VentanaSeleccionar(QMainWindow):
                     self.ui.progressBar.setValue(0)
                     QMessageBox.information(self,"Mensaje","Ya se genero el CSV",QMessageBox.Ok,QMessageBox.Ok)
                 except:
-                    ruta="./"+"Reporte "+self.ui.dato.text()+".csv"
+                    
+                    options = QFileDialog.Options()
+                    options = QFileDialog.DontUseNativeDialog
+                    fileName= QFileDialog.getSaveFileName(self,"Guardar Como:","","CSV(.csv)", options=options)
+                    ruta=fileName[0]+".csv"
+                    
                     df_condicion.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
                     x=0
                     while x<100:
