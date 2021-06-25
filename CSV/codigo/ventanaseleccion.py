@@ -94,12 +94,10 @@ class Ui_VentanaSeleccionar(object):
         self.imagen.setScaledContents(True)
         self.imagen.setObjectName("imagen")
         self.verticalLayout.addWidget(self.imagen)
-        self.titulo2 = QtWidgets.QLabel(self.layoutWidget)
-        self.titulo2.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.titulo2.setText("")
-        self.titulo2.setAlignment(QtCore.Qt.AlignCenter)
-        self.titulo2.setObjectName("titulo2")
-        self.verticalLayout.addWidget(self.titulo2)
+        self.progressBar = QtWidgets.QProgressBar(self.layoutWidget)
+        self.progressBar.setProperty("value", 0)
+        self.progressBar.setObjectName("progressBar")
+        self.verticalLayout.addWidget(self.progressBar)
         self.opciones_2 = QtWidgets.QComboBox(self.layoutWidget)
         self.opciones_2.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.opciones_2.setObjectName("opciones_2")
@@ -115,7 +113,7 @@ class Ui_VentanaSeleccionar(object):
         font.setBold(True)
         font.setWeight(75)
         self.realizar.setFont(font)
-        self.realizar.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
+        self.realizar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.realizar.setStyleSheet("QPushButton{\n"
 "    background-color: rgb(255, 255, 255);\n"
 "}\n"
@@ -132,7 +130,7 @@ class Ui_VentanaSeleccionar(object):
         font.setBold(True)
         font.setWeight(75)
         self.generarinforme.setFont(font)
-        self.generarinforme.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
+        self.generarinforme.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.generarinforme.setStyleSheet("QPushButton{\n"
 "    background-color: rgb(255, 255, 255);\n"
 "}\n"

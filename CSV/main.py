@@ -1270,7 +1270,6 @@ class VentanaSeleccionar(QMainWindow):
         global seleccion
         global listaEncabezados
         
-        self.ui.titulo2.setText("")
         self.ui.dato.setText("")
         selecciones=self.ui.opciones.itemText(self.ui.opciones.currentIndex())
 
@@ -1343,7 +1342,7 @@ class VentanaSeleccionar(QMainWindow):
                     listadatos.append(dato)
 
                 if otrocontador==0:
-                    self.ui.titulo2.setText("No Hay Registros")
+                    QMessageBox.information(self,"Mensaje","No Hay registros",QMessageBox.Ok,QMessageBox.Ok)
                     validacioninforme=0
 
                 else:
@@ -1363,7 +1362,8 @@ class VentanaSeleccionar(QMainWindow):
                         self.ui.tableWidget.setColumnWidth(x,200)
 
             except:
-                self.ui.titulo2.setText("No Hay Registros")
+                QMessageBox.information(self,"Mensaje","No Hay Registros",QMessageBox.Ok,QMessageBox.Ok)
+
 
 
         elif seleccion=="Especifico":
@@ -1406,7 +1406,7 @@ class VentanaSeleccionar(QMainWindow):
                     listadatos.append(dato)
 
                 if otrocontador==0:
-                    self.ui.titulo2.setText("No Hay Registros")
+                    QMessageBox.information(self,"Mensaje","No Hay Registros",QMessageBox.Ok,QMessageBox.Ok)
                     validacioninforme=0
 
                 else:
@@ -1426,18 +1426,19 @@ class VentanaSeleccionar(QMainWindow):
                         self.ui.tableWidget.setColumnWidth(x,200)
 
             except:
-                self.ui.titulo2.setText("No Hay Registros")
+                QMessageBox.information(self,"Mensaje","No Hay Registros",QMessageBox.Ok,QMessageBox.Ok)
 
     def generarcsv(self):
         global statuscsv 
         global df_condicion
         global excel
         global validacioninforme
+        self.ui.progressBar.setValue(0)
         
         
         if statuscsv=="TODOS":
             if validacioninforme==0:
-                self.ui.titulo2.setText("No se puede generar el Informe")
+                QMessageBox.information(self,"Mensaje","No se puede generar el Informe",QMessageBox.Ok,QMessageBox.Ok)
 
             else:
                 try:
@@ -1445,36 +1446,55 @@ class VentanaSeleccionar(QMainWindow):
                     remove(ruta)
                     notas=pd.read_csv(excel,encoding='utf-8')
                     notas.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
-                    self.ui.titulo2.setText("Ya se genero el CSV")
+                    x=0
+                    while x<100:
+                        x+=0.001
+                        self.ui.progressBar.setValue(x)
+                    self.ui.progressBar.setValue(0)
+                    QMessageBox.information(self,"Mensaje","Ya se genero el CSV",QMessageBox.Ok,QMessageBox.Ok)
+
+                    
                 except:
                     ruta="./"+"Reporte TODOS"+".csv"
                     notas=pd.read_csv(excel,encoding='utf-8')
                     notas.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
-                    self.ui.titulo2.setText("Ya se genero el CSV")
+                    x=0
+                    while x<100:
+                        x+=0.001
+                        self.ui.progressBar.setValue(x)
+                    self.ui.progressBar.setValue(0)
+                    QMessageBox.information(self,"Mensaje","Ya se genero el CSV",QMessageBox.Ok,QMessageBox.Ok)
                 
             
 
         elif statuscsv=="Especifico":
             if validacioninforme==0:
-                self.ui.titulo2.setText("No se puede generar el Informe")
+                QMessageBox.information(self,"Mensaje","No se puede generar el Informe",QMessageBox.Ok,QMessageBox.Ok)
 
             else:
                 try:
                     ruta="./"+"Reporte "+self.ui.dato.text()+".csv"
                     remove(ruta)
                     df_condicion.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
-                    self.ui.titulo2.setText("Ya se genero el CSV")
+                    x=0
+                    while x<100:
+                        x+=0.001
+                        self.ui.progressBar.setValue(x)
+                    self.ui.progressBar.setValue(0)
+                    QMessageBox.information(self,"Mensaje","Ya se genero el CSV",QMessageBox.Ok,QMessageBox.Ok)
                 except:
                     ruta="./"+"Reporte "+self.ui.dato.text()+".csv"
                     df_condicion.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
-                    self.ui.titulo2.setText("Ya se genero el CSV")
-
-
+                    x=0
+                    while x<100:
+                        x+=0.001
+                        self.ui.progressBar.setValue(x)
+                    self.ui.progressBar.setValue(0)
+                    QMessageBox.information(self,"Mensaje","Ya se genero el CSV",QMessageBox.Ok,QMessageBox.Ok)
 
     def atras(self):
         self.parent().show()
         self.close()
-            
 
 class VentanaFuentes(QMainWindow):
     def __init__(self,parent=None):
