@@ -1023,8 +1023,6 @@ class VentanaUnirDosCSV(QMainWindow):
         except:
             pass
 
-      
-    
     def csv1(self):
         global csv1
         global listaEncabezados
@@ -1063,54 +1061,52 @@ class VentanaUnirDosCSV(QMainWindow):
             df2=pd.read_csv(csv2,encoding='utf-8')
 
             try:
-  
-                if len(self.ui.nombrearchivo.text())>0:
-                    ruta="./"+self.ui.nombrearchivo.text()+".csv"
+                options = QFileDialog.Options()
+                options = QFileDialog.DontUseNativeDialog
+                fileName= QFileDialog.getSaveFileName(self,"Guardar Como:","","CSV(.csv)", options=options)
+                longitud=fileName[0]
+                if len(longitud)>0:
+                    ruta=fileName[0]+".csv"
+    
+                    if join=="Inner":
+                        df_unido=df1.merge(df2,on=columna,how="inner")
+                        DF_UNIDO=pd.DataFrame(df_unido)
+                        DF_UNIDO.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                        QMessageBox.information(self,"Mensaje","Ya se genero el CSV",QMessageBox.Ok,QMessageBox.Ok)
+
+                    elif join=="Outer":
+                        df_unido=df1.merge(df2,on=columna,how="outer")
+                        DF_UNIDO=pd.DataFrame(df_unido)
+                        DF_UNIDO.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                        QMessageBox.information(self,"Mensaje","Ya se genero el CSV",QMessageBox.Ok,QMessageBox.Ok)
+
+                    elif join=="Left":
+                        df_unido=df1.merge(df2,on=columna,how="left")
+                        DF_UNIDO=pd.DataFrame(df_unido)
+                        DF_UNIDO.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                        QMessageBox.information(self,"Mensaje","Ya se genero el CSV",QMessageBox.Ok,QMessageBox.Ok)
+
+                    elif join=="Right":
+                        df_unido=df1.merge(df2,on=columna,how="right")
+                        DF_UNIDO=pd.DataFrame(df_unido)
+                        DF_UNIDO.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                        QMessageBox.information(self,"Mensaje","Ya se genero el CSV",QMessageBox.Ok,QMessageBox.Ok)
+
                 else:
-                    self.ui.resultado.setText("Nombre del Archivo?")
+                    pass
 
-                if join=="Inner" and len(self.ui.nombrearchivo.text())>0:
-                    df_unido=df1.merge(df2,on=columna,how="inner")
-                    DF_UNIDO=pd.DataFrame(df_unido)
-                    DF_UNIDO.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
-                    self.ui.resultado.setText("Ya se guardo el csv")
-                    self.ui.nombrearchivo.clear()
-                    
-                    
-
-                elif join=="Outer" and len(self.ui.nombrearchivo.text())>0:
-                    df_unido=df1.merge(df2,on=columna,how="outer")
-                    DF_UNIDO=pd.DataFrame(df_unido)
-                    DF_UNIDO.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
-                    self.ui.resultado.setText("Ya se guardo el csv")
-                    self.ui.nombrearchivo.clear()
-
-                elif join=="Left" and len(self.ui.nombrearchivo.text())>0:
-                    df_unido=df1.merge(df2,on=columna,how="left")
-                    DF_UNIDO=pd.DataFrame(df_unido)
-                    DF_UNIDO.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
-                    self.ui.resultado.setText("Ya se guardo el csv")
-                    self.ui.nombrearchivo.clear()
-
-                elif join=="Right" and len(self.ui.nombrearchivo.text())>0:
-                    df_unido=df1.merge(df2,on=columna,how="right")
-                    DF_UNIDO=pd.DataFrame(df_unido)
-                    DF_UNIDO.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
-                    self.ui.resultado.setText("Ya se guardo el csv")
-                    self.ui.nombrearchivo.clear()
-
-                
 
             except:
-                self.ui.resultado.setText("La columna no coincide")
+                QMessageBox.information(self,"Mensaje","La Columna no Coincide",QMessageBox.Ok,QMessageBox.Ok)
         except:
-            self.ui.resultado.setText("Eliga los Archivos")
+            QMessageBox.information(self,"Mensaje","Eliga ambos archivos csv",QMessageBox.Ok,QMessageBox.Ok)
             
        
 
     def atras(self):
         self.parent().show()
         self.close()
+
 
 
 class VentanaEliminarColumnas(QMainWindow):

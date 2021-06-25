@@ -20,9 +20,9 @@
    <widget class="QPushButton" name="unir">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>350</y>
-      <width>91</width>
+      <x>30</x>
+      <y>360</y>
+      <width>161</width>
       <height>31</height>
      </rect>
     </property>
@@ -207,35 +207,6 @@ QPushButton{
      </property>
     </item>
    </widget>
-   <widget class="QLabel" name="resultado">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>400</y>
-      <width>171</width>
-      <height>19</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>9</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Box</enum>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
    <widget class="QLabel" name="img1">
     <property name="geometry">
      <rect>
@@ -344,34 +315,12 @@ QPushButton{
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="img4">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>350</y>
-      <width>41</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>../multimedia/igual.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="QLabel" name="img5">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>250</x>
       <y>350</y>
-      <width>41</width>
+      <width>71</width>
       <height>41</height>
      </rect>
     </property>
@@ -391,9 +340,9 @@ QPushButton{
    <widget class="QLabel" name="img6">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>400</x>
       <y>340</y>
-      <width>71</width>
+      <width>91</width>
       <height>61</height>
      </rect>
     </property>
@@ -553,43 +502,21 @@ QPushButton{
      </item>
     </layout>
    </widget>
-   <widget class="QLineEdit" name="nombrearchivo">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>360</y>
-      <width>113</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="placeholderText">
-     <string>Nombre del Archivo:</string>
-    </property>
-   </widget>
    <zorder>unir</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>subtitulo1</zorder>
    <zorder>subtitulo2</zorder>
    <zorder>tipo_join</zorder>
-   <zorder>resultado</zorder>
    <zorder>img1</zorder>
    <zorder>line</zorder>
    <zorder>line_2</zorder>
    <zorder>img3</zorder>
    <zorder>line_3</zorder>
-   <zorder>img4</zorder>
    <zorder>img5</zorder>
    <zorder>img6</zorder>
    <zorder>label</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
-   <zorder>nombrearchivo</zorder>
    <zorder>columnajoin</zorder>
    <zorder>img2</zorder>
   </widget>
