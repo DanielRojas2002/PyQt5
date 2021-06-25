@@ -1446,16 +1446,18 @@ class VentanaSeleccionar(QMainWindow):
                     options = QFileDialog.Options()
                     options = QFileDialog.DontUseNativeDialog
                     fileName= QFileDialog.getSaveFileName(self,"Guardar Como:","","CSV(.csv)", options=options)
-                    ruta=fileName[0]+".csv"
-                    
-                    notas.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
-                    x=0
-                    while x<100:
-                        x+=0.001
-                        self.ui.progressBar.setValue(x)
-                    self.ui.progressBar.setValue(0)
-                    QMessageBox.information(self,"Mensaje","Ya se genero el CSV",QMessageBox.Ok,QMessageBox.Ok)
-
+                    longitud=fileName[0]
+                    if len(longitud)>0:
+                        ruta=fileName[0]+".csv"
+                        notas.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                        x=0
+                        while x<100:
+                            x+=0.001
+                            self.ui.progressBar.setValue(x)
+                        self.ui.progressBar.setValue(0)
+                        QMessageBox.information(self,"Mensaje","Ya se genero el CSV",QMessageBox.Ok,QMessageBox.Ok)
+                    else:
+                        pass
                     
                 except:
                     pass
@@ -1469,29 +1471,21 @@ class VentanaSeleccionar(QMainWindow):
                     options = QFileDialog.Options()
                     options = QFileDialog.DontUseNativeDialog
                     fileName= QFileDialog.getSaveFileName(self,"Guardar Como:","","CSV(.csv)", options=options)
-                    ruta=fileName[0]+".csv"
-                    df_condicion.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
-
-                    x=0
-                    while x<100:
-                        x+=0.001
-                        self.ui.progressBar.setValue(x)
-                    self.ui.progressBar.setValue(0)
-                    QMessageBox.information(self,"Mensaje","Ya se genero el CSV",QMessageBox.Ok,QMessageBox.Ok)
+                    
+                    longitud=fileName[0]
+                    if len(longitud)>0:
+                        ruta=fileName[0]+".csv"
+                        df_condicion.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
+                        x=0
+                        while x<100:
+                            x+=0.001
+                            self.ui.progressBar.setValue(x)
+                        self.ui.progressBar.setValue(0)
+                        QMessageBox.information(self,"Mensaje","Ya se genero el CSV",QMessageBox.Ok,QMessageBox.Ok)
+                    else:
+                        pass
                 except:
-                    
-                    options = QFileDialog.Options()
-                    options = QFileDialog.DontUseNativeDialog
-                    fileName= QFileDialog.getSaveFileName(self,"Guardar Como:","","CSV(.csv)", options=options)
-                    ruta=fileName[0]+".csv"
-                    
-                    df_condicion.to_csv(ruta, index=None, mode="a", header=not os.path.isfile(ruta))
-                    x=0
-                    while x<100:
-                        x+=0.001
-                        self.ui.progressBar.setValue(x)
-                    self.ui.progressBar.setValue(0)
-                    QMessageBox.information(self,"Mensaje","Ya se genero el CSV",QMessageBox.Ok,QMessageBox.Ok)
+                   pass
 
     def atras(self):
         self.parent().show()
