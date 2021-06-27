@@ -1371,18 +1371,45 @@ class VentanaSeleccionar(QMainWindow):
                 notas=pd.read_csv(excel,encoding='utf-8')
                 columna=str(self.ui.opciones_2.itemText(self.ui.opciones_2.currentIndex()))
                 dato=str((self.ui.dato.text()))
+                
+                if "/" in dato:
+                    try:
+                        longitud=len(dato)
+                        longitudsincoma=longitud-1
 
+                        longitudantesdelacoma=0
+                        for x in dato:
+                            if x=="/":
+                                break
+                            else:
+                                longitudantesdelacoma=longitudantesdelacoma+1
+
+                        longituddespuesdelacoma=longitudsincoma-longitudantesdelacoma
+
+                        dato1=dato[0:longitudantesdelacoma]
+                        dato2=dato[-longituddespuesdelacoma:]
+                    except:
+                        QMessageBox.information(self,"Mensaje","Respete la Sintaxis",QMessageBox.Ok,QMessageBox.Ok)
+        
                 for encabezado in listaEncabezados:
                     notas[encabezado]=notas[encabezado].astype('object')
 
                 df=pd.DataFrame(notas)
-                
-                try:
-                    df_condicion=df.loc[(df[columna]==int(dato))]
-                    
-                except:
-                    df_condicion=df.loc[(df[columna]==str(dato))]
-                    
+
+                if "/" in dato:
+                    try:
+                        df_condicion=df.loc[(df[columna]>=int(dato1)) & (df[columna]<=int(dato2))]
+                        
+                    except:
+                        QMessageBox.information(self,"Mensaje","Respete la Sintaxis",QMessageBox.Ok,QMessageBox.Ok)
+
+                else:
+                    try:
+                        df_condicion=df.loc[(df[columna]==int(dato))]
+                        
+                    except:
+                        df_condicion=df.loc[(df[columna]==str(dato))]
+                        
                 self.ui.tableWidget.clear()
                 listadatos=[]
                 contador=0
@@ -1482,7 +1509,7 @@ class VentanaSeleccionar(QMainWindow):
                         pass
                 except:
                    pass
-
+         
     def atras(self):
         self.parent().show()
         self.close()
