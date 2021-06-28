@@ -1315,6 +1315,7 @@ class VentanaSeleccionar(QMainWindow):
         global statuscsv
         global validacioninforme
         statuscsv=""
+        self.ui.tableWidget.setSortingEnabled(False)
 
         if seleccion=="TODOS":
             statuscsv="TODOS"
@@ -1377,6 +1378,7 @@ class VentanaSeleccionar(QMainWindow):
                         longitud=len(dato)
                         longitudsincoma=longitud-1
 
+
                         longitudantesdelacoma=0
                         for x in dato:
                             if x=="/":
@@ -1390,7 +1392,35 @@ class VentanaSeleccionar(QMainWindow):
                         dato2=dato[-longituddespuesdelacoma:]
                     except:
                         QMessageBox.information(self,"Mensaje","Respete la Sintaxis",QMessageBox.Ok,QMessageBox.Ok)
-        
+
+                if "&" in dato:
+                    try:
+                        longitud=len(dato)
+                        contadory=0
+                        cajita=""
+                        listavalores=[]
+                        contadorlista=0
+
+                        for x in dato:
+                            if x=="&":
+                                listavalores.append(cajita)
+                                contadory=contadory+1
+                                cajita=""
+
+                            else:
+                                cajita=cajita+x
+
+                        listavalores.append(cajita)
+                        
+
+                        for elemento in listavalores:
+                            contadorlista=contadorlista+1
+
+                    except:
+                        QMessageBox.information(self,"Mensaje","Respete la Sintaxis",QMessageBox.Ok,QMessageBox.Ok)
+
+                
+
                 for encabezado in listaEncabezados:
                     notas[encabezado]=notas[encabezado].astype('object')
 
@@ -1402,6 +1432,39 @@ class VentanaSeleccionar(QMainWindow):
                         
                     except:
                         QMessageBox.information(self,"Mensaje","Respete la Sintaxis",QMessageBox.Ok,QMessageBox.Ok)
+
+                elif "&" in dato:
+                    try:
+                    
+                        if contadorlista==2:
+                            dato1=listavalores[0]
+                            dato2=listavalores[1]
+                            df_condicion=df.loc[(df[columna]==str(dato1)) | (df[columna]==str(dato2))]
+                            
+
+                        elif contadorlista==3:
+                            dato1=listavalores[0]
+                            dato2=listavalores[1]
+                            dato3=listavalores[2]
+                            df_condicion=df.loc[(df[columna]==str(dato1)) | (df[columna]==str(dato2)) | (df[columna]==str(dato3))]
+                        
+                        elif contadorlista==4:
+                            dato1=listavalores[0]
+                            dato2=listavalores[1]
+                            dato3=listavalores[2]
+                            dato4=listavalores[3]
+                            df_condicion=df.loc[(df[columna]==str(dato1)) | (df[columna]==str(dato2)) | (df[columna]==str(dato3)) | (df[columna]==str(dato4))]
+
+                        elif contadorlista==5:
+                            dato1=listavalores[0]
+                            dato2=listavalores[1]
+                            dato3=listavalores[2]
+                            dato4=listavalores[3]
+                            dato5=listavalores[4]
+                            df_condicion=df.loc[(df[columna]==str(dato1)) | (df[columna]==str(dato2)) | (df[columna]==str(dato3)) | (df[columna]==str(dato4)) | (df[columna]==str(dato5))]
+                            
+                    except:
+                        QMessageBox.information(self,"Mensaje","No se Encontraron Coincidencias",QMessageBox.Ok,QMessageBox.Ok)
 
                 else:
                     try:
@@ -1509,7 +1572,8 @@ class VentanaSeleccionar(QMainWindow):
                         pass
                 except:
                    pass
-         
+
+                
     def atras(self):
         self.parent().show()
         self.close()
