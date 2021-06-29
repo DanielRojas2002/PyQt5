@@ -15,15 +15,44 @@ class Ui_VentanaOpciones(object):
     def setupUi(self, VentanaOpciones):
         VentanaOpciones.setObjectName("VentanaOpciones")
         VentanaOpciones.resize(402, 219)
-
         VentanaOpciones.setMinimumSize(QtCore.QSize(402, 219))
         VentanaOpciones.setMaximumSize(QtCore.QSize(402, 219))
-
         VentanaOpciones.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(VentanaOpciones)
         self.centralwidget.setObjectName("centralwidget")
-        self.titulo = QtWidgets.QLabel(self.centralwidget)
-        self.titulo.setGeometry(QtCore.QRect(50, 60, 311, 31))
+        self.frame = QtWidgets.QFrame(self.centralwidget)
+        self.frame.setGeometry(QtCore.QRect(0, 0, 411, 221))
+        self.frame.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.widget = QtWidgets.QWidget(self.frame)
+        self.widget.setGeometry(QtCore.QRect(20, 20, 361, 171))
+        self.widget.setObjectName("widget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.widget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.regresar = QtWidgets.QPushButton(self.widget)
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        self.regresar.setFont(font)
+        self.regresar.setStyleSheet("QPushButton{\n"
+"    padding :5px;\n"
+"    border-radius:10px;\n"
+"    border:1.5px solid black;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
+"    background-color: rgb(165, 175, 173);\n"
+"}\n"
+"\n"
+"")
+        self.regresar.setObjectName("regresar")
+        self.verticalLayout.addWidget(self.regresar)
+        self.titulo = QtWidgets.QLabel(self.widget)
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
@@ -32,11 +61,25 @@ class Ui_VentanaOpciones(object):
         self.titulo.setStyleSheet("")
         self.titulo.setAlignment(QtCore.Qt.AlignCenter)
         self.titulo.setObjectName("titulo")
-        self.elegir = QtWidgets.QPushButton(self.centralwidget)
-        self.elegir.setGeometry(QtCore.QRect(50, 152, 311, 31))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("CSV/multimedia/vector.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        VentanaOpciones.setWindowIcon(icon)
+        self.verticalLayout.addWidget(self.titulo)
+        self.opciones = QtWidgets.QComboBox(self.widget)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.opciones.setFont(font)
+        self.opciones.setToolTip("")
+        self.opciones.setStatusTip("")
+        self.opciones.setWhatsThis("")
+        self.opciones.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.opciones.setObjectName("opciones")
+        self.opciones.addItem("")
+        self.opciones.addItem("")
+        self.opciones.addItem("")
+        self.opciones.addItem("")
+        self.opciones.addItem("")
+        self.opciones.addItem("")
+        self.opciones.addItem("")
+        self.verticalLayout.addWidget(self.opciones)
+        self.elegir = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -57,53 +100,9 @@ class Ui_VentanaOpciones(object):
 "\n"
 "")
         self.elegir.setObjectName("elegir")
-        self.elegir.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
-        self.opciones = QtWidgets.QComboBox(self.centralwidget)
-        self.opciones.setGeometry(QtCore.QRect(50, 110, 311, 21))
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.opciones.setFont(font)
-        self.opciones.setToolTip("")
-        self.opciones.setStatusTip("")
-        self.opciones.setWhatsThis("")
-        self.opciones.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.opciones.setObjectName("opciones")
-        self.opciones.addItem("")
-        self.opciones.addItem("")
-        self.opciones.addItem("")
-        self.opciones.addItem("")
-        self.opciones.addItem("")
-        self.opciones.addItem("")
-        self.opciones.addItem("")
-        self.opciones.addItem("")
-        self.opciones.addItem("")
-        self.regresar = QtWidgets.QPushButton(self.centralwidget)
-        self.regresar.setGeometry(QtCore.QRect(50, 20, 311, 31))
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
-        self.regresar.setFont(font)
-        self.regresar.setStyleSheet("QPushButton{\n"
-"    padding :5px;\n"
-"    border-radius:10px;\n"
-"    border:1.5px solid black;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:hover\n"
-"{\n"
-"    background-color: rgb(165, 175, 173);\n"
-"}\n"
-"\n"
-"")
-        self.regresar.setObjectName("regresar")
-        self.regresar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.frame = QtWidgets.QFrame(self.centralwidget)
-        self.frame.setGeometry(QtCore.QRect(0, 0, 411, 221))
-        self.frame.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame.setObjectName("frame")
+        self.verticalLayout.addWidget(self.elegir)
+        self.regresar.raise_()
+        self.titulo.raise_()
         self.frame.raise_()
         self.titulo.raise_()
         self.elegir.raise_()
@@ -117,18 +116,16 @@ class Ui_VentanaOpciones(object):
     def retranslateUi(self, VentanaOpciones):
         _translate = QtCore.QCoreApplication.translate
         VentanaOpciones.setWindowTitle(_translate("VentanaOpciones", "Opciones CSV"))
+        self.regresar.setText(_translate("VentanaOpciones", "<--"))
         self.titulo.setText(_translate("VentanaOpciones", "MAS OPCIONES PARA EL CSV:"))
-        self.elegir.setText(_translate("VentanaOpciones", "ELEGIR"))
         self.opciones.setItemText(0, _translate("VentanaOpciones", "Eliminar Columnas"))
         self.opciones.setItemText(1, _translate("VentanaOpciones", "Eliminar Registros"))
         self.opciones.setItemText(2, _translate("VentanaOpciones", "Segmentar dos CSV´s"))
         self.opciones.setItemText(3, _translate("VentanaOpciones", "Segmentar por Rangos"))
         self.opciones.setItemText(4, _translate("VentanaOpciones", "Unir dos CSV´s"))
         self.opciones.setItemText(5, _translate("VentanaOpciones", "Buscar Datos en especifico del CSV y Generar CSV"))
-        self.opciones.setItemText(6, _translate("VentanaOpciones", "Elegir Columnas y Generar un CSV"))
-        self.opciones.setItemText(7, _translate("VentanaOpciones", "Hacer Operaciones entre columnas"))
-        self.opciones.setItemText(8, _translate("VentanaOpciones", "Referencia Cruzada"))
-        self.regresar.setText(_translate("VentanaOpciones", "<--"))
+        self.opciones.setItemText(6, _translate("VentanaOpciones", "Hacer Operaciones entre columnas"))
+        self.elegir.setText(_translate("VentanaOpciones", "ELEGIR"))
 
 
 if __name__ == "__main__":
