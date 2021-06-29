@@ -1222,6 +1222,7 @@ class VentanaSeleccionar(QMainWindow):
         self.ui.realizar.clicked.connect(self.realizar)
         self.ui.seleccionar.clicked.connect(self.seleccionar)
         self.ui.generarinforme.clicked.connect(self.generarcsv)
+        self.ui.info.clicked.connect(self.mostrarinfo)
         
         try:
             colores=pd.read_csv("CSV/Configuracion/colores.csv",encoding='utf-8')
@@ -1271,6 +1272,8 @@ class VentanaSeleccionar(QMainWindow):
             listaEncabezados.append(encabezados)
 
         
+    def mostrarinfo(self):
+        QMessageBox.information(self,"Informacion","Para buscar entre rangos se usaria la siguiente sintaxis:"+"\n"+"Buscare en la columna 'edad' entre 10/40 años"+"\n"+"\n"+"Para buscar varios valores se usaria la siguiente sintaxis: "+"\n"+"Buscare en la columna 'nombre' "+"\n"+"Los nombres daniel&eduardo&enrique&santana&juan "+"\n"+"\n"+"Caracter para rangos numericos  '/' "+"\n"+"Caracter para buscar valores textuales '&' ",QMessageBox.Ok,QMessageBox.Ok)
 
     def seleccionar(self):
         global seleccion
