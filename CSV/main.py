@@ -8,6 +8,7 @@ from matplotlib import dates as mpl_dates
 from PyQt5.QtWidgets import QDialog,QApplication,QMainWindow,QMessageBox,QErrorMessage,QFileDialog,QTableWidgetItem,QColorDialog,QPushButton
 from PyQt5.QtGui import QColor 
 from PyQt5 import QtGui 
+from PyQt5.QtCore import QTime ,QTimer
 from codigo.ventanacsv import Ui_VentanaPrincipal
 from codigo.ventanaopciones import Ui_VentanaOpciones
 from codigo.ventana_eliminador import Ui_Ventana_Eliminar
@@ -56,6 +57,11 @@ class VentanaP1(QMainWindow):
         self.ui.etiqueta_usuario.setDisabled(True)
         self.ui.etiqueta_tiempo.setDisabled(True)
         self.ui.GRAFICAR.setDisabled(True)
+
+        tiempo=QTimer(self)
+        tiempo.timeout.connect(self.tic)
+        tiempo.start(1000)
+        self.tic()
 
         
         self.ui.color_ventanas.clicked.connect(self.Guardar_Color_Ventanas)
@@ -118,7 +124,11 @@ class VentanaP1(QMainWindow):
         except:
             pass
 
-
+    def tic(self):
+        hora=QTime.currentTime()
+        hora_texto=hora.toString('hh:mm')
+        self.ui.hora.display(hora_texto)
+        
     def Guardar_Color_Ventanas(self):
         colorFrame=""
         colorFrame=QColorDialog.getColor()

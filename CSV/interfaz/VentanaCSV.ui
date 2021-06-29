@@ -257,7 +257,7 @@ border-left: 5px solid gray;</string>
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>../../../../../../Desktop/P Git/PYQT5/PyQt5/CSV/multimedia/vector.ico</pixmap>
+        <pixmap>../multimedia/vector.ico</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -631,9 +631,9 @@ QPushButton:hover
     <property name="geometry">
      <rect>
       <x>720</x>
-      <y>80</y>
+      <y>90</y>
       <width>611</width>
-      <height>291</height>
+      <height>281</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -643,77 +643,75 @@ QPushButton:hover
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>720</x>
-      <y>30</y>
-      <width>611</width>
-      <height>41</height>
+      <x>1010</x>
+      <y>12</y>
+      <width>321</width>
+      <height>71</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLabel" name="cantidad_registros">
-       <property name="minimumSize">
-        <size>
-         <width>145</width>
-         <height>0</height>
-        </size>
-       </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>5</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="color_botones">
        <property name="font">
         <font>
-         <pointsize>13</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <family>Arial</family>
+         <weight>50</weight>
+         <bold>false</bold>
         </font>
        </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cambiar el Color de todos los Botones&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="styleSheet">
-        <string notr="true">border-radius:8px;
-border:1.5px solid black;</string>
+        <string notr="true">QPushButton{
+	padding :5px;
+	border-radius:10px;
+	border:1.5px solid black;
+
+}
+
+QPushButton:hover
+{
+	background-color: rgb(165, 175, 173);
+}</string>
        </property>
        <property name="text">
-        <string/>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-       <property name="margin">
-        <number>0</number>
+        <string>COLOR BOTONES</string>
        </property>
       </widget>
      </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <property name="spacing">
-        <number>9</number>
+     <item row="1" column="0">
+      <widget class="QPushButton" name="color_ventanas">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
        </property>
-       <property name="leftMargin">
-        <number>0</number>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
        </property>
-       <property name="topMargin">
-        <number>5</number>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cambiar el Color de todas las Ventanas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QPushButton" name="color_ventanas">
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cambiar el Color de todas las Ventanas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton{
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
 	padding :5px;
 	border-radius:10px;
 	border:1.5px solid black;
@@ -726,29 +724,32 @@ QPushButton:hover
 }
 
 </string>
-         </property>
-         <property name="text">
-          <string>COLOR VENTANAS</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="color_botones">
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cambiar el Color de todos los Botones&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton{
+       </property>
+       <property name="text">
+        <string>COLOR VENTANAS</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QPushButton" name="tipo_fuente">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cambiar el Tipo de Letra de Los Componentes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="whatsThis">
+        <string/>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
 	padding :5px;
 	border-radius:10px;
 	border:1.5px solid black;
@@ -759,51 +760,65 @@ QPushButton:hover
 {
 	background-color: rgb(165, 175, 173);
 }</string>
-         </property>
-         <property name="text">
-          <string>COLOR BOTONES</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="tipo_fuente">
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cambiar el Tipo de Letra de Los Componentes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="whatsThis">
-          <string/>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton{
-	padding :5px;
-	border-radius:10px;
-	border:1.5px solid black;
-
-}
-
-QPushButton:hover
-{
-	background-color: rgb(165, 175, 173);
-}</string>
-         </property>
-         <property name="text">
-          <string>FUENTE LETRAS</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+       </property>
+       <property name="text">
+        <string>FUENTE LETRAS</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1" colspan="2">
+      <widget class="QLCDNumber" name="hora">
+       <property name="font">
+        <font>
+         <pointsize>7</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">padding:2px;
+border-radius:10px;
+border:3px solid black;
+</string>
+       </property>
+      </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QLabel" name="cantidad_registros">
+    <property name="geometry">
+     <rect>
+      <x>721</x>
+      <y>40</y>
+      <width>281</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>145</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:8px;
+border:1.5px solid black;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="margin">
+     <number>0</number>
+    </property>
    </widget>
   </widget>
  </widget>

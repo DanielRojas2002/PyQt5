@@ -319,34 +319,37 @@ class Ui_VentanaPrincipal(object):
         self.GRAFICAR.setObjectName("GRAFICAR")
         self.verticalLayout_3.addWidget(self.GRAFICAR)
         self.tableDescripcion = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableDescripcion.setGeometry(QtCore.QRect(720, 80, 611, 291))
+        self.tableDescripcion.setGeometry(QtCore.QRect(720, 90, 611, 281))
         self.tableDescripcion.setStyleSheet("")
         self.tableDescripcion.setObjectName("tableDescripcion")
         self.tableDescripcion.setColumnCount(0)
         self.tableDescripcion.setRowCount(0)
         self.layoutWidget3 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget3.setGeometry(QtCore.QRect(720, 30, 611, 41))
+        self.layoutWidget3.setGeometry(QtCore.QRect(1010, 12, 321, 71))
         self.layoutWidget3.setObjectName("layoutWidget3")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.layoutWidget3)
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.cantidad_registros = QtWidgets.QLabel(self.layoutWidget3)
-        self.cantidad_registros.setMinimumSize(QtCore.QSize(145, 0))
+        self.gridLayout = QtWidgets.QGridLayout(self.layoutWidget3)
+        self.gridLayout.setContentsMargins(0, 5, 0, 0)
+        self.gridLayout.setObjectName("gridLayout")
+        self.color_botones = QtWidgets.QPushButton(self.layoutWidget3)
         font = QtGui.QFont()
-        font.setPointSize(13)
-        font.setBold(True)
-        font.setWeight(75)
-        self.cantidad_registros.setFont(font)
-        self.cantidad_registros.setStyleSheet("border-radius:8px;\n"
-"border:1.5px solid black;")
-        self.cantidad_registros.setText("")
-        self.cantidad_registros.setAlignment(QtCore.Qt.AlignCenter)
-        self.cantidad_registros.setObjectName("cantidad_registros")
-        self.horizontalLayout_2.addWidget(self.cantidad_registros)
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setContentsMargins(0, 5, 0, 0)
-        self.horizontalLayout.setSpacing(9)
-        self.horizontalLayout.setObjectName("horizontalLayout")
+        font.setFamily("Arial")
+        font.setBold(False)
+        font.setWeight(50)
+        self.color_botones.setFont(font)
+        self.color_botones.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.color_botones.setStyleSheet("QPushButton{\n"
+"    padding :5px;\n"
+"    border-radius:10px;\n"
+"    border:1.5px solid black;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
+"    background-color: rgb(165, 175, 173);\n"
+"}")
+        self.color_botones.setObjectName("color_botones")
+        self.gridLayout.addWidget(self.color_botones, 1, 1, 1, 1)
         self.color_ventanas = QtWidgets.QPushButton(self.layoutWidget3)
         font = QtGui.QFont()
         font.setFamily("Arial")
@@ -368,27 +371,7 @@ class Ui_VentanaPrincipal(object):
 "\n"
 "")
         self.color_ventanas.setObjectName("color_ventanas")
-        self.horizontalLayout.addWidget(self.color_ventanas)
-        self.color_botones = QtWidgets.QPushButton(self.layoutWidget3)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setBold(False)
-        font.setWeight(50)
-        self.color_botones.setFont(font)
-        self.color_botones.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.color_botones.setStyleSheet("QPushButton{\n"
-"    padding :5px;\n"
-"    border-radius:10px;\n"
-"    border:1.5px solid black;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:hover\n"
-"{\n"
-"    background-color: rgb(165, 175, 173);\n"
-"}")
-        self.color_botones.setObjectName("color_botones")
-        self.horizontalLayout.addWidget(self.color_botones)
+        self.gridLayout.addWidget(self.color_ventanas, 1, 0, 1, 1)
         self.tipo_fuente = QtWidgets.QPushButton(self.layoutWidget3)
         font = QtGui.QFont()
         font.setFamily("Arial")
@@ -409,8 +392,31 @@ class Ui_VentanaPrincipal(object):
 "    background-color: rgb(165, 175, 173);\n"
 "}")
         self.tipo_fuente.setObjectName("tipo_fuente")
-        self.horizontalLayout.addWidget(self.tipo_fuente)
-        self.horizontalLayout_2.addLayout(self.horizontalLayout)
+        self.gridLayout.addWidget(self.tipo_fuente, 1, 2, 1, 1)
+        self.hora = QtWidgets.QLCDNumber(self.layoutWidget3)
+        font = QtGui.QFont()
+        font.setPointSize(7)
+        font.setItalic(True)
+        self.hora.setFont(font)
+        self.hora.setStyleSheet("padding:2px;\n"
+"border-radius:10px;\n"
+"border:3px solid black;\n"
+"")
+        self.hora.setObjectName("hora")
+        self.gridLayout.addWidget(self.hora, 0, 1, 1, 2)
+        self.cantidad_registros = QtWidgets.QLabel(self.centralwidget)
+        self.cantidad_registros.setGeometry(QtCore.QRect(721, 40, 281, 41))
+        self.cantidad_registros.setMinimumSize(QtCore.QSize(145, 0))
+        font = QtGui.QFont()
+        font.setPointSize(13)
+        font.setBold(True)
+        font.setWeight(75)
+        self.cantidad_registros.setFont(font)
+        self.cantidad_registros.setStyleSheet("border-radius:8px;\n"
+"border:1.5px solid black;")
+        self.cantidad_registros.setText("")
+        self.cantidad_registros.setAlignment(QtCore.Qt.AlignCenter)
+        self.cantidad_registros.setObjectName("cantidad_registros")
         VentanaPrincipal.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(VentanaPrincipal)
@@ -448,10 +454,10 @@ class Ui_VentanaPrincipal(object):
         self.etiqueta_tiempo.setToolTip(_translate("VentanaPrincipal", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Ingrese el nombre de la Etiqueta donde esta el Tiempo</span></p><p align=\"center\">(Las Fechas)</p></body></html>"))
         self.GRAFICAR.setToolTip(_translate("VentanaPrincipal", "<html><head/><body><p><span style=\" font-weight:600;\">Graficar CSV</span></p></body></html>"))
         self.GRAFICAR.setText(_translate("VentanaPrincipal", "GRAFICAR"))
-        self.color_ventanas.setToolTip(_translate("VentanaPrincipal", "<html><head/><body><p>Cambiar el Color de todas las Ventanas</p></body></html>"))
-        self.color_ventanas.setText(_translate("VentanaPrincipal", "COLOR VENTANAS"))
         self.color_botones.setToolTip(_translate("VentanaPrincipal", "<html><head/><body><p>Cambiar el Color de todos los Botones</p></body></html>"))
         self.color_botones.setText(_translate("VentanaPrincipal", "COLOR BOTONES"))
+        self.color_ventanas.setToolTip(_translate("VentanaPrincipal", "<html><head/><body><p>Cambiar el Color de todas las Ventanas</p></body></html>"))
+        self.color_ventanas.setText(_translate("VentanaPrincipal", "COLOR VENTANAS"))
         self.tipo_fuente.setToolTip(_translate("VentanaPrincipal", "<html><head/><body><p>Cambiar el Tipo de Letra de Los Componentes</p></body></html>"))
         self.tipo_fuente.setText(_translate("VentanaPrincipal", "FUENTE LETRAS"))
 
