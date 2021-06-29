@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VentanaLCD</class>
+ <widget class="QMainWindow" name="VentanaLCD">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>342</width>
+    <height>157</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Convertidor</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>301</width>
+      <height>83</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLineEdit" name="entrada">
+         <property name="inputMask">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="placeholderText">
+          <string>Ingresa el numero a Convertir:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="botonpasar">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+QPushButton{
+	
+	background-color: rgb(255, 255, 255);
+	border-radius:5px;
+	border:1.5px solid black;
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>../img/flecha.png</normaloff>../img/flecha.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QLCDNumber" name="pantalla"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QSplitter" name="splitter">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>110</y>
+      <width>301</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <widget class="QPushButton" name="decimal">
+     <property name="cursor">
+      <cursorShape>OpenHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton:hover{
+	background-color: rgb(165, 175, 173);
+	color: rgb(0, 0, 0);
+
+}
+QPushButton{
+	background-color: rgb(255, 0, 0);
+	color: rgb(255, 255, 255);
+	border-radius:5px;
+}</string>
+     </property>
+     <property name="text">
+      <string>DEC</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="binario">
+     <property name="cursor">
+      <cursorShape>OpenHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton:hover{
+	background-color: rgb(255, 255, 0);
+	color: rgb(0, 0, 0);
+
+}
+QPushButton{
+	background-color: rgb(165, 175, 173);
+	color: rgb(255, 255, 255);
+	border-radius:5px;
+}</string>
+     </property>
+     <property name="text">
+      <string>BIN</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="octagonal">
+     <property name="cursor">
+      <cursorShape>OpenHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton:hover{
+	background-color: rgb(165, 175, 173);
+	color: rgb(0, 0, 0);
+
+}
+QPushButton{
+	background-color: rgb(255, 0, 0);
+	color: rgb(255, 255, 255);
+	border-radius:5px;
+}</string>
+     </property>
+     <property name="text">
+      <string>OCT</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="hexadecimal">
+     <property name="cursor">
+      <cursorShape>OpenHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton:hover{
+	background-color: rgb(255, 255, 0);
+	color: rgb(0, 0, 0);
+
+}
+QPushButton{
+	background-color: rgb(165, 175, 173);
+	color: rgb(255, 255, 255);
+	border-radius:5px;
+}</string>
+     </property>
+     <property name="text">
+      <string>HEX</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
