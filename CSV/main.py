@@ -712,6 +712,8 @@ class VentanaP1(QMainWindow):
 
                     valor=DATOS[etiqueta2]
                     tiempo=DATOS[etiqueta4]
+                    print(tiempo)
+                    print(valor)
                 
                     plt.style.use('seaborn')
                     plt.plot_date(tiempo,valor,linestyle="solid")
