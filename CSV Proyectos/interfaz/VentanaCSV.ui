@@ -428,23 +428,6 @@ QPushButton:hover
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="opciones">
-       <property name="font">
-        <font>
-         <family>Arial Black</family>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Estadistica Descriptiva&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Se podra ver la Estadistiva Descriptiva del CSV&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string>Opciones</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="realizar">
        <property name="font">
         <font>

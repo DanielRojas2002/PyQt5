@@ -481,78 +481,21 @@ class VentanaP1(QMainWindow):
             etiqueta1=self.ui.etiqueta_nombre.text()
             etiqueta2=self.ui.etiqueta_valor.text()
 
-        # SI ESTE RAIDOBUTTON ESTA SELECCIONADO VA HACER ESTAS COSAS
-        elif self.ui.graficaTenInd.isChecked()==True: 
+        
 
-            self.ui.errorarchivo.setText("")
-            self.ui.titulo_Grafico.setEnabled(True)
-            self.ui.etiqueta_nombre.setEnabled(True)
-            self.ui.etiqueta_valor.setEnabled(True)
-            self.ui.etiqueta_usuario.setEnabled(True)
-            self.ui.etiqueta_tiempo.setEnabled(True)
-            self.ui.GRAFICAR.setEnabled(True)
 
-            titulo=""
-            etiqueta1=""
-            etiqueta2=""
-            etiqueta3=""
-            etiqueta4=""
+    
 
-            self.ui.tituloGrafica.setText("DATOS PARA PODER GRAFICAR:\nTendencia(Usuario):")
-            self.ui.titulo_Grafico.setPlaceholderText("Ingrese el Titulo del Grafico:")
-            self.ui.etiqueta_nombre.setPlaceholderText("Ingrese la Etiqueta del Nombre:")
-            self.ui.etiqueta_valor.setPlaceholderText("Ingrese la Etiqueta del Valor:")
-            self.ui.etiqueta_usuario.setPlaceholderText("Ingrese la Etiqueta del Usuario:")
-            self.ui.etiqueta_tiempo.setPlaceholderText("Ingrese la Etiqueta del Tiempo:")
-
-            titulo=self.ui.titulo_Grafico.text()
-            etiqueta1=self.ui.etiqueta_nombre.text()
-            etiqueta2=self.ui.etiqueta_valor.text()
-            etiqueta3=self.ui.etiqueta_usuario.text()
-            etiqueta4=self.ui.etiqueta_tiempo.text()
-
-        # SI ESTE RAIDOBUTTON ESTA SELECCIONADO VA HACER ESTAS COSAS
-        elif self.ui.graficarTenGru.isChecked()==True:
-
-            self.ui.errorarchivo.setText("")
-            self.ui.titulo_Grafico.setEnabled(True)
-            self.ui.etiqueta_nombre.setEnabled(True)
-            self.ui.etiqueta_valor.setEnabled(True)
-
-            self.ui.etiqueta_usuario.setDisabled(True)
-            self.ui.etiqueta_usuario.setPlaceholderText("")
-
-            self.ui.etiqueta_tiempo.setEnabled(True)
-            self.ui.GRAFICAR.setEnabled(True)
-
-            titulo=""
-            etiqueta1=""
-            etiqueta2=""
-            etiqueta3=""
-            etiqueta4=""
-
-            self.ui.tituloGrafica.setText("DATOS PARA PODER GRAFICAR:\nTendencia(Grupal):")
-            self.ui.titulo_Grafico.setPlaceholderText("Ingrese el Titulo del Grafico:")
-            self.ui.etiqueta_nombre.setPlaceholderText("Ingrese la Etiqueta del Nombre:")
-            self.ui.etiqueta_valor.setPlaceholderText("Ingrese la Etiqueta del Valor:")  
-            self.ui.etiqueta_tiempo.setPlaceholderText("Ingrese la Etiqueta del Tiempo:")
-
-            titulo=self.ui.titulo_Grafico.text()
-            etiqueta1=self.ui.etiqueta_nombre.text()
-            etiqueta2=self.ui.etiqueta_valor.text()
-            etiqueta4=self.ui.etiqueta_tiempo.text()
-
-        elif self.ui.masopciones.isChecked()==True:
+        elif self.ui.filtrado.isChecked()==True:
             try:
                 notas=pd.read_csv(excel,encoding='utf-8')
                 self.hide()
-                otraventana=VentanaOpciones(self)
+                otraventana=VentanaSeleccionar(self)
                 otraventana.show()
                 self.ui.errorarchivo.setText("")
             except:
                 self.ui.errorarchivo.setText("Tiene que seleccionar el Archivo")
-
-
+        
 
     # ESTE BOTON ES EL BOTON GRAFICAR 
     def Graficar(self):
@@ -698,91 +641,8 @@ class VentanaP1(QMainWindow):
                 self.ui.errorarchivo.setText("Ingrese los datos necesarios")
         
 
-        #AQUI EL CSV TIENE QUE ESTAR LA FECHA COMO AÑO MES DIA (INDIVIDUAL)
-        if self.ui.graficaTenInd.isChecked()==True:
-            if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0 and len(etiqueta3)>0 and len(etiqueta4)>0:
-                try:
-                    self.ui.errorarchivo.setText("")
-                    notas=pd.read_csv(excel,encoding='utf-8')
-                    notas[etiqueta4]=pd.to_datetime(notas[etiqueta4])
-                    
 
-                    dato=notas[etiqueta1]==etiqueta3
-                    DATOS=notas[dato]
-
-                    valor=DATOS[etiqueta2]
-                    tiempo=DATOS[etiqueta4]
-                    print(tiempo)
-                    print(valor)
-                
-                    plt.style.use('seaborn')
-                    plt.plot_date(tiempo,valor,linestyle="solid")
-                    plt.gcf().autofmt_xdate()
-                    formato=mpl_dates.DateFormatter('%d,%b,%Y')
-                    plt.gca().xaxis.set_major_formatter(formato)
-                    plt.title(titulo+": "+etiqueta1+": "+etiqueta4)
-                    plt.xlabel(etiqueta3)
-                    plt.ylabel(etiqueta2)
-                    plt.tight_layout()
-                    plt.show()
-               
-                except:
-                    self.ui.errorarchivo.setText("Ingreso mal Una Etiqueta")
-            else:
-                self.ui.errorarchivo.setText("Ingrese los datos necesarios")
-
-        #  TENDENCIA GRUPAL DE PREFERENCIA VALORES UNICOAS MAXIMO 30 PARA QUE SE VEA BIEN LA GRAFICA
-        if self.ui.graficarTenGru.isChecked()==True:
-            if len(titulo)>0 and len(etiqueta1)>0 and len(etiqueta2)>0 and len(etiqueta4)>0:
-                try:
-
-                
-                    self.ui.errorarchivo.setText("")
-                    notas=pd.read_csv(excel,encoding='utf-8')
-
-                    notas[etiqueta4]=pd.to_datetime(notas[etiqueta4])
-                    
-                    datos=notas[etiqueta1].unique()
-            
-                    plt.style.use('seaborn')
-                    listalegend=[]
-                    contadorcolores=0
-                    longitud=len(listacolores)
-                    fig,ax=plt.subplots()
-
-                    for x in datos:
-                        listalegend.append(x)
-                        dato=notas[etiqueta1]==x
-                        DATOS=notas[dato]
-
-                        valor=DATOS[etiqueta2]
-                        tiempo=DATOS[etiqueta4]
-                        ax.plot(tiempo,valor,marker="o",linewidth=2,color=listacolores[contadorcolores])
-                        contadorcolores=contadorcolores+1
-
-                        if longitud==contadorcolores:
-                            contadorcolores=0
-                                
-                    plt.gcf().autofmt_xdate()
-                    formato=mpl_dates.DateFormatter('%d,%b,%Y')
-                    plt.gca().xaxis.set_major_formatter(formato)
-                    plt.title("GRAFICA LINEAL(GRUPAL)")
-                    plt.xlabel(etiqueta1)
-                    plt.ylabel(etiqueta2)          
-                    plt.rc('legend', fontsize=6)
-                    plt.legend(listalegend,loc='best',bbox_to_anchor=(1.05, 1.0))          
-                    plt.show()
-
-                except:
-                    self.ui.errorarchivo.setText("Ingreso mal Una Etiqueta")
-
-               
-            else:
-                self.ui.errorarchivo.setText("Ingrese los datos necesarios")
-
-
-
-
+     
 class VentanaOpciones(QMainWindow):
     def __init__(self,parent=None):
         super(VentanaOpciones,self).__init__(parent) 
@@ -844,18 +704,9 @@ class VentanaOpciones(QMainWindow):
             otraventana=VentanaEliminarRegistros(self)
             otraventana.show()
         
-        elif seleccion=="Segmentar dos CSV´s":
-            self.hide()
-            otraventana=VentanaUnirDosCSV(self)
-            otraventana.show()
+       
         
-        elif seleccion=="Hacer Operaciones entre columnas":
-            pass
-
-        elif seleccion=="Buscar Datos en especifico del CSV y Generar CSV":
-            self.hide()
-            otraventana=VentanaSeleccionar(self)
-            otraventana.show()
+  
 
     def atras(self):
         self.parent().show()
